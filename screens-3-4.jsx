@@ -11,6 +11,123 @@ const Screen03_VDP = () => {
   const [isDragging360, setIsDragging360] = React.useState(false);
   const [showHint360, setShowHint360] = React.useState(false);
   const drag360Ref = React.useRef({ startX: 0, startFrame: 0 });
+
+  // === AI Chat state for "Câu hỏi" tab ===
+  const INITIAL_CHIPS = ['Xe có bảo hành không?','Có giao tận nhà?','Tôi muốn lái thử','Cách thanh toán?','Đổi ý có được?','Chi phí bảo dưỡng/năm?'];
+  const [chatMessages, setChatMessages] = React.useState([{
+    role: 'ai',
+    text: '👋 Chào bạn! Mình là Cario AI — trợ lý ảo cho xe Honda CR-V 1.5L Turbo này. Mình đã đọc kỹ hồ sơ 200 điểm + lịch sử + financing options. Bạn muốn hỏi gì?',
+    chips: INITIAL_CHIPS,
+    confidence: null,
+    citation: null,
+    typing: false,
+  }]);
+  const [chatTyping, setChatTyping] = React.useState(false);
+  const [chatInput, setChatInput] = React.useState('');
+  const chatScrollRef = React.useRef(null);
+
+  const AI_RESPONSES = {
+    'Xe có bảo hành không?': {
+      text: 'Honda CR-V này có **3 lớp bảo hành** chồng nhau:\n\n✓ **Cario 7-day Money-Back** — Đổi trả 100% trong 7 ngày, không hỏi lý do\n✓ **Bảo hành chính hãng Honda** — Còn hiệu lực đến 03/2025 hoặc 100,000 km\n✓ **Cario+ Extended** (optional) — +12M cho 12 tháng bảo hành thêm\n\nNếu xe có vấn đề kỹ thuật trong 7 ngày đầu, Cario hoàn 100% tiền + chi phí giao. Bạn cần mình giải thích thêm phần nào?',
+      chips: ['Cario+ giá bao nhiêu?','Quy trình đổi trả?','Đặt lịch xem xe'],
+      citation: 'Cario Policy v2.4 • Honda Vietnam Warranty Doc',
+    },
+    'Có giao tận nhà?': {
+      text: 'Có nhé! Cario giao tận nhà toàn quốc:\n\n🚚 **Nội thành HCM, HN**: MIỄN PHÍ\n🚚 **Tỉnh giáp ranh** (Bình Dương, Đồng Nai, Long An...): 1.5M\n🚚 **Các tỉnh xa hơn**: 2.5M – 3.5M (tùy khoảng cách)\n\n⏱ **Thời gian giao: trong 24h** kể từ khi hoàn tất thanh toán + ký hợp đồng. Tài xế Cario gọi xác nhận trước 1h.\n\nBạn ở đâu để mình check phí giao chính xác?',
+      chips: ['Giao Bình Dương?','Thời gian rảnh?','Đặt lịch giao'],
+      citation: 'Cario Logistics Policy • Updated 04/2026',
+    },
+    'Tôi muốn lái thử': {
+      text: 'Test drive Honda CR-V **hoàn toàn miễn phí**:\n\n📍 **Showroom HCM**: 123 Nguyễn Trãi, P. Bến Thành, Q.1\n📍 **Showroom HN**: 45 Bà Triệu, Hoàn Kiếm\n⏱ Mỗi buổi 30-60 phút\n🛣 Lái trên đường thực tế — KHÔNG bó hẹp trong showroom\n👤 Có sale Cario đi cùng tư vấn\n\nĐặt lịch qua app Cario hoặc gọi **1900-CARIO**. Bạn muốn lái thử khi nào?',
+      chips: ['Đặt lịch ngay','Mang giấy tờ gì?','Có sale tiếng Anh?'],
+      citation: 'Cario Test Drive Program v1.8',
+    },
+    'Cách thanh toán?': {
+      text: 'Cario hỗ trợ **3 phương thức**:\n\n💵 **Tiền mặt** tại showroom — giảm 0.5% cho deal lớn\n🏦 **Chuyển khoản**: VCB / Techcom / MB / VPBank / 10+ ngân hàng\n💳 **Trả góp** qua VPBank (partner): 9.8%/năm, kỳ hạn 12-60 tháng, **pre-approve trong 30 GIÂY**\n\nBạn có thể combo: VD trả trước 30% tiền mặt + 70% trả góp. Mình tính chi tiết giúp ở tab **Tài chính** được không?',
+      chips: ['Tính trả góp','Pre-approve ngay','So sánh banks'],
+      citation: 'Cario Payment Methods • VPBank Partnership Doc',
+    },
+    'Đổi ý có được?': {
+      text: 'Hoàn toàn được — đây là **lý do khác biệt nhất** của Cario:\n\n✓ **7 ngày đầu**: Hoàn 100% tiền, không hỏi lý do (chỉ trừ phí giao ~1.5M)\n✓ **Sau 7 ngày**: Cario thu mua lại theo giá AI Pricing\n✓ **Trong 1 năm đầu**: Priority buyback, giá tốt hơn 5-8% thị trường\n\nĐây là policy rủi ro thấp nhất ngành ô tô VN. Bạn cứ yên tâm mua thử nhé!',
+      chips: ['Buyback program','Trade-in xe cũ','Yêu cầu báo giá'],
+      citation: 'Cario Return & Buyback Policy v3.0',
+    },
+    'Chi phí bảo dưỡng/năm?': {
+      text: 'Honda CR-V 1.5L Turbo chi phí bảo dưỡng dự kiến:\n\n🔧 Bảo dưỡng định kỳ (mỗi 10,000 km): **~3-5M**\n🔧 Thay dầu + lọc (mỗi 5,000 km): **1.2M**\n🔧 Tổng năm (avg 20,000 km/năm): **12-15M**\n🔧 Đăng kiểm + bảo hiểm bắt buộc: **4-5M**\n🔧 Bảo hiểm vật chất (khuyến nghị): **8-12M**\n\n**TỔNG: ~24-32M/năm**\n\nCario có gói **Worry-Free Ownership** 18M/năm — bao trọn bảo dưỡng + bảo hiểm + roadside assist. Tiết kiệm 30%. Có muốn mình giới thiệu không?',
+      chips: ['Worry-Free package','Chi phí xăng?','So Toyota CR-V'],
+      citation: 'Honda Vietnam Service Cost Estimate • 2026 Q2',
+    },
+  };
+  const FALLBACK_RESPONSE = {
+    text: '🤔 Câu hỏi của bạn cần thông tin chi tiết hơn từ đội Cario. Mình sẽ chuyển ngay tới sale chuyên trách Honda CR-V — phản hồi trong **5 phút** qua SMS/Zalo.\n\nTrong lúc chờ, có thể bạn quan tâm:',
+    chips: ['Xe có bảo hành không?','Có giao tận nhà?','Tôi muốn lái thử'],
+    citation: 'Cario AI Routing v1.2',
+  };
+
+  const renderChatMarkdown = (text) => {
+    const out = [];
+    const lines = text.split('\n');
+    lines.forEach((line, li) => {
+      if (li > 0) out.push(React.createElement('br', { key: `br-${li}` }));
+      const segs = line.split(/(\*\*[^*]+\*\*)/g);
+      segs.forEach((seg, si) => {
+        if (seg.startsWith('**') && seg.endsWith('**')) {
+          out.push(React.createElement('strong', { key: `b-${li}-${si}`, style: { color: '#F5F5F5', fontWeight: 700 } }, seg.slice(2, -2)));
+        } else if (seg) {
+          out.push(seg);
+        }
+      });
+    });
+    return out;
+  };
+
+  const askAI = (question) => {
+    if (chatTyping) return;
+    setChatMessages(prev => [...prev, { role: 'user', text: question }]);
+    setChatTyping(true);
+    const response = AI_RESPONSES[question] || FALLBACK_RESPONSE;
+    setTimeout(() => {
+      setChatTyping(false);
+      // Start typing animation
+      setChatMessages(prev => [...prev, {
+        role: 'ai', text: '', typing: true,
+        chips: response.chips, citation: response.citation, confidence: '98%',
+        fullText: response.text,
+      }]);
+      let i = 0;
+      const tick = () => {
+        i += 3;
+        setChatMessages(prev => {
+          const last = prev[prev.length - 1];
+          if (!last || !last.typing) return prev;
+          if (i >= response.text.length) {
+            return [...prev.slice(0, -1), { ...last, text: response.text, typing: false }];
+          }
+          return [...prev.slice(0, -1), { ...last, text: response.text.substring(0, i) }];
+        });
+        if (i < response.text.length) setTimeout(tick, 70);
+      };
+      setTimeout(tick, 50);
+    }, 1100);
+  };
+
+  const submitChatInput = () => {
+    const q = chatInput.trim();
+    if (!q || chatTyping) return;
+    setChatInput('');
+    const matched = Object.keys(AI_RESPONSES).find(k =>
+      k.toLowerCase().replace(/[?]/g, '').includes(q.toLowerCase().replace(/[?]/g, '')) ||
+      q.toLowerCase().includes(k.toLowerCase().replace(/[?]/g, '').slice(0, 8))
+    );
+    askAI(matched || q);
+  };
+
+  React.useEffect(() => {
+    if (chatScrollRef.current) {
+      chatScrollRef.current.scrollTop = chatScrollRef.current.scrollHeight;
+    }
+  }, [chatMessages, chatTyping]);
+
   const TABS = ['Tổng quan', 'Inspection 200pt', 'Lịch sử xe', 'Tài chính', 'Câu hỏi'];
   const GALLERY = [
     { label: 'EXT_FRONT', src: 'uploads/s03-gallery-01-front.png', alt: 'Honda CR-V front view' },
@@ -594,29 +711,101 @@ const Screen03_VDP = () => {
       <section style={{ padding: '48px' }}>
         <h2 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 24, fontWeight: 600, color: '#F5F5F5', lineHeight: 1.3, marginBottom: 8, marginTop: 0 }}>Trợ lý AI Cario</h2>
         <div style={{ fontSize: 14, color: '#A0A4AB', marginBottom: 24, display: 'flex', alignItems: 'center', gap: 10 }}>
-          <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#10B981', boxShadow: '0 0 0 4px rgba(16,185,129,0.2)' }} />
+          <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#10B981', boxShadow: '0 0 0 4px rgba(16,185,129,0.2)', animation: 'aiPulse 2s ease-in-out infinite' }} />
           Online • Đã trả lời 47,392 câu hỏi • Avg 1.2s
           <span style={{ marginLeft: 'auto', fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: '#6B7280' }}>Powered by Cario AI v2.4</span>
         </div>
-        <div className="card" style={{ padding: 24, marginBottom: 16 }}>
-          <div style={{ display: 'flex', gap: 12, marginBottom: 16 }}>
-            <div style={{ width: 36, height: 36, borderRadius: '50%', background: 'linear-gradient(135deg, #10B981, #34D399)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FFF', fontWeight: 700, flexShrink: 0 }}>C</div>
-            <div style={{ flex: 1 }}>
-              <div style={{ fontSize: 14, fontWeight: 600, color: '#F5F5F5', marginBottom: 4 }}>Cario AI <span style={{ marginLeft: 8, fontSize: 11, padding: '2px 8px', borderRadius: 999, border: '1px solid #10B981', color: '#10B981', fontWeight: 500 }}>98% confident</span></div>
-              <div style={{ fontSize: 14, color: '#F5F5F5', lineHeight: 1.6 }}>👋 Chào bạn! Mình là Cario AI — trợ lý ảo cho xe Honda CR-V 1.5L Turbo này. Mình đã đọc kỹ hồ sơ 200 điểm + lịch sử + financing options. Bạn muốn hỏi gì?</div>
+
+        {/* Messages container */}
+        <div ref={chatScrollRef} style={{ maxHeight: 540, overflowY: 'auto', marginBottom: 16, padding: '4px 4px 8px' }}>
+          {chatMessages.map((m, idx) => m.role === 'user' ? (
+            <div key={idx} style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 16 }}>
+              <div style={{ maxWidth: '70%', padding: '10px 16px', background: 'rgba(255,255,255,0.08)', borderRadius: '14px 14px 4px 14px', color: '#F5F5F5', fontSize: 14, lineHeight: 1.5 }}>{m.text}</div>
             </div>
-          </div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, paddingLeft: 48 }}>
-            {['Xe có bảo hành không?','Có giao tận nhà?','Tôi muốn lái thử','Cách thanh toán?','Đổi ý có được?','Chi phí bảo dưỡng/năm?'].map(q => (
-              <button key={q} style={{ padding: '8px 14px', background: 'transparent', border: '1px solid rgba(255,255,255,0.2)', borderRadius: 999, color: '#F5F5F5', fontSize: 13, cursor: 'pointer', fontFamily: 'inherit' }}>{q}</button>
-            ))}
-          </div>
+          ) : (
+            <div key={idx} style={{ marginBottom: 20 }}>
+              <div style={{ display: 'flex', gap: 12 }}>
+                <div style={{ width: 36, height: 36, borderRadius: '50%', background: 'linear-gradient(135deg, #10B981, #34D399)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FFF', fontWeight: 700, flexShrink: 0, fontSize: 16, boxShadow: '0 0 0 3px rgba(16,185,129,0.15)' }}>C</div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ fontSize: 13, fontWeight: 600, color: '#F5F5F5', marginBottom: 6, display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+                    Cario AI
+                    {m.confidence && <span style={{ fontSize: 11, padding: '2px 8px', borderRadius: 999, border: '1px solid #10B981', color: '#10B981', fontWeight: 500 }}>{m.confidence} confident</span>}
+                    {!m.typing && idx > 0 && <span style={{ fontSize: 11, color: '#6B7280', fontWeight: 400 }}>vừa xong</span>}
+                  </div>
+                  <div style={{ padding: '10px 14px', background: 'rgba(255,255,255,0.03)', borderLeft: '3px solid #10B981', borderRadius: '4px 14px 14px 14px', color: '#E5E7EB', fontSize: 14, lineHeight: 1.65 }}>
+                    {renderChatMarkdown(m.text)}
+                    {m.typing && <span style={{ display: 'inline-block', width: 2, height: 14, background: '#10B981', marginLeft: 2, animation: 'cursorBlink 0.6s ease infinite', verticalAlign: 'middle' }} />}
+                  </div>
+                  {!m.typing && m.citation && (
+                    <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', marginTop: 6, paddingLeft: 4 }}>📚 Nguồn: {m.citation}</div>
+                  )}
+                  {!m.typing && m.chips && m.chips.length > 0 && (
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 12 }}>
+                      {m.chips.map(c => (
+                        <button
+                          key={c}
+                          onClick={() => askAI(c)}
+                          disabled={chatTyping}
+                          style={{ padding: '8px 14px', background: 'transparent', border: '1px solid rgba(255,255,255,0.2)', borderRadius: 999, color: '#F5F5F5', fontSize: 13, cursor: chatTyping ? 'not-allowed' : 'pointer', fontFamily: 'inherit', opacity: chatTyping ? 0.5 : 1, transition: 'all 0.15s ease' }}
+                          onMouseEnter={(e) => { if (!chatTyping) { e.currentTarget.style.borderColor = '#10B981'; e.currentTarget.style.background = 'rgba(16,185,129,0.08)'; } }}
+                          onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)'; e.currentTarget.style.background = 'transparent'; }}
+                        >{c}</button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+
+          {/* Typing indicator */}
+          {chatTyping && (
+            <div style={{ display: 'flex', gap: 12, marginBottom: 16 }}>
+              <div style={{ width: 36, height: 36, borderRadius: '50%', background: 'linear-gradient(135deg, #10B981, #34D399)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FFF', fontWeight: 700, flexShrink: 0, fontSize: 16 }}>C</div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '10px 16px', background: 'rgba(255,255,255,0.03)', borderRadius: 14, color: '#A0A4AB', fontSize: 13 }}>
+                <span style={{ display: 'flex', gap: 4 }}>
+                  <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#10B981', animation: 'typingBounce 1.2s ease-in-out infinite', animationDelay: '0s' }} />
+                  <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#10B981', animation: 'typingBounce 1.2s ease-in-out infinite', animationDelay: '0.15s' }} />
+                  <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#10B981', animation: 'typingBounce 1.2s ease-in-out infinite', animationDelay: '0.3s' }} />
+                </span>
+                <span style={{ marginLeft: 6 }}>Cario AI đang suy nghĩ…</span>
+              </div>
+            </div>
+          )}
         </div>
-        <div style={{ display: 'flex', gap: 8, padding: 16, background: '#1A1F26', border: '1px solid #2D343F', borderRadius: 12 }}>
-          <input placeholder="Hoặc gõ câu hỏi của bạn..." style={{ flex: 1, background: 'transparent', border: 'none', color: '#F5F5F5', fontSize: 14, outline: 'none', fontFamily: 'inherit' }} />
-          <button style={{ padding: '8px 18px', background: '#10B981', border: 'none', borderRadius: 8, color: '#FFF', fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>➤</button>
+
+        {/* Input */}
+        <div style={{ display: 'flex', gap: 8, padding: 12, background: '#1A1F26', border: '1px solid #2D343F', borderRadius: 12 }}>
+          <input
+            value={chatInput}
+            onChange={(e) => setChatInput(e.target.value)}
+            onKeyDown={(e) => { if (e.key === 'Enter') submitChatInput(); }}
+            placeholder="Hoặc gõ câu hỏi của bạn..."
+            disabled={chatTyping}
+            style={{ flex: 1, background: 'transparent', border: 'none', color: '#F5F5F5', fontSize: 14, outline: 'none', fontFamily: 'inherit', padding: '8px 12px' }}
+          />
+          <button
+            onClick={submitChatInput}
+            disabled={chatTyping || !chatInput.trim()}
+            style={{ padding: '8px 18px', background: chatTyping || !chatInput.trim() ? '#2D343F' : '#10B981', border: 'none', borderRadius: 8, color: '#FFF', fontWeight: 600, cursor: chatTyping || !chatInput.trim() ? 'not-allowed' : 'pointer', fontFamily: 'inherit', fontSize: 14, transition: 'background 0.15s ease' }}
+          >➤</button>
         </div>
         <div style={{ fontSize: 12, color: '#6B7280', marginTop: 10, textAlign: 'center' }}>📚 Powered by Cario AI • Phản hồi tức thì • Train trên 47k Q&A</div>
+
+        <style>{`
+          @keyframes aiPulse {
+            0%, 100% { box-shadow: 0 0 0 4px rgba(16,185,129,0.2); }
+            50% { box-shadow: 0 0 0 8px rgba(16,185,129,0.05); }
+          }
+          @keyframes typingBounce {
+            0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+            30% { transform: translateY(-4px); opacity: 1; }
+          }
+          @keyframes cursorBlink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+          }
+        `}</style>
       </section>
     )}
 
