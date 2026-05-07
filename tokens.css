@@ -1,0 +1,184 @@
+/* Cario design tokens */
+/* Primary CTA — orange filled with hover lift */
+.btn-cta-primary {
+  background: #E85D2C;
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 18px;
+  width: 100%;
+  padding: 20px 32px;
+  border-radius: 12px;
+  border: none;
+  margin-top: 24px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: inherit;
+}
+.btn-cta-primary:hover {
+  background: #D14A1F;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(232, 93, 44, 0.3);
+}
+
+.rotate-360-badge:hover {
+  background: #E85D2C !important;
+  transform: scale(1.05);
+}
+
+@keyframes inspBarFill {
+  from { width: 0%; }
+  to { width: 96%; }
+}
+
+.insp-report-link:hover {
+  text-decoration: underline;
+}
+
+:root {
+  --bg: #0F1419;
+  --surface: #1A1F26;
+  --surface-2: #242A33;
+  --border: #2D343F;
+  --accent: #E85D2C;
+  --accent-2: #FFB800;
+  --success: #10B981;
+  --warning: #F59E0B;
+  --danger: #EF4444;
+  --text: #F5F5F5;
+  --text-2: #A0A4AB;
+  --text-3: #6B7280;
+
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+[data-theme="light"] {
+  --bg: #F8F7F4;
+  --surface: #FFFFFF;
+  --surface-2: #F0EEE9;
+  --border: #E5E2DC;
+  --text: #14181E;
+  --text-2: #4B5563;
+  --text-3: #9CA3AF;
+}
+
+.cario {
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+.cario h1, .cario h2, .cario h3, .cario h4, .cario .display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.cario .mono { font-family: var(--font-mono); }
+
+.cario .btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 8px; padding: 14px 22px; border-radius: 10px;
+  font-weight: 600; font-size: 15px; cursor: pointer;
+  border: 1px solid transparent; transition: all .15s ease;
+  font-family: inherit;
+}
+.cario .btn-primary { background: var(--accent); color: #fff; }
+.cario .btn-primary:hover { background: #d54e1f; transform: translateY(-1px); }
+.cario .btn-outline { background: transparent; color: var(--text); border-color: var(--border); }
+.cario .btn-outline:hover { background: var(--surface-2); }
+.cario .btn-ghost { background: transparent; color: var(--text); }
+
+.cario .badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600;
+}
+.cario .badge-deal { background: rgba(16,185,129,.15); color: var(--success); }
+.cario .badge-good { background: rgba(255,184,0,.15); color: var(--accent-2); }
+.cario .badge-verified { background: rgba(16,185,129,.12); color: var(--success); border: 1px solid rgba(16,185,129,.3); }
+.cario .badge-premium { background: rgba(255,184,0,.15); color: var(--accent-2); border: 1px solid rgba(255,184,0,.3); }
+
+.cario .card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.cario .input {
+  background: var(--surface-2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 12px 14px; color: var(--text);
+  font-family: inherit; font-size: 14px; width: 100%;
+}
+.cario .input:focus { outline: none; border-color: var(--accent); }
+
+/* SVG car placeholder pattern */
+.car-placeholder {
+  background: repeating-linear-gradient(
+    135deg,
+    var(--surface-2) 0px, var(--surface-2) 14px,
+    rgba(255,255,255,0.02) 14px, rgba(255,255,255,0.02) 28px
+  );
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-3); font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: 0.05em; text-transform: uppercase;
+  position: relative; overflow: hidden;
+}
+.car-placeholder::before {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 60% 60%, rgba(232,93,44,0.08), transparent 60%);
+}
+.car-placeholder span { position: relative; z-index: 1; padding: 6px 10px; background: rgba(15,20,25,0.6); border-radius: 4px; }
+
+/* Hover lift */
+.cario .lift { transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+.cario .lift:hover { transform: translateY(-3px); border-color: rgba(232,93,44,0.4); box-shadow: 0 12px 32px rgba(0,0,0,0.3); }
+
+/* Scrollbar hide on cards */
+.cario *::-webkit-scrollbar { display: none; }
+.cario * { scrollbar-width: none; }
+
+
+/* === Vehicle image normalization (13 ảnh ô tô — Screen 02 + 03) === */
+img.vehicle-image {
+  filter: saturate(0.88) contrast(1.06) brightness(0.96);
+  transition: filter 0.25s ease, transform 0.25s ease;
+  display: block;
+}
+img.vehicle-image:hover {
+  filter: saturate(1) contrast(1.06) brightness(1.02);
+}
+.car-card { overflow: hidden; }
+.car-card:hover img.vehicle-image { transform: scale(1.03); }
+.car-card-image-wrapper { position: relative; overflow: hidden; }
+.car-card-image-wrapper::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 60px;
+  background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+
+/* ── 360° rotation modal animations ──────────────────── */
+@keyframes pulse360 {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232, 93, 44, 0); }
+  50%      { box-shadow: 0 0 0 12px rgba(232, 93, 44, 0.15); }
+}
+@keyframes hintFade {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+  15%  { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  80%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+.rotate-360-badge:hover {
+  transform: scale(1.08);
+  background: rgba(0, 0, 0, 0.8) !important;
+  box-shadow: 0 4px 12px rgba(232, 93, 44, 0.4);
+}

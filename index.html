@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<title>Cario — 12 màn hình</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="tokens.css" />
+<style>
+  html, body { margin:0; padding:0; background:#0a0d11; color:#F5F5F5; font-family:"Inter",system-ui,sans-serif; }
+  svg { display:block; }
+  * { box-sizing: border-box; }
+
+  /* App shell */
+  .app { display:grid; grid-template-columns: 280px 1fr; min-height:100vh; }
+  .sidebar { background:#0F1419; border-right:1px solid #2D343F; padding:24px 0; position:sticky; top:0; height:100vh; overflow-y:auto; }
+  .sidebar-header { padding:0 24px 20px; border-bottom:1px solid #2D343F; margin-bottom:16px; }
+  .sidebar-title { font-family:"Space Grotesk",sans-serif; font-weight:700; font-size:20px; }
+  .sidebar-sub { font-size:11px; color:#6B7280; margin-top:4px; font-family:"JetBrains Mono",monospace; letter-spacing:0.05em; }
+  .sidebar h4 { font-family:"JetBrains Mono",monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#6B7280; margin: 18px 24px 8px; font-weight:600; }
+  .nav-item { display:flex; align-items:center; gap:10px; padding:9px 24px; color:#A0A4AB; text-decoration:none; cursor:pointer; font-size:13px; border:none; background:transparent; width:100%; text-align:left; font-family:inherit; }
+  .nav-item:hover { background:#1A1F26; color:#F5F5F5; }
+  .nav-item.active { background:rgba(232,93,44,0.12); color:#E85D2C; border-left:3px solid #E85D2C; padding-left:21px; }
+  .nav-num { font-family:"JetBrains Mono",monospace; font-size:11px; color:#6B7280; width:22px; }
+  .nav-item.active .nav-num { color:#E85D2C; }
+
+  /* Main */
+  .main { display:flex; flex-direction:column; min-height:100vh; }
+  .topbar { display:flex; align-items:center; justify-content:space-between; padding:16px 32px; border-bottom:1px solid #2D343F; background:#0F1419; position:sticky; top:0; z-index:10; }
+  .topbar-info .eyebrow { font-family:"JetBrains Mono",monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#E85D2C; font-weight:600; }
+  .topbar-info h1 { font-family:"Space Grotesk",sans-serif; font-size:20px; margin:4px 0 0; font-weight:700; letter-spacing:-0.01em; }
+  .pager { display:flex; align-items:center; gap:8px; font-family:"JetBrains Mono",monospace; font-size:12px; color:#A0A4AB; }
+  .pager button { background:#1A1F26; border:1px solid #2D343F; color:#F5F5F5; width:34px; height:34px; border-radius:8px; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:16px; font-family:inherit; }
+  .pager button:hover:not(:disabled) { background:#242A33; border-color:#E85D2C; }
+  .pager button:disabled { opacity:0.35; cursor:not-allowed; }
+  .pager .count { padding: 0 10px; }
+
+  .stage { flex:1; padding:32px; display:flex; align-items:flex-start; justify-content:center; overflow:auto; }
+  .frame-wrap { width:100%; max-width:1600px; }
+  .frame-meta { display:flex; align-items:baseline; gap:14px; margin-bottom:14px; padding: 0 4px; }
+  .frame-meta .num { font-family:"JetBrains Mono",monospace; font-size:13px; color:#6B7280; font-weight:600; }
+  .frame-meta .name { font-size:16px; color:#F5F5F5; font-weight:600; }
+  .frame-meta .dim { margin-left:auto; font-family:"JetBrains Mono",monospace; font-size:11px; color:#6B7280; }
+  .frame { background:#1A1F26; border:1px solid #2D343F; border-radius:14px; overflow:hidden; box-shadow: 0 24px 60px rgba(0,0,0,0.5); }
+  .frame > div { display:flex; justify-content:center; }
+
+  @media (max-width: 980px) { .app { grid-template-columns: 1fr; } .sidebar { display:none; } }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="shared.jsx"></script>
+<script type="text/babel" src="screens-1-2.jsx"></script>
+<script type="text/babel" src="screens-3-4.jsx"></script>
+<script type="text/babel" src="screens-5-8.jsx"></script>
+<script type="text/babel" src="screens-9-12.jsx"></script>
+
+<script type="text/babel" data-presets="env,react">
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "theme": "dark",
+  "accent": "#E85D2C",
+  "accent2": "#FFB800"
+}/*EDITMODE-END*/;
+
+const SCREENS = [
+  { n: '01', name: 'Landing', dim: '1440 × 1900', group: 'Marketing & Discovery', comp: 'Screen01_Landing' },
+  { n: '02', name: 'Inventory Browse', dim: '1440 × 1500', group: 'Marketing & Discovery', comp: 'Screen02_Browse' },
+  { n: '03', name: 'Vehicle Detail Page', dim: '1440 × 2400', group: 'Buying Flow', comp: 'Screen03_VDP' },
+  { n: '04', name: '200-pt Inspection Report', dim: '1440 × 1900', group: 'Buying Flow', comp: 'Screen04_Inspection' },
+  { n: '05', name: 'Checkout / Order', dim: '1440 × 1500', group: 'Buying Flow', comp: 'Screen05_Checkout' },
+  { n: '06', name: 'Sell My Car (AI)', dim: '1440 × 1500', group: 'Sell-side & Mobile', comp: 'Screen06_Sell' },
+  { n: '07', name: 'Pre-approval Financing', dim: '1440 × 1500', group: 'Buying Flow', comp: 'Screen07_Financing' },
+  { n: '08', name: 'Mobile App Home', dim: 'iPhone 14 Pro', group: 'Sell-side & Mobile', comp: 'Screen08_Mobile' },
+  { n: '09', name: 'Order Tracking', dim: '1440 × 1300', group: 'Post-purchase', comp: 'Screen09_Tracking' },
+  { n: '10', name: 'IRC Operations', dim: '1440 × 1100', group: 'Internal Tools', comp: 'Screen10_IRC' },
+  { n: '11', name: 'AI Pricing Analyst', dim: '1440 × 1200', group: 'Internal Tools', comp: 'Screen11_AIPricing' },
+  { n: '12', name: 'Cario Tower (Vending)', dim: '1440 × 1500', group: 'Brand Moonshot', comp: 'Screen12_Tower' },
+];
+
+// Group screens for the sidebar
+const GROUPS = SCREENS.reduce((acc, s) => {
+  (acc[s.group] = acc[s.group] || []).push(s);
+  return acc;
+}, {});
+
+function App() {
+  const t = useTweaks(TWEAK_DEFAULTS);
+  const [idx, setIdx] = React.useState(() => {
+    const h = parseInt((location.hash || '').replace('#screen-', ''), 10);
+    return Number.isFinite(h) && h >= 1 && h <= SCREENS.length ? h - 1 : 0;
+  });
+
+  React.useEffect(() => {
+    document.documentElement.dataset.theme = t.theme;
+    document.documentElement.style.setProperty('--accent', t.accent);
+    document.documentElement.style.setProperty('--accent-2', t.accent2);
+  }, [t.theme, t.accent, t.accent2]);
+
+  React.useEffect(() => {
+    location.hash = `screen-${SCREENS[idx].n}`;
+    document.querySelector('.stage')?.scrollTo(0, 0);
+  }, [idx]);
+
+  React.useEffect(() => {
+    const onKey = (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.isContentEditable) return;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'j') setIdx(i => Math.min(SCREENS.length - 1, i + 1));
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'k') setIdx(i => Math.max(0, i - 1));
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
+
+  const cur = SCREENS[idx];
+  const Cmp = window[cur.comp];
+
+  return (
+    <>
+      <div className="app">
+        <nav className="sidebar">
+          <div className="sidebar-header">
+            <div className="sidebar-title">Cario</div>
+            <div className="sidebar-sub">12 màn hình · v1</div>
+          </div>
+          {Object.entries(GROUPS).map(([group, list]) => (
+            <div key={group}>
+              <h4>{group}</h4>
+              {list.map(s => {
+                const sIdx = SCREENS.indexOf(s);
+                return (
+                  <button key={s.n} className={`nav-item ${sIdx === idx ? 'active' : ''}`} onClick={() => setIdx(sIdx)}>
+                    <span className="nav-num">{s.n}</span>
+                    <span>{s.name}</span>
+                  </button>
+                );
+              })}
+            </div>
+          ))}
+        </nav>
+
+        <div className="main">
+          <div className="topbar">
+            <div className="topbar-info">
+              <div className="eyebrow">{cur.group}</div>
+              <h1>{cur.n} · {cur.name}</h1>
+            </div>
+            <div className="pager">
+              <button onClick={() => setIdx(i => Math.max(0, i - 1))} disabled={idx === 0} title="Trước (←)">‹</button>
+              <span className="count">{idx + 1} / {SCREENS.length}</span>
+              <button onClick={() => setIdx(i => Math.min(SCREENS.length - 1, i + 1))} disabled={idx === SCREENS.length - 1} title="Sau (→)">›</button>
+            </div>
+          </div>
+
+          <div className="stage">
+            <div className="frame-wrap">
+              <div className="frame-meta">
+                <span className="num">{cur.n}</span>
+                <span className="name">{cur.name}</span>
+                <span className="dim">{cur.dim} · phím ← → để chuyển trang</span>
+              </div>
+              <div className="frame">
+                <div>
+                  {Cmp ? <Cmp /> : <div style={{ padding: 80, color: '#6B7280' }}>Missing component: {cur.comp}</div>}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <TweaksPanel title="Tweaks">
+        <TweakSection title="Theme">
+          <TweakRadio
+            label="Mode"
+            value={t.theme}
+            onChange={v => t.setTweak('theme', v)}
+            options={[{ value: 'dark', label: 'Dark' }, { value: 'light', label: 'Light' }]}
+          />
+        </TweakSection>
+        <TweakSection title="Brand color">
+          <TweakColor label="Primary" value={t.accent} onChange={v => t.setTweak('accent', v)}
+            options={['#E85D2C','#0E5DAD','#10B981','#7C3AED']} />
+          <TweakColor label="Highlight" value={t.accent2} onChange={v => t.setTweak('accent2', v)}
+            options={['#FFB800','#F472B6','#34D399','#FBBF24']} />
+        </TweakSection>
+      </TweaksPanel>
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
