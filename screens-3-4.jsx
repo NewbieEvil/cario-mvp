@@ -279,6 +279,7 @@ const Screen03_VDP = () => {
       </div>
     </div>
 
+    {activeTab === 0 && (<>
     {/* Specs */}
     <section style={{ padding: '48px' }}>
       <h2 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 24, fontWeight: 600, color: '#F5F5F5', lineHeight: 1.3, marginBottom: 16, marginTop: 0 }}>Thông số kỹ thuật</h2>
@@ -303,6 +304,9 @@ const Screen03_VDP = () => {
       </div>
     </section>
 
+    </>)}
+
+    {activeTab === 1 && (<>
     {/* Inspection Summary Card — between specs and trust badges */}
     <section style={{ padding: '0 48px 48px' }}>
       <div style={{
@@ -389,6 +393,9 @@ const Screen03_VDP = () => {
       </div>
     </section>
 
+    </>)}
+
+    {activeTab === 0 && (<>
     {/* Trust badges row */}
     <section style={{ padding: '0 48px 48px' }}>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginTop: 32, marginBottom: 32 }}>
@@ -501,6 +508,117 @@ const Screen03_VDP = () => {
         </a>
       </div>
     </section>
+
+    </>)}
+
+    {activeTab === 2 && (
+      <section style={{ padding: '48px' }}>
+        <h2 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 24, fontWeight: 600, color: '#F5F5F5', lineHeight: 1.3, marginBottom: 16, marginTop: 0 }}>Lịch sử xe</h2>
+        <div style={{ display: 'flex', gap: 16, marginBottom: 32 }}>
+          {[
+            { icon: '👤', label: '1 chủ sở hữu', sub: 'Private owner' },
+            { icon: '🚫', label: '0 tai nạn', sub: 'Verified clean' },
+            { icon: '✓', label: 'Odometer Verified', sub: 'VinCheck pass' },
+          ].map(s => (
+            <div key={s.label} style={{ flex: 1, background: '#1A1F26', border: '1px solid #2D343F', padding: 20, borderRadius: 12 }}>
+              <div style={{ fontSize: 24, marginBottom: 8 }}>{s.icon}</div>
+              <div style={{ fontSize: 16, fontWeight: 600, color: '#F5F5F5' }}>{s.label}</div>
+              <div style={{ fontSize: 13, color: '#A0A4AB', marginTop: 4 }}>{s.sub}</div>
+            </div>
+          ))}
+        </div>
+        <div className="card" style={{ padding: 32 }}>
+          <h3 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 18, fontWeight: 600, color: '#F5F5F5', marginBottom: 24, marginTop: 0 }}>Timeline</h3>
+          <div style={{ position: 'relative', paddingLeft: 28 }}>
+            <div style={{ position: 'absolute', left: 8, top: 8, bottom: 8, width: 2, background: 'linear-gradient(180deg, #10B981, #2D343F)' }} />
+            {[
+              { date: '01/2022', event: 'Mua mới tại Honda Plaza Quận 7', detail: 'Chủ sở hữu đầu tiên, biển số 51K-XXX.XX' },
+              { date: '06/2022', event: 'Bảo dưỡng 5,000 km', detail: 'Honda Service — kiểm tra dầu, lọc' },
+              { date: '12/2022', event: 'Bảo dưỡng 15,000 km', detail: 'Honda Service — thay dầu định kỳ' },
+              { date: '06/2023', event: 'Bảo dưỡng 25,000 km', detail: 'Honda Service — kiểm tra phanh, lốp' },
+              { date: '12/2023', event: 'Bảo dưỡng 35,000 km', detail: 'Garage độc lập (chứng nhận đầy đủ)' },
+              { date: '11/2024', event: 'Cario kiểm định 200 điểm → Nhập kho', detail: '192/200 điểm — XUẤT SẮC' },
+            ].map((e, i) => (
+              <div key={i} style={{ position: 'relative', paddingBottom: 24 }}>
+                <div style={{ position: 'absolute', left: -27, top: 4, width: 16, height: 16, borderRadius: '50%', background: '#10B981', border: '3px solid #0a0d11' }} />
+                <div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 12, color: '#10B981', fontWeight: 600, marginBottom: 4 }}>{e.date}</div>
+                <div style={{ fontSize: 15, fontWeight: 600, color: '#F5F5F5', marginBottom: 4 }}>{e.event}</div>
+                <div style={{ fontSize: 13, color: '#A0A4AB' }}>{e.detail}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    {activeTab === 3 && (
+      <section style={{ padding: '48px' }}>
+        <h2 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 24, fontWeight: 600, color: '#F5F5F5', lineHeight: 1.3, marginBottom: 16, marginTop: 0 }}>Tài chính</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: 24 }}>
+          <div className="card" style={{ padding: 32 }}>
+            <h3 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 18, fontWeight: 600, color: '#F5F5F5', marginBottom: 24, marginTop: 0 }}>Tính trả góp</h3>
+            <div style={{ marginBottom: 20 }}>
+              <div style={{ fontSize: 13, color: '#A0A4AB', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 8 }}>Trả trước</div>
+              <div style={{ fontSize: 22, fontWeight: 700, color: '#F5F5F5', fontFamily: '"Space Grotesk", sans-serif' }}>276,000,000 đ <span style={{ fontSize: 14, color: '#A0A4AB', fontWeight: 400 }}>(30%)</span></div>
+              <div style={{ height: 6, background: '#2D343F', borderRadius: 999, marginTop: 10, position: 'relative' }}>
+                <div style={{ position: 'absolute', left: 0, top: 0, width: '30%', height: '100%', background: 'linear-gradient(90deg, #10B981, #34D399)', borderRadius: 999 }} />
+                <div style={{ position: 'absolute', left: '30%', top: -4, width: 14, height: 14, borderRadius: '50%', background: '#10B981', border: '2px solid #0a0d11' }} />
+              </div>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 8, marginBottom: 24 }}>
+              {[12, 24, 36, 48, 60].map(m => (
+                <div key={m} style={{ textAlign: 'center', padding: '10px 0', borderRadius: 8, border: m === 36 ? '1px solid #E85D2C' : '1px solid #2D343F', background: m === 36 ? 'rgba(232,93,44,0.12)' : 'transparent', color: m === 36 ? '#E85D2C' : '#A0A4AB', fontWeight: 600, fontSize: 13, cursor: 'pointer' }}>{m} tháng</div>
+              ))}
+            </div>
+            <div style={{ padding: 24, background: 'rgba(16,185,129,0.06)', border: '1px solid rgba(16,185,129,0.2)', borderRadius: 12 }}>
+              <div style={{ fontSize: 13, color: '#A0A4AB', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 6 }}>Trả góp hàng tháng</div>
+              <div style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 36, fontWeight: 800, color: '#10B981', lineHeight: 1 }}>21,580,000 đ</div>
+              <div style={{ fontSize: 12, color: '#A0A4AB', marginTop: 10 }}>Lãi suất 9.8%/năm (VPBank — partner Cario)</div>
+            </div>
+          </div>
+          <div className="card" style={{ padding: 32 }}>
+            <h3 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 18, fontWeight: 600, color: '#F5F5F5', marginBottom: 16, marginTop: 0 }}>Đối tác ngân hàng</h3>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 10, marginBottom: 20 }}>
+              {['VPBank ⭐','Vietcombank','Techcombank','MB Bank','TPBank','VIB','ACB','Sacombank'].map(b => (
+                <div key={b} style={{ padding: '10px 14px', background: '#1A1F26', border: '1px solid #2D343F', borderRadius: 8, fontSize: 13, color: '#F5F5F5', textAlign: 'center' }}>{b}</div>
+              ))}
+            </div>
+            <div style={{ fontSize: 13, color: '#A0A4AB', marginBottom: 20 }}>10+ ngân hàng đối tác — pre-approve trong 30 giây</div>
+            <button className="btn-cta-primary" style={{ width: '100%' }}>Pre-approve ngay (30s) →</button>
+          </div>
+        </div>
+      </section>
+    )}
+
+    {activeTab === 4 && (
+      <section style={{ padding: '48px' }}>
+        <h2 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 24, fontWeight: 600, color: '#F5F5F5', lineHeight: 1.3, marginBottom: 8, marginTop: 0 }}>Trợ lý AI Cario</h2>
+        <div style={{ fontSize: 14, color: '#A0A4AB', marginBottom: 24, display: 'flex', alignItems: 'center', gap: 10 }}>
+          <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#10B981', boxShadow: '0 0 0 4px rgba(16,185,129,0.2)' }} />
+          Online • Đã trả lời 47,392 câu hỏi • Avg 1.2s
+          <span style={{ marginLeft: 'auto', fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: '#6B7280' }}>Powered by Cario AI v2.4</span>
+        </div>
+        <div className="card" style={{ padding: 24, marginBottom: 16 }}>
+          <div style={{ display: 'flex', gap: 12, marginBottom: 16 }}>
+            <div style={{ width: 36, height: 36, borderRadius: '50%', background: 'linear-gradient(135deg, #10B981, #34D399)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FFF', fontWeight: 700, flexShrink: 0 }}>C</div>
+            <div style={{ flex: 1 }}>
+              <div style={{ fontSize: 14, fontWeight: 600, color: '#F5F5F5', marginBottom: 4 }}>Cario AI <span style={{ marginLeft: 8, fontSize: 11, padding: '2px 8px', borderRadius: 999, border: '1px solid #10B981', color: '#10B981', fontWeight: 500 }}>98% confident</span></div>
+              <div style={{ fontSize: 14, color: '#F5F5F5', lineHeight: 1.6 }}>👋 Chào bạn! Mình là Cario AI — trợ lý ảo cho xe Honda CR-V 1.5L Turbo này. Mình đã đọc kỹ hồ sơ 200 điểm + lịch sử + financing options. Bạn muốn hỏi gì?</div>
+            </div>
+          </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, paddingLeft: 48 }}>
+            {['Xe có bảo hành không?','Có giao tận nhà?','Tôi muốn lái thử','Cách thanh toán?','Đổi ý có được?','Chi phí bảo dưỡng/năm?'].map(q => (
+              <button key={q} style={{ padding: '8px 14px', background: 'transparent', border: '1px solid rgba(255,255,255,0.2)', borderRadius: 999, color: '#F5F5F5', fontSize: 13, cursor: 'pointer', fontFamily: 'inherit' }}>{q}</button>
+            ))}
+          </div>
+        </div>
+        <div style={{ display: 'flex', gap: 8, padding: 16, background: '#1A1F26', border: '1px solid #2D343F', borderRadius: 12 }}>
+          <input placeholder="Hoặc gõ câu hỏi của bạn..." style={{ flex: 1, background: 'transparent', border: 'none', color: '#F5F5F5', fontSize: 14, outline: 'none', fontFamily: 'inherit' }} />
+          <button style={{ padding: '8px 18px', background: '#10B981', border: 'none', borderRadius: 8, color: '#FFF', fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>➤</button>
+        </div>
+        <div style={{ fontSize: 12, color: '#6B7280', marginTop: 10, textAlign: 'center' }}>📚 Powered by Cario AI • Phản hồi tức thì • Train trên 47k Q&A</div>
+      </section>
+    )}
 
     {/* Similar cars */}
     <section style={{ padding: '48px 48px 96px' }}>
