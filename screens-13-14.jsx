@@ -496,8 +496,8 @@ const Screen15_ISWeb = () => {
         {/* KPI strip */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 20, marginBottom: 40 }}>
           {[
-            { eyebrow: 'Income tháng 5', value: '52.4M ₫', delta: '↑ 38% vs T4', sub: 'Wholesale 28M + Retail 18M + Tier bonus 6.4M', color: 'var(--success)' },
-            { eyebrow: 'Active Owners', value: '13', delta: '5 wholesale · 8 retail', sub: '5 mới tuần này, 0 từ chối service', color: 'var(--accent)' },
+            { eyebrow: 'Doanh thu tháng 5', value: '52.4M ₫', delta: '↑ 38% vs T4', sub: 'Wholesale 28M + Retail 18M + Tier bonus 6.4M', color: 'var(--success)' },
+            { eyebrow: 'Owner đang hoạt động', value: '13', delta: '5 wholesale · 8 retail', sub: '5 mới tuần này, 0 từ chối service', color: 'var(--accent)' },
             { eyebrow: 'Win rate Owner', value: '87%', delta: '40/46 ký gửi accept', sub: '90 ngày qua · top 12% IS network', color: 'var(--success)' },
             { eyebrow: 'Auction success', value: '92%', delta: 'Trên target 60% (PRD)', sub: '12/13 wholesale auctions có ≥1 bid', color: 'var(--success)' },
           ].map(k => (
