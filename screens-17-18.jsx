@@ -622,7 +622,7 @@ const Screen18_ACShowroom = () => {
     { name: 'VinFast VF8 Plus 2023', km: '12,400', img: 'uploads/s02-card11-vinfast-vf8-blue.png', trust: 91, price: 1200, loc: 'HCM', viewers: 6, deadline: 2 },
     { name: 'Kia Seltos 1.6L 2023', km: '14,200', img: 'uploads/s02-card06-kia-seltos-silver.png', trust: 85, price: 690, loc: 'HCM', viewers: 11, hot: true },
     { name: 'Hyundai Tucson 2.0 2022', km: '32,100', img: 'uploads/s02-card07-hyundai-tucson-gray.png', trust: 82, price: 880, loc: 'HCM', viewers: 3 },
-    { name: 'Mitsubishi Xpander 2023', km: '21,500', img: 'uploads/s02-card05-mitsubishi-xpander.png', trust: 86, price: 620, loc: 'HCM', viewers: 5 },
+    { name: 'Toyota Innova Cross 2023', km: '21,500', img: 'uploads/s02-card09-toyota-innova-silver.png', trust: 86, price: 720, loc: 'HCM', viewers: 5 },
   ];
 
   const activities = [
