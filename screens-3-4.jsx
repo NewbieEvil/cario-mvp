@@ -16,7 +16,7 @@ const Screen03_VDP = () => {
   const INITIAL_CHIPS = ['Xe có bảo hành không?','Có giao tận nhà?','Tôi muốn lái thử','Cách thanh toán?','Đổi ý có được?','Chi phí bảo dưỡng/năm?'];
   const [chatMessages, setChatMessages] = React.useState([{
     role: 'ai',
-    text: '👋 Chào bạn! Mình là Cario AI — trợ lý ảo cho xe Honda CR-V 1.5L Turbo này. Mình đã đọc kỹ hồ sơ 200 điểm + lịch sử + financing options. Bạn muốn hỏi gì?',
+    text: '👋 Chào bạn! Mình là Otobank AI — trợ lý ảo cho xe Honda CR-V 1.5L Turbo này. Mình đã đọc kỹ hồ sơ 200 điểm + lịch sử + financing options. Bạn muốn hỏi gì?',
     chips: INITIAL_CHIPS,
     confidence: null,
     citation: null,
@@ -28,156 +28,156 @@ const Screen03_VDP = () => {
 
   const AI_RESPONSES = {
     'Xe có bảo hành không?': {
-      text: 'Honda CR-V này có **3 lớp bảo hành** chồng nhau:\n\n✓ **Cario 7-day Money-Back** — Đổi trả 100% trong 7 ngày, không hỏi lý do\n✓ **Bảo hành chính hãng Honda** — Còn hiệu lực đến 03/2025 hoặc 100,000 km\n✓ **Cario+ Extended** (optional) — +12M cho 12 tháng bảo hành thêm\n\nNếu xe có vấn đề kỹ thuật trong 7 ngày đầu, Cario hoàn 100% tiền + chi phí giao. Bạn cần mình giải thích thêm phần nào?',
-      chips: ['Cario+ giá bao nhiêu?','Quy trình đổi trả?','Đặt lịch xem xe'],
-      citation: 'Cario Policy v2.4 • Honda Vietnam Warranty Doc',
+      text: 'Honda CR-V này có **3 lớp bảo hành** chồng nhau:\n\n✓ **Otobank 7-day Money-Back** — Đổi trả 100% trong 7 ngày, không hỏi lý do\n✓ **Bảo hành chính hãng Honda** — Còn hiệu lực đến 03/2025 hoặc 100,000 km\n✓ **Otobank+ Extended** (optional) — +12M cho 12 tháng bảo hành thêm\n\nNếu xe có vấn đề kỹ thuật trong 7 ngày đầu, Otobank hoàn 100% tiền + chi phí giao. Bạn cần mình giải thích thêm phần nào?',
+      chips: ['Otobank+ giá bao nhiêu?','Quy trình đổi trả?','Đặt lịch xem xe'],
+      citation: 'Otobank Policy v2.4 • Honda Vietnam Warranty Doc',
     },
     'Có giao tận nhà?': {
-      text: 'Có nhé! Cario giao tận nhà toàn quốc:\n\n🚚 **Nội thành HCM, HN**: MIỄN PHÍ\n🚚 **Tỉnh giáp ranh** (Bình Dương, Đồng Nai, Long An...): 1.5M\n🚚 **Các tỉnh xa hơn**: 2.5M – 3.5M (tùy khoảng cách)\n\n⏱ **Thời gian giao: trong 24h** kể từ khi hoàn tất thanh toán + ký hợp đồng. Tài xế Cario gọi xác nhận trước 1h.\n\nBạn ở đâu để mình check phí giao chính xác?',
+      text: 'Có nhé! Otobank giao tận nhà toàn quốc:\n\n🚚 **Nội thành HCM, HN**: MIỄN PHÍ\n🚚 **Tỉnh giáp ranh** (Bình Dương, Đồng Nai, Long An...): 1.5M\n🚚 **Các tỉnh xa hơn**: 2.5M – 3.5M (tùy khoảng cách)\n\n⏱ **Thời gian giao: trong 24h** kể từ khi hoàn tất thanh toán + ký hợp đồng. Tài xế Otobank gọi xác nhận trước 1h.\n\nBạn ở đâu để mình check phí giao chính xác?',
       chips: ['Giao Bình Dương?','Thời gian rảnh?','Đặt lịch giao'],
-      citation: 'Cario Logistics Policy • Updated 04/2026',
+      citation: 'Otobank Logistics Policy • Updated 04/2026',
     },
     'Tôi muốn lái thử': {
-      text: 'Test drive Honda CR-V **hoàn toàn miễn phí**:\n\n📍 **Showroom HCM**: 123 Nguyễn Trãi, P. Bến Thành, Q.1\n📍 **Showroom HN**: 45 Bà Triệu, Hoàn Kiếm\n⏱ Mỗi buổi 30-60 phút\n🛣 Lái trên đường thực tế — KHÔNG bó hẹp trong showroom\n👤 Có sale Cario đi cùng tư vấn\n\nĐặt lịch qua app Cario hoặc gọi **1900-CARIO**. Bạn muốn lái thử khi nào?',
+      text: 'Test drive Honda CR-V **hoàn toàn miễn phí**:\n\n📍 **Showroom HCM**: 123 Nguyễn Trãi, P. Bến Thành, Q.1\n📍 **Showroom HN**: 45 Bà Triệu, Hoàn Kiếm\n⏱ Mỗi buổi 30-60 phút\n🛣 Lái trên đường thực tế — KHÔNG bó hẹp trong showroom\n👤 Có sale Otobank đi cùng tư vấn\n\nĐặt lịch qua app Otobank hoặc gọi **1900-OTOBANK**. Bạn muốn lái thử khi nào?',
       chips: ['Đặt lịch ngay','Mang giấy tờ gì?','Có sale tiếng Anh?'],
-      citation: 'Cario Test Drive Program v1.8',
+      citation: 'Otobank Test Drive Program v1.8',
     },
     'Cách thanh toán?': {
-      text: 'Cario hỗ trợ **3 phương thức**:\n\n💵 **Tiền mặt** tại showroom — giảm 0.5% cho deal lớn\n🏦 **Chuyển khoản**: VCB / Techcom / MB / VPBank / 10+ ngân hàng\n💳 **Trả góp** qua VPBank (partner): 9.8%/năm, kỳ hạn 12-60 tháng, **pre-approve trong 30 GIÂY**\n\nBạn có thể combo: VD trả trước 30% tiền mặt + 70% trả góp. Mình tính chi tiết giúp ở tab **Tài chính** được không?',
+      text: 'Otobank hỗ trợ **3 phương thức**:\n\n💵 **Tiền mặt** tại showroom — giảm 0.5% cho deal lớn\n🏦 **Chuyển khoản**: VCB / Techcom / MB / VPBank / 10+ ngân hàng\n💳 **Trả góp** qua VPBank (partner): 9.8%/năm, kỳ hạn 12-60 tháng, **pre-approve trong 30 GIÂY**\n\nBạn có thể combo: VD trả trước 30% tiền mặt + 70% trả góp. Mình tính chi tiết giúp ở tab **Tài chính** được không?',
       chips: ['Tính trả góp','Pre-approve ngay','So sánh banks'],
-      citation: 'Cario Payment Methods • VPBank Partnership Doc',
+      citation: 'Otobank Payment Methods • VPBank Partnership Doc',
     },
     'Đổi ý có được?': {
-      text: 'Hoàn toàn được — đây là **lý do khác biệt nhất** của Cario:\n\n✓ **7 ngày đầu**: Hoàn 100% tiền, không hỏi lý do (chỉ trừ phí giao ~1.5M)\n✓ **Sau 7 ngày**: Cario thu mua lại theo giá AI Pricing\n✓ **Trong 1 năm đầu**: Priority buyback, giá tốt hơn 5-8% thị trường\n\nĐây là policy rủi ro thấp nhất ngành ô tô VN. Bạn cứ yên tâm mua thử nhé!',
+      text: 'Hoàn toàn được — đây là **lý do khác biệt nhất** của Otobank:\n\n✓ **7 ngày đầu**: Hoàn 100% tiền, không hỏi lý do (chỉ trừ phí giao ~1.5M)\n✓ **Sau 7 ngày**: Otobank thu mua lại theo giá AI Pricing\n✓ **Trong 1 năm đầu**: Priority buyback, giá tốt hơn 5-8% thị trường\n\nĐây là policy rủi ro thấp nhất ngành ô tô VN. Bạn cứ yên tâm mua thử nhé!',
       chips: ['Buyback program','Trade-in xe cũ','Yêu cầu báo giá'],
-      citation: 'Cario Return & Buyback Policy v3.0',
+      citation: 'Otobank Return & Buyback Policy v3.0',
     },
     'Chi phí bảo dưỡng/năm?': {
-      text: 'Honda CR-V 1.5L Turbo chi phí bảo dưỡng dự kiến:\n\n🔧 Bảo dưỡng định kỳ (mỗi 10,000 km): **~3-5M**\n🔧 Thay dầu + lọc (mỗi 5,000 km): **1.2M**\n🔧 Tổng năm (avg 20,000 km/năm): **12-15M**\n🔧 Đăng kiểm + bảo hiểm bắt buộc: **4-5M**\n🔧 Bảo hiểm vật chất (khuyến nghị): **8-12M**\n\n**TỔNG: ~24-32M/năm**\n\nCario có gói **Worry-Free Ownership** 18M/năm — bao trọn bảo dưỡng + bảo hiểm + roadside assist. Tiết kiệm 30%. Có muốn mình giới thiệu không?',
+      text: 'Honda CR-V 1.5L Turbo chi phí bảo dưỡng dự kiến:\n\n🔧 Bảo dưỡng định kỳ (mỗi 10,000 km): **~3-5M**\n🔧 Thay dầu + lọc (mỗi 5,000 km): **1.2M**\n🔧 Tổng năm (avg 20,000 km/năm): **12-15M**\n🔧 Đăng kiểm + bảo hiểm bắt buộc: **4-5M**\n🔧 Bảo hiểm vật chất (khuyến nghị): **8-12M**\n\n**TỔNG: ~24-32M/năm**\n\nOtobank có gói **Worry-Free Ownership** 18M/năm — bao trọn bảo dưỡng + bảo hiểm + roadside assist. Tiết kiệm 30%. Có muốn mình giới thiệu không?',
       chips: ['Worry-Free package','Chi phí xăng?','So Toyota CR-V'],
       citation: 'Honda Vietnam Service Cost Estimate • 2026 Q2',
     },
     // === ROUND 2 — Follow-up responses ===
-    'Cario+ giá bao nhiêu?': {
-      text: 'Cario+ Extended Warranty có **3 gói**:\n\n💎 **Cario+ Basic** — 12M / 12 tháng\n  • Bảo hành powertrain (động cơ, hộp số)\n  • Roadside assist 24/7 (HCM, HN, Đà Nẵng)\n\n💎 **Cario+ Pro** — 18M / 24 tháng (HOT)\n  • Tất cả Basic + bảo hành điện tử + AC\n  • Free 4 lần bảo dưỡng định kỳ\n  • Replacement vehicle khi xe sửa >24h\n\n💎 **Cario+ Premium** — 28M / 36 tháng\n  • Bao trọn mọi bộ phận (trừ wear items)\n  • Free oil change suốt thời gian gói\n  • Concierge support cá nhân\n\n→ Cho Honda CR-V này, **Pro là sweet spot**. Add vào order luôn?',
-      chips: ['Add Cario+ Pro vào order','So sánh chi tiết 3 gói','Đặt lịch xem xe'],
-      citation: 'Cario+ Warranty Plans 2026 v3.1',
+    'Otobank+ giá bao nhiêu?': {
+      text: 'Otobank+ Extended Warranty có **3 gói**:\n\n💎 **Otobank+ Basic** — 12M / 12 tháng\n  • Bảo hành powertrain (động cơ, hộp số)\n  • Roadside assist 24/7 (HCM, HN, Đà Nẵng)\n\n💎 **Otobank+ Pro** — 18M / 24 tháng (HOT)\n  • Tất cả Basic + bảo hành điện tử + AC\n  • Free 4 lần bảo dưỡng định kỳ\n  • Replacement vehicle khi xe sửa >24h\n\n💎 **Otobank+ Premium** — 28M / 36 tháng\n  • Bao trọn mọi bộ phận (trừ wear items)\n  • Free oil change suốt thời gian gói\n  • Concierge support cá nhân\n\n→ Cho Honda CR-V này, **Pro là sweet spot**. Add vào order luôn?',
+      chips: ['Add Otobank+ Pro vào order','So sánh chi tiết 3 gói','Đặt lịch xem xe'],
+      citation: 'Otobank+ Warranty Plans 2026 v3.1',
     },
     'Quy trình đổi trả?': {
-      text: 'Quy trình đổi trả **siêu đơn giản**, 4 bước:\n\n1️⃣ **Báo trong 7 ngày** — qua app hoặc gọi 1900-CARIO, không hỏi lý do\n2️⃣ **Cario lấy xe tận nhà** — trong 24h, miễn phí\n3️⃣ **Inspection 1 ngày** — verify tình trạng xe\n4️⃣ **Hoàn 100% tiền** — về tài khoản trong 3 ngày làm việc (chỉ trừ phí giao 1.5M)\n\nKHÔNG có catch, không fine print. Đây là **moneyback đơn giản nhất ngành ô tô VN**.',
+      text: 'Quy trình đổi trả **siêu đơn giản**, 4 bước:\n\n1️⃣ **Báo trong 7 ngày** — qua app hoặc gọi 1900-OTOBANK, không hỏi lý do\n2️⃣ **Otobank lấy xe tận nhà** — trong 24h, miễn phí\n3️⃣ **Inspection 1 ngày** — verify tình trạng xe\n4️⃣ **Hoàn 100% tiền** — về tài khoản trong 3 ngày làm việc (chỉ trừ phí giao 1.5M)\n\nKHÔNG có catch, không fine print. Đây là **moneyback đơn giản nhất ngành ô tô VN**.',
       chips: ['Đặt lịch xem xe','Đảm bảo gì khác?','Cám ơn'],
-      citation: 'Cario Return Policy v3.0 — Section 4.2',
+      citation: 'Otobank Return Policy v3.0 — Section 4.2',
     },
     'Đặt lịch xem xe': {
-      text: '✅ Mình pre-fill thông tin xem xe Honda CR-V cho bạn:\n\n📅 **Slot trống gần nhất**:\n• Thứ 5, 09/05/2026 — 10:00 AM hoặc 2:00 PM\n• Thứ 6, 10/05/2026 — Cả ngày\n• Thứ 7, 11/05/2026 — 9:00 AM hoặc 3:00 PM\n\n📍 Showroom Cario Q.7 (gần xe đang list)\n📞 Sale chuyên trách: **Anh Hùng** — 4.9★ (1,247 chuyến)\n\nClick chip để mình book ngay, hoặc gọi 1900-CARIO.',
+      text: '✅ Mình pre-fill thông tin xem xe Honda CR-V cho bạn:\n\n📅 **Slot trống gần nhất**:\n• Thứ 5, 09/05/2026 — 10:00 AM hoặc 2:00 PM\n• Thứ 6, 10/05/2026 — Cả ngày\n• Thứ 7, 11/05/2026 — 9:00 AM hoặc 3:00 PM\n\n📍 Showroom Otobank Q.7 (gần xe đang list)\n📞 Sale chuyên trách: **Anh Hùng** — 4.9★ (1,247 chuyến)\n\nClick chip để mình book ngay, hoặc gọi 1900-OTOBANK.',
       chips: ['Book Thứ 5 10AM','Book Thứ 7 9AM','Cần slot khác'],
-      citation: 'Cario Booking System v2.1',
+      citation: 'Otobank Booking System v2.1',
     },
     'Giao Bình Dương?': {
-      text: 'Có chứ! Bình Dương là **tỉnh giáp ranh HCM**:\n\n🚚 **Phí giao**: 1.5M (cố định, không tính theo km)\n⏱ **Thời gian**: 24h kể từ ký hợp đồng\n📍 **Khu vực**: Tất cả huyện thị xã Thuận An, Dĩ An, Thủ Dầu Một, Tân Uyên, Bến Cát, Phú Giáo...\n👤 **Tài xế**: Cario in-house, 4.9★, kèm hợp đồng + bàn giao\n\nBạn ở khu nào trong Bình Dương để mình check thời gian chính xác?',
+      text: 'Có chứ! Bình Dương là **tỉnh giáp ranh HCM**:\n\n🚚 **Phí giao**: 1.5M (cố định, không tính theo km)\n⏱ **Thời gian**: 24h kể từ ký hợp đồng\n📍 **Khu vực**: Tất cả huyện thị xã Thuận An, Dĩ An, Thủ Dầu Một, Tân Uyên, Bến Cát, Phú Giáo...\n👤 **Tài xế**: Otobank in-house, 4.9★, kèm hợp đồng + bàn giao\n\nBạn ở khu nào trong Bình Dương để mình check thời gian chính xác?',
       chips: ['Thuận An','Dĩ An','Đặt lịch giao'],
-      citation: 'Cario Logistics — Bình Dương Coverage',
+      citation: 'Otobank Logistics — Bình Dương Coverage',
     },
     'Thời gian rảnh?': {
-      text: 'Cario giao **7 ngày/tuần**, slot rất linh hoạt:\n\n⏰ **Thứ 2 → Thứ 6**: 8:00 AM → 8:00 PM\n⏰ **Thứ 7 → Chủ Nhật**: 9:00 AM → 6:00 PM\n⏰ **Holiday**: vẫn giao, có sale on-call\n\n💡 **Slot popular**: Thứ 6 tối 6-8 PM hoặc sáng thứ 7 — khách thường rảnh check xe kỹ.\n\nBạn pick slot nào?',
+      text: 'Otobank giao **7 ngày/tuần**, slot rất linh hoạt:\n\n⏰ **Thứ 2 → Thứ 6**: 8:00 AM → 8:00 PM\n⏰ **Thứ 7 → Chủ Nhật**: 9:00 AM → 6:00 PM\n⏰ **Holiday**: vẫn giao, có sale on-call\n\n💡 **Slot popular**: Thứ 6 tối 6-8 PM hoặc sáng thứ 7 — khách thường rảnh check xe kỹ.\n\nBạn pick slot nào?',
       chips: ['Tối thứ 6','Sáng thứ 7','Đặt lịch giao'],
-      citation: 'Cario Delivery Slots — Updated Weekly',
+      citation: 'Otobank Delivery Slots — Updated Weekly',
     },
     'Đặt lịch giao': {
       text: '✅ Ghi nhận yêu cầu giao xe Honda CR-V 1.5L Turbo:\n\n📋 **Order summary**:\n• Xe: Honda CR-V 1.5L Turbo 2022 (920M)\n• Pre-approval: chưa có (sẽ verify ở bước thanh toán)\n• Giao: tận nhà, theo slot bạn chọn\n• Thời gian: 24h sau ký hợp đồng\n\nMình chuyển sang **Anh Hùng** (sale chuyên trách CR-V) confirm chi tiết qua Zalo/SMS trong 5 phút. OK không?',
       chips: ['OK chuyển ngay','Cần xem hợp đồng trước','Hỏi thêm'],
-      citation: 'Cario Order Confirmation Flow',
+      citation: 'Otobank Order Confirmation Flow',
     },
     'Đặt lịch ngay': {
-      text: '✅ Mình đặt test drive cho bạn:\n\n📅 **Slot khả dụng nhanh nhất**:\n• Hôm nay, 5:00 PM (1.5h sau)\n• Ngày mai, 10:00 AM hoặc 3:00 PM\n• Thứ 7, cả ngày\n\n📍 **Địa điểm**: Cario Showroom Q.7 — có sẵn xe Honda CR-V\n👤 **Sale**: Anh Hùng (4.9★) hoặc Chị Linh (4.8★)\n🛣 **Lộ trình test**: 30 phút quanh Quận 1 + Quận 7 (city + highway)\n\nBạn pick slot nào?',
+      text: '✅ Mình đặt test drive cho bạn:\n\n📅 **Slot khả dụng nhanh nhất**:\n• Hôm nay, 5:00 PM (1.5h sau)\n• Ngày mai, 10:00 AM hoặc 3:00 PM\n• Thứ 7, cả ngày\n\n📍 **Địa điểm**: Otobank Showroom Q.7 — có sẵn xe Honda CR-V\n👤 **Sale**: Anh Hùng (4.9★) hoặc Chị Linh (4.8★)\n🛣 **Lộ trình test**: 30 phút quanh Quận 1 + Quận 7 (city + highway)\n\nBạn pick slot nào?',
       chips: ['Hôm nay 5PM','Ngày mai 10AM','Thứ 7'],
-      citation: 'Cario Test Drive Booking — Real-time slots',
+      citation: 'Otobank Test Drive Booking — Real-time slots',
     },
     'Mang giấy tờ gì?': {
-      text: 'Test drive **CỰC ĐƠN GIẢN**, chỉ cần 1 thứ:\n\n📄 **Bắt buộc**: Bằng lái xe ô tô B2 (B1 cũng được)\n\n💡 **Optional**:\n• CMND/CCCD (xác nhận booking)\n• Cọc 0đ — KHÔNG yêu cầu cọc, KHÔNG ép buộc mua\n\n⚠️ **Lưu ý**:\n• Bằng lái phải còn hạn\n• Mới có B1 < 6 tháng → có thể yêu cầu sale lái cùng (free)\n• Không lái thử nếu có cồn (Cario test BAC trước)\n\nBạn có B2 chưa?',
+      text: 'Test drive **CỰC ĐƠN GIẢN**, chỉ cần 1 thứ:\n\n📄 **Bắt buộc**: Bằng lái xe ô tô B2 (B1 cũng được)\n\n💡 **Optional**:\n• CMND/CCCD (xác nhận booking)\n• Cọc 0đ — KHÔNG yêu cầu cọc, KHÔNG ép buộc mua\n\n⚠️ **Lưu ý**:\n• Bằng lái phải còn hạn\n• Mới có B1 < 6 tháng → có thể yêu cầu sale lái cùng (free)\n• Không lái thử nếu có cồn (Otobank test BAC trước)\n\nBạn có B2 chưa?',
       chips: ['Có B2 rồi','Mới có B1','Đặt lịch ngay'],
-      citation: 'Cario Test Drive Requirements v1.5',
+      citation: 'Otobank Test Drive Requirements v1.5',
     },
     'Có sale tiếng Anh?': {
-      text: 'Có nhé! Cario có **đội sale international**:\n\n🌐 **Tiếng Anh**:\n• **John (Mỹ)** — 5★, 312 chuyến — chuyên Honda/Toyota\n• **Sarah (Anh)** — 4.9★, 198 chuyến — chuyên VinFast/Mercedes\n\n🌐 **Tiếng Trung**: Lin Wei — 4.9★, 247 chuyến\n🌐 **Tiếng Hàn**: Park Min-ho — 4.8★, 156 chuyến\n\nBook qua app Cario, chọn "Language preference" → "English" → auto match. Book sale tiếng Anh cho test drive?',
+      text: 'Có nhé! Otobank có **đội sale international**:\n\n🌐 **Tiếng Anh**:\n• **John (Mỹ)** — 5★, 312 chuyến — chuyên Honda/Toyota\n• **Sarah (Anh)** — 4.9★, 198 chuyến — chuyên VinFast/Mercedes\n\n🌐 **Tiếng Trung**: Lin Wei — 4.9★, 247 chuyến\n🌐 **Tiếng Hàn**: Park Min-ho — 4.8★, 156 chuyến\n\nBook qua app Otobank, chọn "Language preference" → "English" → auto match. Book sale tiếng Anh cho test drive?',
       chips: ['Book John (English)','Book Sarah (English)','Đặt lịch ngay'],
-      citation: 'Cario Multilingual Sales Team',
+      citation: 'Otobank Multilingual Sales Team',
     },
     'Tính trả góp': {
       text: 'OK quick-calc trả góp Honda CR-V 920M:\n\n💰 **3 scenarios phổ biến**:\n\n**A. Trả trước 20% (184M) + 60 tháng**\n• Vay: 736M @ 9.8%/năm\n• Trả/tháng: **15.6M đ**\n• Tổng lãi: ~187M\n\n**B. Trả trước 30% (276M) + 36 tháng** (sweet spot)\n• Vay: 644M @ 9.8%/năm\n• Trả/tháng: **21.6M đ**\n• Tổng lãi: ~98M\n\n**C. Trả trước 50% (460M) + 24 tháng**\n• Vay: 460M @ 9.5%/năm\n• Trả/tháng: **21.2M đ**\n• Tổng lãi: ~49M\n\nBạn fit scenario nào?',
       chips: ['Scenario A 60T','Scenario B 36T','Pre-approve ngay'],
-      citation: 'Cario Loan Calculator + VPBank Rates',
+      citation: 'Otobank Loan Calculator + VPBank Rates',
     },
     'Pre-approve ngay': {
-      text: '✅ Pre-approve VPBank trong **30 GIÂY** — không ảnh hưởng credit score:\n\n📋 **Cần thông tin**:\n• Họ tên + CMND/CCCD\n• Mức lương / thu nhập tháng\n• Hợp đồng lao động (chụp ảnh)\n• Bảo lãnh không cần (Cario là partner VPBank)\n\n💡 **Sau khi submit**:\n• 30s → VPBank trả về kết quả ML model\n• Approve → có ngay limit + lãi suất chính xác\n• Reject → Cario gợi ý 9 banks khác (95% có 1 trong 10 banks approve)\n\nOpen form pre-approve không?',
+      text: '✅ Pre-approve VPBank trong **30 GIÂY** — không ảnh hưởng credit score:\n\n📋 **Cần thông tin**:\n• Họ tên + CMND/CCCD\n• Mức lương / thu nhập tháng\n• Hợp đồng lao động (chụp ảnh)\n• Bảo lãnh không cần (Otobank là partner VPBank)\n\n💡 **Sau khi submit**:\n• 30s → VPBank trả về kết quả ML model\n• Approve → có ngay limit + lãi suất chính xác\n• Reject → Otobank gợi ý 9 banks khác (95% có 1 trong 10 banks approve)\n\nOpen form pre-approve không?',
       chips: ['Open form pre-approve','Cần xem hợp đồng trước','So sánh banks'],
       citation: 'VPBank ML Pre-approval API v4.2',
     },
     'So sánh banks': {
-      text: 'So sánh **10 ngân hàng partner** Cario cho khoản 644M / 36 tháng:\n\n🏆 **Top 3 (recommend)**:\n1. **VPBank** — 9.8%/năm — 21.5M/tháng — pre-approve 30s ⭐\n2. **Techcombank** — 10.2%/năm — 21.8M/tháng — 2 phút\n3. **MB Bank** — 10.5%/năm — 21.9M/tháng — 5 phút\n\n📊 **Còn 7 banks**: VCB, TPBank, VIB, ACB, Sacombank, BIDV, HDBank — lãi 10.8-12%\n\n💡 **Tip**: Lãi VPBank thấp nhất vì là **partner chiến lược Cario**. Credit profile tốt → có thể negotiate xuống 9.5%.',
+      text: 'So sánh **10 ngân hàng partner** Otobank cho khoản 644M / 36 tháng:\n\n🏆 **Top 3 (recommend)**:\n1. **VPBank** — 9.8%/năm — 21.5M/tháng — pre-approve 30s ⭐\n2. **Techcombank** — 10.2%/năm — 21.8M/tháng — 2 phút\n3. **MB Bank** — 10.5%/năm — 21.9M/tháng — 5 phút\n\n📊 **Còn 7 banks**: VCB, TPBank, VIB, ACB, Sacombank, BIDV, HDBank — lãi 10.8-12%\n\n💡 **Tip**: Lãi VPBank thấp nhất vì là **partner chiến lược Otobank**. Credit profile tốt → có thể negotiate xuống 9.5%.',
       chips: ['Pre-approve VPBank','Pre-approve nhiều banks','Đặt lịch xem xe'],
-      citation: 'Cario Bank Partnership Rates — Q2 2026',
+      citation: 'Otobank Bank Partnership Rates — Q2 2026',
     },
     'Buyback program': {
-      text: 'Cario **Priority Buyback** — exclusive cho khách Cario:\n\n🔄 **Quy tắc**:\n• Year 1: Cario mua lại với giá **+5-8% so thị trường**\n• Year 2: Giá thị trường\n• Year 3+: Theo AI Pricing Engine của Cario\n\n📊 **Ví dụ Honda CR-V 920M**:\n• Sau 1 năm: Cario mua ~870M (depreciation ~5%)\n• Thị trường: ~830M\n• → Bạn save ~40M nếu sell qua Cario\n\n💡 **Sao Cario làm vậy?** Xe quay lại pipeline IRC nhanh hơn (verified history) → margin cao hơn classified. Win-win.\n\nQuan tâm trade-in xe cũ luôn không?',
+      text: 'Otobank **Priority Buyback** — exclusive cho khách Otobank:\n\n🔄 **Quy tắc**:\n• Year 1: Otobank mua lại với giá **+5-8% so thị trường**\n• Year 2: Giá thị trường\n• Year 3+: Theo AI Pricing Engine của Otobank\n\n📊 **Ví dụ Honda CR-V 920M**:\n• Sau 1 năm: Otobank mua ~870M (depreciation ~5%)\n• Thị trường: ~830M\n• → Bạn save ~40M nếu sell qua Otobank\n\n💡 **Sao Otobank làm vậy?** Xe quay lại pipeline IRC nhanh hơn (verified history) → margin cao hơn classified. Win-win.\n\nQuan tâm trade-in xe cũ luôn không?',
       chips: ['Trade-in xe cũ','Yêu cầu báo giá','Đặt lịch xem xe'],
-      citation: 'Cario Priority Buyback Program v2.0',
+      citation: 'Otobank Priority Buyback Program v2.0',
     },
     'Trade-in xe cũ': {
-      text: 'Trade-in xe cũ **giảm 5-15% tổng tiền** Honda CR-V mới.\n\n📋 **Quy trình**:\n1. Bạn cho mình **VIN/biển số xe cũ** + ảnh\n2. AI Pricing Engine định giá trong 2 phút\n3. Sale Cario verify physical (15 phút showroom)\n4. Cario thu mua tại chỗ — TIỀN MẶT hoặc deduct order\n\n💰 **Ví dụ phổ biến**:\n• Toyota Vios 2018 → ~280M\n• Mazda 3 2019 → ~420M\n• Hyundai Accent 2020 → ~340M\n\nBạn có xe gì để trade-in?',
+      text: 'Trade-in xe cũ **giảm 5-15% tổng tiền** Honda CR-V mới.\n\n📋 **Quy trình**:\n1. Bạn cho mình **VIN/biển số xe cũ** + ảnh\n2. AI Pricing Engine định giá trong 2 phút\n3. Sale Otobank verify physical (15 phút showroom)\n4. Otobank thu mua tại chỗ — TIỀN MẶT hoặc deduct order\n\n💰 **Ví dụ phổ biến**:\n• Toyota Vios 2018 → ~280M\n• Mazda 3 2019 → ~420M\n• Hyundai Accent 2020 → ~340M\n\nBạn có xe gì để trade-in?',
       chips: ['Toyota Vios','Mazda 3','Yêu cầu báo giá'],
-      citation: 'Cario Trade-in AI Pricing Engine',
+      citation: 'Otobank Trade-in AI Pricing Engine',
     },
     'Yêu cầu báo giá': {
-      text: '✅ Mình tạo **báo giá chính thức** Honda CR-V 1.5L Turbo:\n\n📄 **Quote PDF chứa**:\n• Giá listed: 920,000,000 đ\n• Phí trước bạ HCM (~10%): 92,000,000 đ\n• Phí đăng ký + biển: ~3,500,000 đ\n• Bảo hiểm bắt buộc: ~480,000 đ\n• **TỔNG OUT-THE-DOOR: 1,015,980,000 đ**\n\n💰 **Discount khả dụng**:\n• Mua trong 7 ngày: −5M\n• Trade-in xe cũ: tùy giá\n• Cario+ Pro: +18M (offset by 5M discount)\n\nGửi qua đâu?',
+      text: '✅ Mình tạo **báo giá chính thức** Honda CR-V 1.5L Turbo:\n\n📄 **Quote PDF chứa**:\n• Giá listed: 920,000,000 đ\n• Phí trước bạ HCM (~10%): 92,000,000 đ\n• Phí đăng ký + biển: ~3,500,000 đ\n• Bảo hiểm bắt buộc: ~480,000 đ\n• **TỔNG OUT-THE-DOOR: 1,015,980,000 đ**\n\n💰 **Discount khả dụng**:\n• Mua trong 7 ngày: −5M\n• Trade-in xe cũ: tùy giá\n• Otobank+ Pro: +18M (offset by 5M discount)\n\nGửi qua đâu?',
       chips: ['Gửi email','Gửi Zalo','Đặt lịch xem xe'],
-      citation: 'Cario Quote Generator v2.1',
+      citation: 'Otobank Quote Generator v2.1',
     },
     'Worry-Free package': {
-      text: 'Cario **Worry-Free Ownership** — gói all-inclusive:\n\n💎 **18M/năm** bao gồm:\n• ✓ Bảo dưỡng định kỳ (4 lần/năm tại Cario Tech Center)\n• ✓ Thay dầu + lọc miễn phí (8 lần/năm)\n• ✓ Bảo hiểm vật chất (full coverage)\n• ✓ Bảo hiểm bắt buộc + đăng kiểm\n• ✓ Roadside assist 24/7 toàn quốc\n• ✓ Replacement vehicle khi sửa >24h\n• ✓ Free wash xe (1 lần/tháng)\n\n📊 **Tiết kiệm**:\n• Tự DIY: ~26M/năm\n• Worry-Free: 18M/năm\n• → **Save 8M/năm** + zero stress\n\nAdd vào order luôn?',
+      text: 'Otobank **Worry-Free Ownership** — gói all-inclusive:\n\n💎 **18M/năm** bao gồm:\n• ✓ Bảo dưỡng định kỳ (4 lần/năm tại Otobank Tech Center)\n• ✓ Thay dầu + lọc miễn phí (8 lần/năm)\n• ✓ Bảo hiểm vật chất (full coverage)\n• ✓ Bảo hiểm bắt buộc + đăng kiểm\n• ✓ Roadside assist 24/7 toàn quốc\n• ✓ Replacement vehicle khi sửa >24h\n• ✓ Free wash xe (1 lần/tháng)\n\n📊 **Tiết kiệm**:\n• Tự DIY: ~26M/năm\n• Worry-Free: 18M/năm\n• → **Save 8M/năm** + zero stress\n\nAdd vào order luôn?',
       chips: ['Add Worry-Free vào order','Đặt lịch xem xe','Cám ơn'],
-      citation: 'Cario Worry-Free Plan v2.0',
+      citation: 'Otobank Worry-Free Plan v2.0',
     },
     'Chi phí xăng?': {
       text: 'Honda CR-V 1.5L Turbo **tiêu thụ xăng**:\n\n⛽ **Mức tiêu thụ thực tế** (avg):\n• City: **8.5L/100km** (kẹt xe HCM/HN)\n• Highway: **6.2L/100km**\n• Mixed: **7.4L/100km** (most common)\n\n💰 **Chi phí xăng/năm** (avg 20,000 km):\n• 7.4L × 200 = 1,480 lít\n• @ giá xăng RON95 (24,500đ/L tháng 5/2026)\n• → **~36,260,000 đ/năm**\n• → **~3,000,000 đ/tháng**\n\n📊 **So với competitor**:\n• Toyota Camry 2.5: ~9.0L/100km — đắt hơn 22%\n• Mazda CX-5 2.0: ~7.8L/100km — đắt hơn 5%\n• → CR-V 1.5L Turbo **economical nhất segment**',
       chips: ['So Toyota CR-V','Worry-Free package','Đặt lịch xem xe'],
-      citation: 'Cario Real-world Fuel Test • 200+ samples',
+      citation: 'Otobank Real-world Fuel Test • 200+ samples',
     },
     'So Toyota CR-V': {
       text: 'Thực ra **Toyota không có CR-V** — đó là model riêng của Honda. Chắc bạn ý so với **Toyota RAV4** hoặc **Toyota Corolla Cross**?\n\n🥊 **Honda CR-V vs Toyota RAV4** (cùng segment):\n\n| | CR-V 1.5T | RAV4 2.0 |\n|--|--|--|\n| Giá VN | 920M | 1.150B |\n| HP | 190 | 173 |\n| Tiêu thụ | 7.4L | 8.5L |\n| Bảo dưỡng | Thấp | Trung bình |\n| Resale | Tốt | Rất tốt |\n\n🏆 **CR-V win**: rẻ hơn 230M, máy mạnh hơn, ăn xăng ít hơn\n🏆 **RAV4 win**: resale value cao hơn 5-8%\n\n→ CR-V tốt hơn cho **value buyer**, RAV4 cho **long-term resale**.',
       chips: ['Đặt lịch xem xe','Buyback program','Cám ơn'],
-      citation: 'Cario Comparison Engine • VN Market 2026',
+      citation: 'Otobank Comparison Engine • VN Market 2026',
     },
     // === ROUND 3+ — Terminal CTAs ===
-    'Add Cario+ Pro vào order': {
-      text: '✅ Done! Mình add **Cario+ Pro (18M / 24 tháng)** vào order:\n\n📋 **Updated total**:\n• Xe: 920M\n• Cario+ Pro: +18M\n• **NEW TOTAL: 938M**\n\n🎁 **Bonus**: Add Cario+ trong cùng order → **free 1 lần Cario Tech Center inspection** (giá trị 2.5M).\n\nSale (Anh Hùng) sẽ Zalo bạn trong 5 phút xác nhận. Còn gì nữa?',
+    'Add Otobank+ Pro vào order': {
+      text: '✅ Done! Mình add **Otobank+ Pro (18M / 24 tháng)** vào order:\n\n📋 **Updated total**:\n• Xe: 920M\n• Otobank+ Pro: +18M\n• **NEW TOTAL: 938M**\n\n🎁 **Bonus**: Add Otobank+ trong cùng order → **free 1 lần Otobank Tech Center inspection** (giá trị 2.5M).\n\nSale (Anh Hùng) sẽ Zalo bạn trong 5 phút xác nhận. Còn gì nữa?',
       chips: ['Add Worry-Free vào order','Đặt lịch xem xe','Cám ơn'],
-      citation: 'Cario Order System v3.2',
+      citation: 'Otobank Order System v3.2',
     },
     'Add Worry-Free vào order': {
-      text: '✅ Worry-Free Ownership đã add vào order:\n\n📋 **Final order**:\n• Honda CR-V 1.5L Turbo: 920M\n• Cario+ Pro (24 tháng): 18M\n• Worry-Free Year 1: 18M\n• **TOTAL: 956M**\n\n💎 **Bonus stack** vì add cả 2 gói:\n• Free Cario Tech Center inspection\n• Free 6 lần wash xe (thay vì 12)\n• Priority hotline (skip queue)\n\nMọi thứ ready, Anh Hùng sẽ confirm trong 5 phút!',
+      text: '✅ Worry-Free Ownership đã add vào order:\n\n📋 **Final order**:\n• Honda CR-V 1.5L Turbo: 920M\n• Otobank+ Pro (24 tháng): 18M\n• Worry-Free Year 1: 18M\n• **TOTAL: 956M**\n\n💎 **Bonus stack** vì add cả 2 gói:\n• Free Otobank Tech Center inspection\n• Free 6 lần wash xe (thay vì 12)\n• Priority hotline (skip queue)\n\nMọi thứ ready, Anh Hùng sẽ confirm trong 5 phút!',
       chips: ['Track order','Cám ơn','Đặt lịch giao'],
-      citation: 'Cario Order System v3.2',
+      citation: 'Otobank Order System v3.2',
     },
     'Book Thứ 5 10AM': {
-      text: '✅ **Booked!** Lịch xem xe:\n\n📅 **Thứ 5, 09/05/2026 — 10:00 AM**\n📍 Cario Showroom Q.7 — 123 Nguyễn Trãi, P. Bến Thành, Q.1\n👤 Sale: **Anh Hùng** (4.9★)\n🚗 Xe sẽ ready: pre-warmed engine, full tank, all docs\n\n📲 SMS confirm gửi tới số đăng ký Cario của bạn trong 30s.\n📧 Email confirm + map + parking instructions cũng đã gửi.\n\nCòn câu hỏi gì trước buổi xem?',
+      text: '✅ **Booked!** Lịch xem xe:\n\n📅 **Thứ 5, 09/05/2026 — 10:00 AM**\n📍 Otobank Showroom Q.7 — 123 Nguyễn Trãi, P. Bến Thành, Q.1\n👤 Sale: **Anh Hùng** (4.9★)\n🚗 Xe sẽ ready: pre-warmed engine, full tank, all docs\n\n📲 SMS confirm gửi tới số đăng ký Otobank của bạn trong 30s.\n📧 Email confirm + map + parking instructions cũng đã gửi.\n\nCòn câu hỏi gì trước buổi xem?',
       chips: ['Mang giấy tờ gì?','Đặt thêm test drive','Cám ơn'],
-      citation: 'Cario Booking System — Confirmed',
+      citation: 'Otobank Booking System — Confirmed',
     },
     'Book Thứ 7 9AM': {
-      text: '✅ **Booked Thứ 7, 11/05/2026 — 9:00 AM**!\n\n📍 Cario Showroom Q.7\n👤 Sale: **Anh Hùng** hoặc **Chị Linh** (cả 2 cùng on-shift)\n📱 SMS + Email confirm đã gửi.\n\nCòn gì giúp bạn?',
+      text: '✅ **Booked Thứ 7, 11/05/2026 — 9:00 AM**!\n\n📍 Otobank Showroom Q.7\n👤 Sale: **Anh Hùng** hoặc **Chị Linh** (cả 2 cùng on-shift)\n📱 SMS + Email confirm đã gửi.\n\nCòn gì giúp bạn?',
       chips: ['Mang giấy tờ gì?','Đặt lịch ngay','Cám ơn'],
-      citation: 'Cario Booking System — Confirmed',
+      citation: 'Otobank Booking System — Confirmed',
     },
     'Hôm nay 5PM': {
-      text: '✅ **Booked test drive HÔM NAY — 5:00 PM!**\n\n📍 Cario Showroom Q.7\n👤 Sale: **Anh Hùng** đang on-shift\n🚗 Xe Honda CR-V đang chuẩn bị: pre-warmed, full tank, docs ready\n⏰ Bạn cần đến trước 4:50 PM để check-in\n\n📲 SMS confirm vừa gửi. Map: Cario Showroom Q.7, 123 Nguyễn Trãi.\n\nMang theo bằng lái B2 hoặc B1!',
+      text: '✅ **Booked test drive HÔM NAY — 5:00 PM!**\n\n📍 Otobank Showroom Q.7\n👤 Sale: **Anh Hùng** đang on-shift\n🚗 Xe Honda CR-V đang chuẩn bị: pre-warmed, full tank, docs ready\n⏰ Bạn cần đến trước 4:50 PM để check-in\n\n📲 SMS confirm vừa gửi. Map: Otobank Showroom Q.7, 123 Nguyễn Trãi.\n\nMang theo bằng lái B2 hoặc B1!',
       chips: ['Mang giấy tờ gì?','Đặt lịch xem xe','Cám ơn'],
-      citation: 'Cario Test Drive — Confirmed',
+      citation: 'Otobank Test Drive — Confirmed',
     },
     'OK chuyển ngay': {
-      text: '✅ Done! Mình **routing order** sang Anh Hùng:\n\n📲 **Trong 5 phút**:\n• Anh Hùng sẽ Zalo + gọi bạn\n• Send quote PDF chính thức (chữ ký số Cario)\n• Hướng dẫn 3 phương thức thanh toán\n• Confirm slot giao xe\n\nQuay lại app Cario bất kỳ lúc nào để track order real-time. Cám ơn bạn đã chọn Cario! 🚀',
+      text: '✅ Done! Mình **routing order** sang Anh Hùng:\n\n📲 **Trong 5 phút**:\n• Anh Hùng sẽ Zalo + gọi bạn\n• Send quote PDF chính thức (chữ ký số Otobank)\n• Hướng dẫn 3 phương thức thanh toán\n• Confirm slot giao xe\n\nQuay lại app Otobank bất kỳ lúc nào để track order real-time. Cám ơn bạn đã chọn Otobank! 🚀',
       chips: ['Track order','Đặt lịch giao','Cám ơn'],
-      citation: 'Cario Order Routing',
+      citation: 'Otobank Order Routing',
     },
     'Open form pre-approve': {
       text: '✅ Form pre-approve VPBank đã open ở tab khác.\n\n⏱ **Thời gian**: ~2 phút điền + 30 giây ML check\n📋 **Bạn cần ready**:\n• CMND/CCCD (chụp 2 mặt)\n• Hợp đồng lao động (1 trang)\n• 3 tháng bank statement (PDF/screenshot)\n\n💡 **Sau approve**:\n• Có ngay limit + lãi suất chính xác\n• Lock rate 30 ngày\n• Chuyển thẳng vào order Honda CR-V của bạn\n\nKhi xong báo mình nhé!',
@@ -185,20 +185,20 @@ const Screen03_VDP = () => {
       citation: 'VPBank Pre-approval Form',
     },
     'Track order': {
-      text: '📍 **Track order Honda CR-V — Live**:\n\n✅ Step 1: Order placed (vừa xong)\n⏳ Step 2: Sale verify (5 phút) — Anh Hùng đang call\n⏳ Step 3: Quote PDF gửi (10 phút)\n⏳ Step 4: Bạn ký hợp đồng điện tử\n⏳ Step 5: Thanh toán\n⏳ Step 6: Cario lấy xe khỏi pipeline IRC\n⏳ Step 7: Logistics chuẩn bị giao\n⏳ Step 8: Tài xế Cario giao xe đến nhà\n\nBạn có thể track real-time trong app Cario, tab "My Orders". ETA giao xe: **trong 24h**.',
+      text: '📍 **Track order Honda CR-V — Live**:\n\n✅ Step 1: Order placed (vừa xong)\n⏳ Step 2: Sale verify (5 phút) — Anh Hùng đang call\n⏳ Step 3: Quote PDF gửi (10 phút)\n⏳ Step 4: Bạn ký hợp đồng điện tử\n⏳ Step 5: Thanh toán\n⏳ Step 6: Otobank lấy xe khỏi pipeline IRC\n⏳ Step 7: Logistics chuẩn bị giao\n⏳ Step 8: Tài xế Otobank giao xe đến nhà\n\nBạn có thể track real-time trong app Otobank, tab "My Orders". ETA giao xe: **trong 24h**.',
       chips: ['Đặt lịch giao','Cám ơn','Hỏi thêm'],
-      citation: 'Cario Order Tracking — Real-time',
+      citation: 'Otobank Order Tracking — Real-time',
     },
     'Cám ơn': {
-      text: '🙏 **Cám ơn bạn đã quan tâm Cario!**\n\nNếu có câu hỏi mới (giờ hay sau này), cứ quay lại đây — mình online 24/7. Hoặc gọi **1900-CARIO** gặp sale.\n\nChúc bạn tìm được chiếc xe hoàn hảo! 🚗💨',
+      text: '🙏 **Cám ơn bạn đã quan tâm Otobank!**\n\nNếu có câu hỏi mới (giờ hay sau này), cứ quay lại đây — mình online 24/7. Hoặc gọi **1900-OTOBANK** gặp sale.\n\nChúc bạn tìm được chiếc xe hoàn hảo! 🚗💨',
       chips: ['Xe có bảo hành không?','Có giao tận nhà?','Tôi muốn lái thử'],
-      citation: 'Cario AI Concierge',
+      citation: 'Otobank AI Concierge',
     },
   };
   const FALLBACK_RESPONSE = {
-    text: '🤔 Câu hỏi của bạn cần thông tin chi tiết hơn từ đội Cario. Mình sẽ chuyển ngay tới sale chuyên trách Honda CR-V — phản hồi trong **5 phút** qua SMS/Zalo.\n\nTrong lúc chờ, có thể bạn quan tâm:',
+    text: '🤔 Câu hỏi của bạn cần thông tin chi tiết hơn từ đội Otobank. Mình sẽ chuyển ngay tới sale chuyên trách Honda CR-V — phản hồi trong **5 phút** qua SMS/Zalo.\n\nTrong lúc chờ, có thể bạn quan tâm:',
     chips: ['Xe có bảo hành không?','Có giao tận nhà?','Tôi muốn lái thử'],
-    citation: 'Cario AI Routing v1.2',
+    citation: 'Otobank AI Routing v1.2',
   };
 
   const renderChatMarkdown = (text) => {
@@ -305,8 +305,8 @@ const Screen03_VDP = () => {
   };
   const handle360Up = () => setIsDragging360(false);
   return (
-  <div className="cario" style={{ width: 1440, minHeight: 2200, background: 'var(--bg)' }}>
-    <CarioNav active="buy" />
+  <div className="otobank" style={{ width: 1440, minHeight: 2200, background: 'var(--bg)' }}>
+    <OtobankNav active="buy" />
 
     {/* Breadcrumb */}
     <div style={{ padding: '20px 48px 12px', display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: 'var(--text-2)' }}>
@@ -618,7 +618,7 @@ const Screen03_VDP = () => {
             Báo cáo Kiểm định 200 điểm
           </h3>
           <div style={{ fontFamily: '"Inter", sans-serif', fontSize: 14, color: '#A0A4AB', marginBottom: 24 }}>
-            Kiểm định bởi Cario Tech Center • 15/04/2026
+            Kiểm định bởi Otobank Tech Center • 15/04/2026
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 16 }}>
@@ -719,7 +719,7 @@ const Screen03_VDP = () => {
         <h2 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 24, fontWeight: 600, color: '#F5F5F5', lineHeight: 1.3, marginBottom: 16, marginTop: 0 }}>Báo cáo Kiểm định 200 điểm</h2>
         <div className="card" style={{ padding: 32 }}>
           <p style={{ fontFamily: '"Inter", sans-serif', fontSize: 16, fontWeight: 400, color: '#F5F5F5', lineHeight: 1.6, margin: 0, marginBottom: 24 }}>
-            Xe đã trải qua quy trình kiểm định 200 điểm tại Cario Tech Center Bình Tân ngày 15/04/2026. 192/200 điểm đạt chuẩn — 8 vấn đề nhỏ đã được khắc phục trước khi list. Xem chi tiết báo cáo đầy đủ 32 trang để biết từng hạng mục.
+            Xe đã trải qua quy trình kiểm định 200 điểm tại Otobank Tech Center Bình Tân ngày 15/04/2026. 192/200 điểm đạt chuẩn — 8 vấn đề nhỏ đã được khắc phục trước khi list. Xem chi tiết báo cáo đầy đủ 32 trang để biết từng hạng mục.
           </p>
           <button className="btn-cta-primary" style={{ marginTop: 0, width: 'auto', display: 'inline-flex' }}>Xem báo cáo đầy đủ →</button>
         </div>
@@ -734,7 +734,7 @@ const Screen03_VDP = () => {
           Honda CR-V 2022 phiên bản 1.5L Turbo G — bản cao cấp nhất, một chủ mua mới từ Honda Plaza Quận 7 tháng 03/2022. Xe được sử dụng cẩn thận, bảo dưỡng định kỳ tại Honda Việt Nam đầy đủ 6 lần (lịch sử bảo hành điện tử kèm trong báo cáo).
         </p>
         <p style={{ fontFamily: '"Inter", sans-serif', fontSize: 16, fontWeight: 400, color: '#F5F5F5', lineHeight: 1.6, marginTop: 14 }}>
-          Đã qua quy trình kiểm định 200 điểm của Cario tại trung tâm reconditioning Bình Tân với <strong style={{ color: 'var(--text)' }}>192/200 điểm</strong> đạt chuẩn. 8 vấn đề nhỏ đã được khắc phục trước khi listing — chi tiết trong báo cáo kèm theo.
+          Đã qua quy trình kiểm định 200 điểm của Otobank tại trung tâm reconditioning Bình Tân với <strong style={{ color: 'var(--text)' }}>192/200 điểm</strong> đạt chuẩn. 8 vấn đề nhỏ đã được khắc phục trước khi listing — chi tiết trong báo cáo kèm theo.
         </p>
 
         <div style={{ display: 'flex', gap: 24, marginTop: 28, padding: '20px 24px', background: 'var(--surface-2)', borderRadius: 12 }}>
@@ -829,7 +829,7 @@ const Screen03_VDP = () => {
               { date: '12/2022', event: 'Bảo dưỡng 15,000 km', detail: 'Honda Service — thay dầu định kỳ' },
               { date: '06/2023', event: 'Bảo dưỡng 25,000 km', detail: 'Honda Service — kiểm tra phanh, lốp' },
               { date: '12/2023', event: 'Bảo dưỡng 35,000 km', detail: 'Garage độc lập (chứng nhận đầy đủ)' },
-              { date: '11/2024', event: 'Cario kiểm định 200 điểm → Nhập kho', detail: '192/200 điểm — XUẤT SẮC' },
+              { date: '11/2024', event: 'Otobank kiểm định 200 điểm → Nhập kho', detail: '192/200 điểm — XUẤT SẮC' },
             ].map((e, i) => (
               <div key={i} style={{ position: 'relative', paddingBottom: 24 }}>
                 <div style={{ position: 'absolute', left: -27, top: 4, width: 16, height: 16, borderRadius: '50%', background: '#10B981', border: '3px solid #0a0d11' }} />
@@ -865,7 +865,7 @@ const Screen03_VDP = () => {
             <div style={{ padding: 24, background: 'rgba(16,185,129,0.06)', border: '1px solid rgba(16,185,129,0.2)', borderRadius: 12 }}>
               <div style={{ fontSize: 13, color: '#A0A4AB', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 6 }}>Trả góp hàng tháng</div>
               <div style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 36, fontWeight: 800, color: '#10B981', lineHeight: 1 }}>21,580,000 đ</div>
-              <div style={{ fontSize: 12, color: '#A0A4AB', marginTop: 10 }}>Lãi suất 9.8%/năm (VPBank — partner Cario)</div>
+              <div style={{ fontSize: 12, color: '#A0A4AB', marginTop: 10 }}>Lãi suất 9.8%/năm (VPBank — partner Otobank)</div>
             </div>
           </div>
           <div className="card" style={{ padding: 32 }}>
@@ -884,11 +884,11 @@ const Screen03_VDP = () => {
 
     {activeTab === 4 && (
       <section style={{ padding: '48px' }}>
-        <h2 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 24, fontWeight: 600, color: '#F5F5F5', lineHeight: 1.3, marginBottom: 8, marginTop: 0 }}>Trợ lý AI Cario</h2>
+        <h2 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 24, fontWeight: 600, color: '#F5F5F5', lineHeight: 1.3, marginBottom: 8, marginTop: 0 }}>Trợ lý AI Otobank</h2>
         <div style={{ fontSize: 14, color: '#A0A4AB', marginBottom: 24, display: 'flex', alignItems: 'center', gap: 10 }}>
           <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#10B981', boxShadow: '0 0 0 4px rgba(16,185,129,0.2)', animation: 'aiPulse 2s ease-in-out infinite' }} />
           Online • Đã trả lời 47,392 câu hỏi • Avg 1.2s
-          <span style={{ marginLeft: 'auto', fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: '#6B7280' }}>Powered by Cario AI v2.4</span>
+          <span style={{ marginLeft: 'auto', fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: '#6B7280' }}>Powered by Otobank AI v2.4</span>
         </div>
 
         {/* Messages container */}
@@ -903,7 +903,7 @@ const Screen03_VDP = () => {
                 <div style={{ width: 36, height: 36, borderRadius: '50%', background: 'linear-gradient(135deg, #10B981, #34D399)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FFF', fontWeight: 700, flexShrink: 0, fontSize: 16, boxShadow: '0 0 0 3px rgba(16,185,129,0.15)' }}>C</div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontSize: 13, fontWeight: 600, color: '#F5F5F5', marginBottom: 6, display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-                    Cario AI
+                    Otobank AI
                     {m.confidence && <span style={{ fontSize: 11, padding: '2px 8px', borderRadius: 999, border: '1px solid #10B981', color: '#10B981', fontWeight: 500 }}>{m.confidence} confident</span>}
                     {!m.typing && idx > 0 && <span style={{ fontSize: 11, color: '#6B7280', fontWeight: 400 }}>vừa xong</span>}
                   </div>
@@ -943,7 +943,7 @@ const Screen03_VDP = () => {
                   <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#10B981', animation: 'typingBounce 1.2s ease-in-out infinite', animationDelay: '0.15s' }} />
                   <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#10B981', animation: 'typingBounce 1.2s ease-in-out infinite', animationDelay: '0.3s' }} />
                 </span>
-                <span style={{ marginLeft: 6 }}>Cario AI đang suy nghĩ…</span>
+                <span style={{ marginLeft: 6 }}>Otobank AI đang suy nghĩ…</span>
               </div>
             </div>
           )}
@@ -965,7 +965,7 @@ const Screen03_VDP = () => {
             style={{ padding: '8px 18px', background: chatTyping || !chatInput.trim() ? '#2D343F' : '#10B981', border: 'none', borderRadius: 8, color: '#FFF', fontWeight: 600, cursor: chatTyping || !chatInput.trim() ? 'not-allowed' : 'pointer', fontFamily: 'inherit', fontSize: 14, transition: 'background 0.15s ease' }}
           >➤</button>
         </div>
-        <div style={{ fontSize: 12, color: '#6B7280', marginTop: 10, textAlign: 'center' }}>📚 Powered by Cario AI • Phản hồi tức thì • Train trên 47k Q&A</div>
+        <div style={{ fontSize: 12, color: '#6B7280', marginTop: 10, textAlign: 'center' }}>📚 Powered by Otobank AI • Phản hồi tức thì • Train trên 47k Q&A</div>
 
         <style>{`
           @keyframes aiPulse {
@@ -992,7 +992,7 @@ const Screen03_VDP = () => {
       </div>
     </section>
 
-    <CarioFooter />
+    <OtobankFooter />
 
     {show360 && (
       <div
@@ -1101,15 +1101,15 @@ const Screen04_Inspection = () => {
     ['Trầy xước nhẹ cánh cửa trước trái', 'Sơn vá đồng màu', 'Q.7 Reconditioning'],
     ['Dầu phanh sắp hết hạn', 'Thay dầu phanh DOT4 chính hãng', 'Honda Plaza'],
     ['Dầu hộp số quá hạn 5,000km', 'Thay dầu CVT chính hãng Honda', 'Honda Plaza'],
-    ['Lốp xe mòn 70% (4 bánh)', 'Thay 4 lốp Michelin Primacy 4 mới', 'Cario Bình Tân'],
-    ['Bóng đèn sương mù trái yếu', 'Thay bóng LED Osram mới', 'Cario Bình Tân'],
-    ['Bộ lọc gió cabin bẩn', 'Thay lọc gió cabin mới', 'Cario Bình Tân'],
-    ['Cốp xe đóng không khớp đều', 'Cân chỉnh khớp + thay đệm cao su', 'Cario Bình Tân'],
-    ['Camera lùi mờ do bụi', 'Vệ sinh + chỉnh lại tiêu cự', 'Cario Bình Tân'],
+    ['Lốp xe mòn 70% (4 bánh)', 'Thay 4 lốp Michelin Primacy 4 mới', 'Otobank Bình Tân'],
+    ['Bóng đèn sương mù trái yếu', 'Thay bóng LED Osram mới', 'Otobank Bình Tân'],
+    ['Bộ lọc gió cabin bẩn', 'Thay lọc gió cabin mới', 'Otobank Bình Tân'],
+    ['Cốp xe đóng không khớp đều', 'Cân chỉnh khớp + thay đệm cao su', 'Otobank Bình Tân'],
+    ['Camera lùi mờ do bụi', 'Vệ sinh + chỉnh lại tiêu cự', 'Otobank Bình Tân'],
   ];
   return (
-    <div className="cario" style={{ width: 1440, minHeight: 1900, background: 'var(--bg)' }}>
-      <CarioNav active="buy" />
+    <div className="otobank" style={{ width: 1440, minHeight: 1900, background: 'var(--bg)' }}>
+      <OtobankNav active="buy" />
 
       {/* Hero header — 60/40 split, gradient bg */}
       <section style={{
@@ -1156,7 +1156,7 @@ const Screen04_Inspection = () => {
               }}>NĐ</div>
               <span>Kỹ thuật viên: Nguyễn Văn Đức</span>
               <span>•</span>
-              <span>Cario Tech Center HCM</span>
+              <span>Otobank Tech Center HCM</span>
               <span>•</span>
               <span>15/04/2026</span>
             </div>
@@ -1326,7 +1326,7 @@ const Screen04_Inspection = () => {
             margin: 0, marginBottom: 32,
             lineHeight: 1.6,
           }}>
-            Cario sửa hết các issues trước khi đưa xe lên website. Nếu có vấn đề tiềm ẩn không sửa được, xe sẽ không được list.
+            Otobank sửa hết các issues trước khi đưa xe lên website. Nếu có vấn đề tiềm ẩn không sửa được, xe sẽ không được list.
           </p>
 
           <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -1402,7 +1402,7 @@ const Screen04_Inspection = () => {
                 color: '#A0A4AB',
                 marginTop: 4,
               }}>
-                Cario tự gánh — không tính vào giá bán
+                Otobank tự gánh — không tính vào giá bán
               </div>
             </div>
             <span style={{ fontSize: 32, lineHeight: 1 }}>💚</span>

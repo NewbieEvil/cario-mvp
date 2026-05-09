@@ -1,7 +1,7 @@
-// Cario shared components — logo, navbar, footer, car placeholder
+// Otobank shared components — logo, navbar, footer, car placeholder
 // Imported by every screen JSX file.
 
-const CarioLogo = ({ size = 22 }) => (
+const OtobankLogo = ({ size = 22 }) => (
   <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: size, letterSpacing: '-0.02em', color: 'var(--text)' }}>
     <svg width={size + 4} height={size + 4} viewBox="0 0 28 28" fill="none">
       <rect x="2" y="2" width="24" height="24" rx="7" fill="var(--accent)" />
@@ -9,7 +9,7 @@ const CarioLogo = ({ size = 22 }) => (
       <circle cx="11" cy="18" r="1.6" fill="#fff" />
       <circle cx="17" cy="18" r="1.6" fill="#fff" />
     </svg>
-    <span>Cario</span>
+    <span>Otobank</span>
   </div>
 );
 
@@ -175,7 +175,7 @@ const Ico = ({ name, size = 16 }) => {
 const fmt = (n) => n.toLocaleString('vi-VN');
 
 // Sticky navbar
-const CarioNav = ({ active = 'home', sticky = false }) => {
+const OtobankNav = ({ active = 'home', sticky = false }) => {
   const items = [
     { id: 'home', label: 'Trang chủ' },
     { id: 'buy', label: 'Mua xe' },
@@ -191,7 +191,7 @@ const CarioNav = ({ active = 'home', sticky = false }) => {
       position: sticky ? 'sticky' : 'relative', top: 0, zIndex: 100,
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 40 }}>
-        <CarioLogo />
+        <OtobankLogo />
         <div style={{ display: 'flex', gap: 28 }}>
           {items.map(it => (
             <a key={it.id} style={{
@@ -217,11 +217,11 @@ const CarioNav = ({ active = 'home', sticky = false }) => {
   );
 };
 
-const CarioFooter = () => (
+const OtobankFooter = () => (
   <footer style={{ padding: '40px 48px 24px', borderTop: '1px solid var(--border)', background: 'var(--bg)' }}>
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 60, marginBottom: 32 }}>
       <div style={{ maxWidth: 320 }}>
-        <CarioLogo />
+        <OtobankLogo />
         <p style={{ marginTop: 14, fontSize: 13, color: 'var(--text-2)', lineHeight: 1.6 }}>
           Mua xe ô tô như mua điện thoại. Đơn giản. Minh bạch. Giao tận nhà.
         </p>
@@ -229,7 +229,7 @@ const CarioFooter = () => (
       {[
         { title: 'Sản phẩm', items: ['Mua xe', 'Bán xe', 'Đổi xe', 'Pre-approval', 'Lái thử 7 ngày'] },
         { title: 'Hỗ trợ', items: ['Trung tâm trợ giúp', 'Quy trình kiểm định', 'Chính sách đổi trả', 'Liên hệ'] },
-        { title: 'Công ty', items: ['Về Cario', 'Tuyển dụng', 'Báo chí', 'Đối tác ngân hàng'] },
+        { title: 'Công ty', items: ['Về Otobank', 'Tuyển dụng', 'Báo chí', 'Đối tác ngân hàng'] },
       ].map(col => (
         <div key={col.title}>
           <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 14 }}>{col.title}</div>
@@ -240,7 +240,7 @@ const CarioFooter = () => (
       ))}
     </div>
     <div style={{ paddingTop: 18, borderTop: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', fontSize: 12, color: 'var(--text-3)' }}>
-      <div>© 2026 Cario Vietnam JSC. Giấy phép DKKD số 0316XXXXXX</div>
+      <div>© 2026 Otobank Vietnam JSC. Giấy phép DKKD số 0316XXXXXX</div>
       <div style={{ display: 'flex', gap: 20 }}>
         <span>Điều khoản</span><span>Bảo mật</span><span>Cookie</span>
       </div>
@@ -257,4 +257,4 @@ const BankLogo = ({ name, w = 100 }) => (
   }}>{name}</div>
 );
 
-Object.assign(window, { CarioLogo, CarioNav, CarioFooter, CarSilhouette, CarPhoto, Ico, fmt, BankLogo });
+Object.assign(window, { OtobankLogo, OtobankNav, OtobankFooter, CarSilhouette, CarPhoto, Ico, fmt, BankLogo });

@@ -1,4 +1,4 @@
-/* Cario design tokens */
+/* Otobank design tokens */
 /* Primary CTA — orange filled with hover lift */
 .btn-cta-primary {
   background: #E85D2C;
@@ -67,54 +67,54 @@
   --text-3: #9CA3AF;
 }
 
-.cario {
+.otobank {
   font-family: var(--font-body);
   color: var(--text);
   background: var(--bg);
   -webkit-font-smoothing: antialiased;
 }
 
-.cario h1, .cario h2, .cario h3, .cario h4, .cario .display {
+.otobank h1, .otobank h2, .otobank h3, .otobank h4, .otobank .display {
   font-family: var(--font-display);
   font-weight: 700;
   letter-spacing: -0.02em;
 }
 
-.cario .mono { font-family: var(--font-mono); }
+.otobank .mono { font-family: var(--font-mono); }
 
-.cario .btn {
+.otobank .btn {
   display: inline-flex; align-items: center; justify-content: center;
   gap: 8px; padding: 14px 22px; border-radius: 10px;
   font-weight: 600; font-size: 15px; cursor: pointer;
   border: 1px solid transparent; transition: all .15s ease;
   font-family: inherit;
 }
-.cario .btn-primary { background: var(--accent); color: #fff; }
-.cario .btn-primary:hover { background: #d54e1f; transform: translateY(-1px); }
-.cario .btn-outline { background: transparent; color: var(--text); border-color: var(--border); }
-.cario .btn-outline:hover { background: var(--surface-2); }
-.cario .btn-ghost { background: transparent; color: var(--text); }
+.otobank .btn-primary { background: var(--accent); color: #fff; }
+.otobank .btn-primary:hover { background: #d54e1f; transform: translateY(-1px); }
+.otobank .btn-outline { background: transparent; color: var(--text); border-color: var(--border); }
+.otobank .btn-outline:hover { background: var(--surface-2); }
+.otobank .btn-ghost { background: transparent; color: var(--text); }
 
-.cario .badge {
+.otobank .badge {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600;
 }
-.cario .badge-deal { background: rgba(16,185,129,.15); color: var(--success); }
-.cario .badge-good { background: rgba(255,184,0,.15); color: var(--accent-2); }
-.cario .badge-verified { background: rgba(16,185,129,.12); color: var(--success); border: 1px solid rgba(16,185,129,.3); }
-.cario .badge-premium { background: rgba(255,184,0,.15); color: var(--accent-2); border: 1px solid rgba(255,184,0,.3); }
+.otobank .badge-deal { background: rgba(16,185,129,.15); color: var(--success); }
+.otobank .badge-good { background: rgba(255,184,0,.15); color: var(--accent-2); }
+.otobank .badge-verified { background: rgba(16,185,129,.12); color: var(--success); border: 1px solid rgba(16,185,129,.3); }
+.otobank .badge-premium { background: rgba(255,184,0,.15); color: var(--accent-2); border: 1px solid rgba(255,184,0,.3); }
 
-.cario .card {
+.otobank .card {
   background: var(--surface); border: 1px solid var(--border);
   border-radius: 16px;
 }
 
-.cario .input {
+.otobank .input {
   background: var(--surface-2); border: 1px solid var(--border);
   border-radius: 10px; padding: 12px 14px; color: var(--text);
   font-family: inherit; font-size: 14px; width: 100%;
 }
-.cario .input:focus { outline: none; border-color: var(--accent); }
+.otobank .input:focus { outline: none; border-color: var(--accent); }
 
 /* SVG car placeholder pattern */
 .car-placeholder {
@@ -135,12 +135,12 @@
 .car-placeholder span { position: relative; z-index: 1; padding: 6px 10px; background: rgba(15,20,25,0.6); border-radius: 4px; }
 
 /* Hover lift */
-.cario .lift { transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
-.cario .lift:hover { transform: translateY(-3px); border-color: rgba(232,93,44,0.4); box-shadow: 0 12px 32px rgba(0,0,0,0.3); }
+.otobank .lift { transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+.otobank .lift:hover { transform: translateY(-3px); border-color: rgba(232,93,44,0.4); box-shadow: 0 12px 32px rgba(0,0,0,0.3); }
 
 /* Scrollbar hide on cards */
-.cario *::-webkit-scrollbar { display: none; }
-.cario * { scrollbar-width: none; }
+.otobank *::-webkit-scrollbar { display: none; }
+.otobank * { scrollbar-width: none; }
 
 
 /* === Vehicle image normalization (13 ảnh ô tô — Screen 02 + 03) === */

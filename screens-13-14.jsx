@@ -50,7 +50,7 @@ const Screen13_WholesaleAuction = () => {
   ];
 
   return (
-    <div className="cario" style={{ width: 1440, minHeight: 1400, background: 'var(--bg)', position: 'relative' }}>
+    <div className="otobank" style={{ width: 1440, minHeight: 1400, background: 'var(--bg)', position: 'relative' }}>
       <PlaceholderRibbon phase="Phase 4 (Tháng 4-5)" refDoc="PRD §11 Wholesale Engine" />
 
       {/* Top bar */}
@@ -329,4 +329,176 @@ const Screen14_ISApp = () => {
   );
 };
 
-Object.assign(window, { Screen13_WholesaleAuction, Screen14_ISApp });
+// ─────────────────────────────────────────────────────────
+// Screen 15 — IS Web Dashboard (desktop)
+// PRD §12.7 Owner Consignment Flow + §12.9 IS Mobile App + §12.10 Commission
+
+const Screen15_ISWeb = () => {
+  const owners = [
+    { name: 'Anh Phạm Quốc', vehicle: 'Mercedes C200 2020', valuation: '900-960M', stage: 'Visited', stageColor: '#3B82F6', daysInPipeline: 2, channel: '?' },
+    { name: 'Chị Nguyễn Hà', vehicle: 'Toyota Innova 2021', valuation: '680-720M', stage: 'Negotiating', stageColor: '#FFB800', daysInPipeline: 5, channel: 'Wholesale' },
+    { name: 'Anh Lê Tâm', vehicle: 'Hyundai Tucson 2021', valuation: '720-780M', stage: 'Auctioning', stageColor: '#E85D2C', daysInPipeline: 1, channel: 'Wholesale' },
+    { name: 'Chị Trần My', vehicle: 'Mazda 3 2022', valuation: '580-620M', stage: 'Retail Listed', stageColor: '#10B981', daysInPipeline: 12, channel: 'Retail' },
+    { name: 'Anh Vũ Hùng', vehicle: 'Ford Ranger 2022', valuation: '880-940M', stage: 'Sold', stageColor: 'var(--success)', daysInPipeline: 8, channel: 'Wholesale' },
+  ];
+
+  const kanbanCols = [
+    { stage: 'Lead (mới)', count: 3, color: '#6B7280' },
+    { stage: 'Visited', count: 4, color: '#3B82F6' },
+    { stage: 'Negotiating', count: 2, color: '#FFB800' },
+    { stage: 'Auctioning', count: 1, color: '#E85D2C' },
+    { stage: 'Retail listed', count: 3, color: '#10B981' },
+    { stage: 'Sold (90d)', count: 12, color: 'var(--success)' },
+  ];
+
+  return (
+    <div className="otobank" style={{ width: 1440, minHeight: 1800, background: 'var(--bg)', position: 'relative' }}>
+      <PlaceholderRibbon phase="Phase 5 (Tháng 5-6)" refDoc="PRD §12 IS Role · Web View" />
+
+      {/* Header bar */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px 48px', borderBottom: '1px solid var(--border)', background: '#0F1419' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+          <div style={{ fontFamily: '"Space Grotesk", sans-serif', fontWeight: 800, fontSize: 22, color: '#F5F5F5' }}>Otobank · IS Console</div>
+          <span style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, padding: '5px 12px', borderRadius: 4, background: 'rgba(255,184,0,0.15)', color: '#FFB800', border: '1px solid rgba(255,184,0,0.3)', fontWeight: 700, letterSpacing: '0.06em' }}>● IS TIER GOLD</span>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+          <span style={{ fontSize: 13, color: 'var(--text-2)' }}>Anh Hoàng Minh · 47 Owner đã hợp tác</span>
+          <div style={{ width: 40, height: 40, borderRadius: '50%', background: 'linear-gradient(135deg, #E85D2C, #FFB800)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700 }}>H</div>
+        </div>
+      </div>
+
+      <div style={{ padding: '40px 48px' }}>
+        {/* Hero header */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 32 }}>
+          <div>
+            <div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: '#FFB800', letterSpacing: '0.1em', fontWeight: 700, marginBottom: 8 }}>● INVENTORY SPECIALIST DASHBOARD</div>
+            <h1 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 40, fontWeight: 700, margin: 0, letterSpacing: '-0.02em' }}>Pipeline săn xe Owner</h1>
+            <p style={{ fontSize: 16, color: 'var(--text-2)', marginTop: 8, margin: '8px 0 0' }}>Quản lý 13 active Owner consignment · Auto-match 30 phút first-claim · 100% xe Owner phải qua IS</p>
+          </div>
+          <div style={{ display: 'flex', gap: 12 }}>
+            <button className="btn btn-outline" style={{ padding: '14px 20px', fontSize: 14, fontWeight: 600 }}>📊 Income breakdown</button>
+            <button className="btn btn-primary" style={{ padding: '14px 24px', fontSize: 14, fontWeight: 700 }}>+ Owner mới (manual entry)</button>
+          </div>
+        </div>
+
+        {/* KPI strip */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 20, marginBottom: 40 }}>
+          {[
+            { eyebrow: 'Income tháng 5', value: '52.4M ₫', delta: '↑ 38% vs T4', sub: 'Wholesale 28M + Retail 18M + Tier bonus 6.4M', color: 'var(--success)' },
+            { eyebrow: 'Active Owners', value: '13', delta: '5 wholesale · 8 retail', sub: '5 mới tuần này, 0 từ chối service', color: 'var(--accent)' },
+            { eyebrow: 'Win rate Owner', value: '87%', delta: '40/46 ký gửi accept', sub: '90 ngày qua · top 12% IS network', color: 'var(--success)' },
+            { eyebrow: 'Auction success', value: '92%', delta: 'Trên target 60% (PRD)', sub: '12/13 wholesale auctions có ≥1 bid', color: 'var(--success)' },
+          ].map(k => (
+            <div key={k.eyebrow} style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 16, padding: 24 }}>
+              <div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600 }}>{k.eyebrow}</div>
+              <div className="mono" style={{ fontSize: 36, fontWeight: 800, color: 'var(--text)', marginTop: 10, lineHeight: 1, letterSpacing: '-0.02em' }}>{k.value}</div>
+              <div style={{ fontSize: 13, color: k.color, marginTop: 6, fontWeight: 600 }}>{k.delta}</div>
+              <div style={{ fontSize: 12, color: 'var(--text-2)', marginTop: 8, lineHeight: 1.4 }}>{k.sub}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Pipeline Kanban */}
+        <h2 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 24, fontWeight: 700, margin: '0 0 16px', letterSpacing: '-0.01em' }}>Pipeline kanban</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: 14, marginBottom: 40 }}>
+          {kanbanCols.map(col => (
+            <div key={col.stage} style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 12, padding: 14 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12, paddingBottom: 10, borderBottom: `2px solid ${col.color}` }}>
+                <span style={{ fontSize: 12, fontWeight: 700, color: col.color, textTransform: 'uppercase', letterSpacing: '0.04em' }}>{col.stage}</span>
+                <span className="mono" style={{ fontSize: 14, fontWeight: 800, color: 'var(--text)' }}>{col.count}</span>
+              </div>
+              <div style={{ height: 120, background: 'var(--surface-2)', borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, color: 'var(--text-3)' }}>
+                {col.count > 0 ? `${col.count} card${col.count > 1 ? 's' : ''}` : 'Empty'}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Active Owners table + Income breakdown */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: 32, marginBottom: 40 }}>
+          {/* Active owners table */}
+          <div className="card" style={{ padding: 28 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+              <h3 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 22, fontWeight: 700, margin: 0, letterSpacing: '-0.01em' }}>Active Owners đang theo dõi</h3>
+              <span style={{ fontSize: 13, color: 'var(--text-2)' }}>5 trong tổng 13 active</span>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1.4fr 130px 120px 80px 90px', gap: 14, padding: '12px 0', fontSize: 11, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 600, borderBottom: '1px solid var(--border)', fontFamily: '"JetBrains Mono", monospace' }}>
+              <div>Owner</div><div>Vehicle</div><div>Valuation</div><div>Stage</div><div>Days</div><div>Channel</div>
+            </div>
+            {owners.map((o, i) => (
+              <div key={i} style={{ display: 'grid', gridTemplateColumns: '1.2fr 1.4fr 130px 120px 80px 90px', gap: 14, padding: '16px 0', fontSize: 14, borderBottom: i < owners.length - 1 ? '1px solid var(--border)' : 'none', alignItems: 'center' }}>
+                <span style={{ fontWeight: 600 }}>{o.name}</span>
+                <span style={{ color: 'var(--text-2)' }}>{o.vehicle}</span>
+                <span className="mono" style={{ color: 'var(--accent)' }}>{o.valuation}</span>
+                <span style={{ fontSize: 11, padding: '4px 10px', borderRadius: 999, background: `${o.stageColor}20`, color: o.stageColor, fontWeight: 700, textAlign: 'center', display: 'inline-block', width: 'fit-content' }}>{o.stage}</span>
+                <span className="mono" style={{ color: 'var(--text-2)' }}>{o.daysInPipeline}d</span>
+                <span style={{ color: 'var(--text-2)', fontSize: 12 }}>{o.channel}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Income breakdown */}
+          <div className="card" style={{ padding: 28 }}>
+            <h3 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 22, fontWeight: 700, margin: '0 0 6px', letterSpacing: '-0.01em' }}>Income breakdown · T5</h3>
+            <p style={{ fontSize: 13, color: 'var(--text-2)', margin: '0 0 24px' }}>Theo PRD §12.10 — 4 income streams</p>
+
+            {[
+              { l: 'Consignment wholesale (1.5% Owner fee, 50%)', v: '28.0M', pct: 53, color: 'var(--accent)' },
+              { l: 'Consignment retail (1.5% Owner fee)', v: '18.0M', pct: 34, color: '#FFB800' },
+              { l: 'AC referral (0.3% deal lead)', v: '0M', pct: 0, color: '#3B82F6' },
+              { l: 'IS Tier GOLD bonus (acquisition)', v: '6.4M', pct: 13, color: '#10B981' },
+            ].map((s, i) => (
+              <div key={i} style={{ marginBottom: 20 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8, fontSize: 13 }}>
+                  <span style={{ color: 'var(--text)', fontWeight: 500 }}>{s.l}</span>
+                  <span className="mono" style={{ color: s.color, fontWeight: 800, fontSize: 16 }}>{s.v} ₫</span>
+                </div>
+                <div style={{ height: 8, background: 'var(--surface-2)', borderRadius: 4, overflow: 'hidden' }}>
+                  <div style={{ height: '100%', width: `${s.pct}%`, background: s.color, borderRadius: 4 }} />
+                </div>
+              </div>
+            ))}
+
+            <div style={{ paddingTop: 14, marginTop: 4, borderTop: '2px solid var(--accent)', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+              <span style={{ fontSize: 16, fontWeight: 700 }}>Total tháng 5</span>
+              <span className="mono" style={{ fontSize: 28, fontWeight: 800, color: 'var(--accent)', letterSpacing: '-0.02em' }}>52.4M ₫</span>
+            </div>
+            <div style={{ marginTop: 8, fontSize: 11, color: 'var(--text-3)' }}>
+              Hash-chain ledger immutable · TNCN 10% withheld auto · payout T+7
+            </div>
+          </div>
+        </div>
+
+        {/* AI Valuation history */}
+        <div className="card" style={{ padding: 28 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+            <h3 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 22, fontWeight: 700, margin: 0, letterSpacing: '-0.01em' }}>AI Valuation history (10 gần nhất)</h3>
+            <span style={{ fontSize: 13, color: 'var(--text-2)' }}>Confidence interval ±5% (Tier GOLD) · Accuracy 94%</span>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1.4fr 100px 130px 130px 100px 110px', gap: 14, padding: '12px 0', fontSize: 11, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 600, borderBottom: '1px solid var(--border)', fontFamily: '"JetBrains Mono", monospace' }}>
+            <div>Date</div><div>Vehicle</div><div>Odo</div><div>AI estimate</div><div>Final price</div><div>Δ</div><div>Outcome</div>
+          </div>
+          {[
+            ['08/05/2026', 'Mercedes C200 2020', '52,000', '930M ±5%', '928M', '−0.2%', 'In auction', 'var(--accent)'],
+            ['07/05/2026', 'Toyota Innova 2021', '78,500', '700M ±5%', '695M', '−0.7%', 'Sold (W)', 'var(--success)'],
+            ['05/05/2026', 'Hyundai Tucson 2021', '41,200', '750M ±5%', '745M', '−0.7%', 'In auction', 'var(--accent)'],
+            ['03/05/2026', 'Mazda 3 2022', '24,500', '600M ±5%', '610M', '+1.7%', 'Retail listed', '#FFB800'],
+            ['01/05/2026', 'Ford Ranger 2022', '38,200', '910M ±5%', '905M', '−0.5%', 'Sold (W)', 'var(--success)'],
+          ].map((r, i) => (
+            <div key={i} style={{ display: 'grid', gridTemplateColumns: '1.2fr 1.4fr 100px 130px 130px 100px 110px', gap: 14, padding: '14px 0', fontSize: 14, borderBottom: i < 4 ? '1px solid var(--border)' : 'none', alignItems: 'center' }}>
+              <span className="mono" style={{ color: 'var(--text-2)' }}>{r[0]}</span>
+              <span style={{ fontWeight: 500 }}>{r[1]}</span>
+              <span className="mono" style={{ color: 'var(--text-2)' }}>{r[2]}</span>
+              <span className="mono" style={{ color: 'var(--text)' }}>{r[3]}</span>
+              <span className="mono" style={{ color: 'var(--text)', fontWeight: 600 }}>{r[4]}</span>
+              <span className="mono" style={{ color: r[5].startsWith('+') ? 'var(--success)' : 'var(--text-2)' }}>{r[5]}</span>
+              <span style={{ color: r[7], fontSize: 12, fontWeight: 700 }}>● {r[6]}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+Object.assign(window, { Screen13_WholesaleAuction, Screen14_ISApp, Screen15_ISWeb });

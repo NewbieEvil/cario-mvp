@@ -30,8 +30,8 @@ const Stepper = ({ steps, current }) => (
 );
 
 const Screen05_Checkout = () => (
-  <div className="cario" style={{ width: 1440, minHeight: 1500, background: 'var(--bg)' }}>
-    <CarioNav active="buy" />
+  <div className="otobank" style={{ width: 1440, minHeight: 1500, background: 'var(--bg)' }}>
+    <OtobankNav active="buy" />
 
     <div style={{ padding: '32px 80px 16px', maxWidth: 1280, margin: '0 auto' }}>
       <Stepper steps={['Chọn xe', 'Tài chính', 'Thông tin giao xe', 'Xác nhận']} current={3} />
@@ -193,7 +193,7 @@ const Screen05_Checkout = () => (
             <span style={{ width: 16, height: 16, borderRadius: 4, background: 'var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center', flex: '0 0 auto', marginTop: 1 }}>
               <Ico name="check" size={11} />
             </span>
-            <span>Tôi đồng ý với <a style={{ color: 'var(--accent)' }}>Điều khoản sử dụng</a> và <a style={{ color: 'var(--accent)' }}>Chính sách bảo mật</a> của Cario</span>
+            <span>Tôi đồng ý với <a style={{ color: 'var(--accent)' }}>Điều khoản sử dụng</a> và <a style={{ color: 'var(--accent)' }}>Chính sách bảo mật</a> của Otobank</span>
           </label>
 
           <button className="btn btn-primary" style={{ width: '100%', padding: 16, fontSize: 15 }}>
@@ -212,8 +212,8 @@ const Screen05_Checkout = () => (
 // Screen 06 — Sell My Car (AI Valuation)
 
 const Screen06_Sell = () => (
-  <div className="cario" style={{ width: 1440, minHeight: 1500, background: 'var(--bg)' }}>
-    <CarioNav active="sell" />
+  <div className="otobank" style={{ width: 1440, minHeight: 1500, background: 'var(--bg)' }}>
+    <OtobankNav active="sell" />
 
     <div style={{ padding: '32px 80px 16px', maxWidth: 1180, margin: '0 auto' }}>
       <Stepper steps={['Thông tin xe', 'AI phân tích', 'Báo giá']} current={2} />
@@ -227,7 +227,7 @@ const Screen06_Sell = () => (
           <div className="badge badge-deal" style={{ marginBottom: 18 }}>
             <Ico name="sparkles" size={12} /> AI Pricing Engine v2.4 • Phân tích trong 4.2 giây
           </div>
-          <div style={{ fontSize: 14, color: 'var(--text-2)', marginBottom: 6 }}>Báo giá cam kết của Cario cho xe của bạn</div>
+          <div style={{ fontSize: 14, color: 'var(--text-2)', marginBottom: 6 }}>Báo giá cam kết của Otobank cho xe của bạn</div>
           <div className="mono display" style={{ fontSize: 84, fontWeight: 800, color: 'var(--accent)', letterSpacing: '-0.04em', lineHeight: 1, marginBottom: 12 }}>
             580,000,000 ₫
           </div>
@@ -267,7 +267,7 @@ const Screen06_Sell = () => (
               { l: 'Tình trạng nội ngoại thất 4.5/5', v: '+5M ₫', positive: true },
               { l: 'Điều chỉnh xu hướng thị trường (-2% / 30 ngày)', v: '−12M ₫', negative: true },
               { l: 'Phí refurb dự kiến (đánh bóng + thay lốp)', v: '−18M ₫', negative: true },
-              { l: 'Margin Cario cam kết (transparent)', v: '−10M ₫', negative: true },
+              { l: 'Margin Otobank cam kết (transparent)', v: '−10M ₫', negative: true },
             ].map((r, i) => (
               <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '11px 0', borderBottom: '1px solid var(--border)', fontSize: 13 }}>
                 <span style={{ color: 'var(--text-2)' }}>{r.l}</span>
@@ -299,7 +299,7 @@ const Screen06_Sell = () => (
           </p>
 
           {[
-            { ch: 'Cario (offer này)', p: '580M ₫', t: '24h', best: true },
+            { ch: 'Otobank (offer này)', p: '580M ₫', t: '24h', best: true },
             { ch: 'Salon truyền thống', p: '~530M ₫', t: '1-2 tuần', sub: 'Bị ép giá 8-10%' },
             { ch: 'Tự đăng Bonbanh / Chợ Tốt', p: '580 - 620M ₫*', t: '4-6 tuần', sub: 'Tốn thời gian + rủi ro show xe' },
             { ch: 'Đấu giá Vucar', p: '550 - 590M ₫', t: '24-72h', sub: 'Phí nền tảng 2%' },
@@ -321,7 +321,7 @@ const Screen06_Sell = () => (
         </div>
       </div>
 
-      {/* Why Cario */}
+      {/* Why Otobank */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16, marginTop: 24 }}>
         {[
           { i: 'dollar', t: 'Giá fair market', d: 'AI loại bỏ trò ép giá của salon — bạn nhận đúng giá thị trường.' },
@@ -355,8 +355,8 @@ const Screen07_Financing = () => {
     { n: 'VIB', rate: '8.7%', monthly: 13400000, total: 806000000, perks: ['Down payment chỉ từ 20%', 'Tặng 1 năm bảo hiểm vật chất', 'eKYC 100% online'] },
   ];
   return (
-    <div className="cario" style={{ width: 1440, minHeight: 1500, background: 'var(--bg)' }}>
-      <CarioNav active="finance" />
+    <div className="otobank" style={{ width: 1440, minHeight: 1500, background: 'var(--bg)' }}>
+      <OtobankNav active="finance" />
 
       <div style={{ padding: '32px 80px 16px', maxWidth: 1280, margin: '0 auto' }}>
         <Stepper steps={['Thông tin', 'Thu nhập', 'Xác thực eKYC', 'Kết quả']} current={3} />
@@ -499,116 +499,131 @@ const PhoneFrame = ({ children }) => (
   </div>
 );
 
+// Screen 08 — AC Sales Mobile App (PRD §5.5)
 const Screen08_Mobile = () => (
   <div style={{ background: 'radial-gradient(ellipse at 50% 30%, #1A1F26 0%, #000 70%)', padding: '40px 60px', display: 'flex', justifyContent: 'center' }}>
-    <div className="cario">
+    <div className="otobank">
       <PhoneFrame>
         <div style={{ height: 'calc(100% - 48px)', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
           {/* Top bar */}
           <div style={{ padding: '8px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <CarioLogo size={20} />
+            <OtobankLogo size={20} />
             <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
               <div style={{ position: 'relative', width: 36, height: 36, borderRadius: 10, background: 'var(--surface-2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <Ico name="bell" size={18} />
-                <span style={{ position: 'absolute', top: 8, right: 8, width: 8, height: 8, background: 'var(--accent)', borderRadius: '50%' }} />
+                <span style={{ position: 'absolute', top: 6, right: 6, minWidth: 16, height: 16, padding: '0 4px', background: 'var(--accent)', borderRadius: 8, fontSize: 9, fontWeight: 700, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>3</span>
               </div>
-              <div style={{ width: 36, height: 36, borderRadius: 10, background: 'var(--accent)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700 }}>MT</div>
+              <div style={{ width: 36, height: 36, borderRadius: 10, background: 'linear-gradient(135deg, #E85D2C, #FFB800)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700 }}>T</div>
             </div>
           </div>
 
-          {/* Greeting */}
+          {/* AC Greeting + Tier */}
           <div style={{ padding: '12px 20px 16px' }}>
-            <div style={{ fontSize: 22, fontWeight: 700 }}>Xin chào, Tuấn 👋</div>
-            <div style={{ fontSize: 13, color: 'var(--text-2)', marginTop: 4 }}>Bạn đang tìm xe gì hôm nay?</div>
-          </div>
-
-          {/* Search */}
-          <div style={{ padding: '0 20px 14px' }}>
-            <div style={{ background: 'var(--surface-2)', border: '1px solid var(--border)', borderRadius: 14, padding: '12px 14px', display: 'flex', alignItems: 'center', gap: 10, color: 'var(--text-3)', fontSize: 13 }}>
-              <Ico name="search" size={16} /> Tìm xe theo hãng, model...
+            <div style={{ fontSize: 11, color: 'var(--text-3)', fontFamily: '"JetBrains Mono", monospace', letterSpacing: '0.06em', textTransform: 'uppercase', fontWeight: 600 }}>● AC SALES APP</div>
+            <div style={{ fontSize: 22, fontWeight: 700, marginTop: 4 }}>Chào, Anh Tuấn</div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 6 }}>
+              <span style={{ fontSize: 11, padding: '3px 9px', borderRadius: 999, background: 'rgba(232,93,44,0.15)', border: '1px solid rgba(232,93,44,0.4)', color: 'var(--accent)', fontWeight: 700, letterSpacing: '0.04em' }}>★ TIER SENIOR</span>
+              <span style={{ fontSize: 12, color: 'var(--text-2)' }}>Multiplier 1.15x · 28 deals YTD</span>
             </div>
           </div>
 
-          {/* Quick actions */}
+          {/* Hero income card */}
+          <div style={{ margin: '0 20px 16px', padding: 18, borderRadius: 16, background: 'linear-gradient(135deg, rgba(232,93,44,0.18), rgba(255,184,0,0.08))', border: '1px solid rgba(232,93,44,0.3)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+              <div>
+                <div style={{ fontSize: 11, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 600 }}>Income tháng 5/2026</div>
+                <div className="mono" style={{ fontSize: 28, fontWeight: 800, color: 'var(--text)', marginTop: 4, letterSpacing: '-0.02em' }}>52.4M ₫</div>
+                <div style={{ fontSize: 12, color: 'var(--success)', marginTop: 4 }}>↑ vs 41M tháng trước · 4 deals đã closed</div>
+              </div>
+              <div style={{ textAlign: 'right' }}>
+                <div style={{ fontSize: 11, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 600 }}>Pending</div>
+                <div className="mono" style={{ fontSize: 18, fontWeight: 700, color: 'var(--accent)', marginTop: 4 }}>+18.2M</div>
+                <div style={{ fontSize: 11, color: 'var(--text-2)' }}>2 deals in escrow</div>
+              </div>
+            </div>
+            <div style={{ marginTop: 14, paddingTop: 14, borderTop: '1px solid rgba(232,93,44,0.2)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, color: 'var(--text-2)', marginBottom: 6 }}>
+                <span>Tier progress: SENIOR → LEAD</span>
+                <span className="mono" style={{ color: 'var(--accent)', fontWeight: 700 }}>72%</span>
+              </div>
+              <div style={{ height: 6, background: 'rgba(255,255,255,0.08)', borderRadius: 3, overflow: 'hidden' }}>
+                <div style={{ height: '100%', width: '72%', background: 'linear-gradient(90deg, var(--accent), #FFB800)', borderRadius: 3 }} />
+              </div>
+            </div>
+          </div>
+
+          {/* Quick actions for AC */}
           <div style={{ padding: '0 20px 16px', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8 }}>
             {[
-              { i: 'cart', t: 'Mua xe' },
-              { i: 'dollar', t: 'Bán xe' },
-              { i: 'refresh', t: 'Đổi xe' },
-              { i: 'bank', t: 'Tài chính' },
+              { i: 'plus', t: 'Lead mới', alert: true },
+              { i: 'dollar', t: 'Loan calc' },
+              { i: 'file', t: 'Quote PDF' },
+              { i: 'sparkles', t: 'AI co-pilot' },
             ].map(q => (
-              <div key={q.t} style={{ padding: '14px 8px', background: 'var(--surface-2)', borderRadius: 12, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+              <div key={q.t} style={{ padding: '12px 6px', background: q.alert ? 'rgba(232,93,44,0.12)' : 'var(--surface-2)', borderRadius: 12, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, position: 'relative', border: q.alert ? '1px solid rgba(232,93,44,0.4)' : '1px solid transparent' }}>
                 <span style={{ color: 'var(--accent)' }}><Ico name={q.i} size={20} /></span>
-                <span style={{ fontSize: 11, fontWeight: 500 }}>{q.t}</span>
+                <span style={{ fontSize: 11, fontWeight: 600 }}>{q.t}</span>
+                {q.alert && <span style={{ position: 'absolute', top: 6, right: 6, width: 8, height: 8, background: 'var(--accent)', borderRadius: '50%' }} />}
               </div>
             ))}
           </div>
 
           <div style={{ flex: 1, overflow: 'hidden', padding: '0 20px' }}>
-            {/* Promo banner */}
-            <div style={{ padding: 16, borderRadius: 16, background: 'linear-gradient(120deg, #E85D2C, #c83e0e)', position: 'relative', overflow: 'hidden', marginBottom: 18 }}>
-              <div style={{ position: 'absolute', right: -10, top: 0, width: 140, opacity: 0.4 }}>
-                <CarSilhouette variant="suv" tone="midnight" />
-              </div>
-              <div style={{ position: 'relative', maxWidth: '60%' }}>
-                <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.7)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Khuyến mãi tháng 5</div>
-                <div style={{ fontSize: 16, fontWeight: 700, color: '#fff', marginTop: 4, lineHeight: 1.3 }}>Tặng 1 năm bảo hành mở rộng cho mọi SUV</div>
-                <div style={{ marginTop: 10, fontSize: 12, color: '#fff', display: 'flex', alignItems: 'center', gap: 4, fontWeight: 600 }}>
-                  Khám phá ngay <Ico name="arrow" size={12} />
-                </div>
-              </div>
-            </div>
-
-            {/* Featured */}
+            {/* Pipeline section */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-              <div style={{ fontSize: 15, fontWeight: 600 }}>Xe nổi bật cho bạn</div>
-              <div style={{ fontSize: 12, color: 'var(--accent)' }}>Xem tất cả →</div>
+              <div style={{ fontSize: 15, fontWeight: 700 }}>Pipeline · 7 active leads</div>
+              <div style={{ fontSize: 12, color: 'var(--accent)', fontWeight: 600 }}>Xem tất cả →</div>
             </div>
 
-            <div style={{ display: 'flex', gap: 10, overflow: 'hidden', marginBottom: 18 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 18 }}>
               {[
-                { v: 'suv', tone: 'pearl', n: 'Honda CR-V', y: 2022, p: 920, d: true, img: 'uploads/s02-card01-honda-crv-blue.png' },
-                { v: 'sedan', tone: 'midnight', n: 'Toyota Camry', y: 2022, p: 1180, d: false, img: 'uploads/s02-card02-toyota-camry-white.png' },
-                { v: 'suv', tone: 'burgundy', n: 'Mazda CX-5', y: 2023, p: 850, d: false, img: 'uploads/s02-card03-mazda-cx5-red.png' },
-              ].map((c, i) => (
-                <div key={i} style={{ minWidth: 168, background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 14, overflow: 'hidden' }}>
-                  <div style={{ padding: 6 }}>
-                    <div style={{ position: 'relative', width: '100%', aspectRatio: '4/3', borderRadius: 8, overflow: 'hidden' }}>
-                      <img src={c.img} alt={c.n} className="vehicle-image" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-                      {c.d && <span className="badge badge-deal" style={{ position: 'absolute', top: 6, left: 6, fontSize: 10 }}>● Great</span>}
+                { name: 'Anh Phạm Quốc', vehicle: 'Honda CR-V 2022', sla: 12, slaUrgent: false, stage: 'NEW', stageColor: '#3B82F6', value: 920 },
+                { name: 'Chị Nguyễn Hà', vehicle: 'Mazda CX-5 2023', sla: 28, slaUrgent: true, stage: 'CONTACTED', stageColor: '#FFB800', value: 850 },
+                { name: 'Anh Lê Tâm', vehicle: 'Toyota Camry 2022', sla: null, stage: 'TEST DRIVE', stageColor: 'var(--success)', value: 1180 },
+              ].map((l, i) => (
+                <div key={i} style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 12, padding: 12, display: 'flex', flexDirection: 'column', gap: 6 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                    <div>
+                      <div style={{ fontSize: 13, fontWeight: 700 }}>{l.name}</div>
+                      <div style={{ fontSize: 11, color: 'var(--text-2)' }}>{l.vehicle} · {l.value}M ₫</div>
                     </div>
+                    <span style={{ fontSize: 10, padding: '3px 8px', borderRadius: 999, background: `${l.stageColor}20`, color: l.stageColor, fontWeight: 700, letterSpacing: '0.04em' }}>{l.stage}</span>
                   </div>
-                  <div style={{ padding: '4px 10px 10px' }}>
-                    <div style={{ fontSize: 13, fontWeight: 600 }}>{c.n}</div>
-                    <div style={{ fontSize: 10, color: 'var(--text-3)' }}>{c.y} • Tự động</div>
-                    <div className="mono" style={{ fontSize: 14, fontWeight: 700, marginTop: 4, color: 'var(--text)' }}>{c.p}M ₫</div>
-                  </div>
+                  {l.sla != null && (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 10, color: l.slaUrgent ? 'var(--danger)' : 'var(--text-2)' }}>
+                      {l.slaUrgent ? '⚠️' : '⏱'} SLA: còn {30 - l.sla} phút để contact (PRD §6.4)
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
 
-            {/* Categories */}
-            <div style={{ fontSize: 15, fontWeight: 600, marginBottom: 12 }}>Khám phá theo phân khúc</div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
-              {[
-                ['SUV', 'suv'], ['Sedan', 'car'], ['Pickup', 'truck'], ['Xe điện', 'zap'], ['MPV', 'home'], ['Hatch', 'star']
-              ].map(([n, i]) => (
-                <div key={n} style={{ padding: '14px 10px', background: 'var(--surface-2)', borderRadius: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
-                  <span style={{ color: 'var(--accent)' }}><Ico name={i} size={18} /></span>
-                  <span style={{ fontSize: 11 }}>{n}</span>
-                </div>
-              ))}
+            {/* Microsite stats */}
+            <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 14, padding: 14, marginBottom: 14 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
+                <div style={{ fontSize: 13, fontWeight: 700 }}>🌐 anhtuan.otobank.vn</div>
+                <div style={{ fontSize: 11, color: 'var(--accent)' }}>Stats →</div>
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
+                {[{ l: 'Visitors', v: '1,247', d: '+18%' }, { l: 'Leads', v: '24', d: '+5' }, { l: 'Conversion', v: '1.9%', d: '+0.3pp' }].map(s => (
+                  <div key={s.l}>
+                    <div style={{ fontSize: 9, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{s.l}</div>
+                    <div className="mono" style={{ fontSize: 16, fontWeight: 700, marginTop: 2 }}>{s.v}</div>
+                    <div style={{ fontSize: 10, color: 'var(--success)' }}>{s.d}</div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
-          {/* Tab bar */}
+          {/* Tab bar — AC App */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', padding: '12px 16px 24px', borderTop: '1px solid var(--border)', background: 'var(--bg)' }}>
             {[
-              { i: 'home', t: 'Trang chủ', a: true },
-              { i: 'search', t: 'Tìm xe' },
-              { i: 'heart', t: 'Yêu thích' },
-              { i: 'chat', t: 'Tin nhắn' },
-              { i: 'user', t: 'Tài khoản' },
+              { i: 'home', t: 'Dashboard', a: true },
+              { i: 'list', t: 'Pipeline' },
+              { i: 'chat', t: 'Inbox' },
+              { i: 'sparkles', t: 'Tools' },
+              { i: 'user', t: 'Profile' },
             ].map(t => (
               <div key={t.t} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
                 <span style={{ color: t.a ? 'var(--accent)' : 'var(--text-3)' }}><Ico name={t.i} size={20} /></span>

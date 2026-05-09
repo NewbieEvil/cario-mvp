@@ -99,8 +99,8 @@ const CarCard = ({ car, w }) => (
 );
 
 const Screen01_Landing = () => (
-  <div className="cario" style={{ width: 1440, minHeight: 1800, background: 'var(--bg)', overflow: 'hidden' }}>
-    <CarioNav active="home" />
+  <div className="otobank" style={{ width: 1440, minHeight: 1800, background: 'var(--bg)', overflow: 'hidden' }}>
+    <OtobankNav active="home" />
 
     {/* Hero — 50/50 split, gradient bg #0F1419 → #1A1F26 */}
     <section style={{
@@ -490,7 +490,7 @@ const Screen01_Landing = () => (
       </div>
     </section>
 
-    {/* USP section — Tại sao chọn Cario */}
+    {/* USP section — Tại sao chọn Otobank */}
     <section style={{ padding: '96px 48px 80px' }}>
       <h2 style={{
         fontFamily: '"Space Grotesk", sans-serif',
@@ -502,7 +502,7 @@ const Screen01_Landing = () => (
         marginBottom: 16,
         letterSpacing: '-0.02em',
       }}>
-        Tại sao mua xe tại Cario?
+        Tại sao mua xe tại Otobank?
       </h2>
       <p style={{
         fontFamily: '"Inter", sans-serif',
@@ -513,7 +513,7 @@ const Screen01_Landing = () => (
         margin: 0,
         marginBottom: 64,
       }}>
-        Khác với salon truyền thống, Cario cam kết:
+        Khác với salon truyền thống, Otobank cam kết:
       </p>
 
       <div style={{
@@ -580,7 +580,7 @@ const Screen01_Landing = () => (
       </div>
     </section>
 
-    <CarioFooter />
+    <OtobankFooter />
   </div>
 );
 
@@ -608,8 +608,8 @@ const FilterSection = ({ title, children }) => (
 );
 
 const Screen02_Browse = () => (
-  <div className="cario" style={{ width: 1440, minHeight: 1500, background: 'var(--bg)' }}>
-    <CarioNav active="buy" />
+  <div className="otobank" style={{ width: 1440, minHeight: 1500, background: 'var(--bg)' }}>
+    <OtobankNav active="buy" />
 
     <div style={{ padding: '20px 48px 12px', display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: 'var(--text-2)' }}>
       <span>Trang chủ</span> <Ico name="chevron" size={11} />
