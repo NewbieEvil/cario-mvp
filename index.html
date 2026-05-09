@@ -78,34 +78,36 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
 }/*EDITMODE-END*/;
 
 const SCREENS = [
-  // ── 1 · CUSTOMER JOURNEY — what the buyer experiences end-to-end ──
-  { n: '01', name: 'Landing — Otobank brand site',          dim: '1440 × 1900',  group: '1 · Customer Journey',         comp: 'Screen01_Landing' },
-  { n: '18', name: 'AC Showroom (Public)',                  dim: '1440 × 2000',  group: '1 · Customer Journey',         comp: 'Screen18_ACShowroom', tag: 'WOW' },
-  { n: '02', name: 'Inventory Browse',                      dim: '1440 × 1500',  group: '1 · Customer Journey',         comp: 'Screen02_Browse' },
-  { n: '03', name: 'Vehicle Detail Page',                   dim: '1440 × 2400',  group: '1 · Customer Journey',         comp: 'Screen03_VDP' },
-  { n: '04', name: '200-pt Inspection Report',              dim: '1440 × 1900',  group: '1 · Customer Journey',         comp: 'Screen04_Inspection' },
-  { n: '07', name: 'Pre-approval Financing',                dim: '1440 × 1500',  group: '1 · Customer Journey',         comp: 'Screen07_Financing' },
-  { n: '05', name: 'Checkout / Order',                      dim: '1440 × 1500',  group: '1 · Customer Journey',         comp: 'Screen05_Checkout' },
-  { n: '09', name: 'Order Tracking',                        dim: '1440 × 1300',  group: '1 · Customer Journey',         comp: 'Screen09_Tracking' },
+  // ── 1 · CUSTOMER SURFACE — what the buyer actually arrives at ──
+  { n: '01', name: 'Landing — Otobank brand site',          dim: '1440 × 1900',  group: '1 · Customer Surface',         comp: 'Screen01_Landing' },
+  { n: '02', name: 'AC Showroom (Public)',                  dim: '1440 × 2000',  group: '1 · Customer Surface',         comp: 'Screen18_ACShowroom', tag: 'WOW' },
 
-  // ── 2 · AC DISTRIBUTION NETWORK — the people running the funnels ──
-  { n: '17', name: 'AC Working Space (Desktop)',            dim: '1440 × 1800',  group: '2 · AC Distribution Network',  comp: 'Screen17_ACWorkspace', tag: 'NEW' },
-  { n: '08', name: 'AC Sales Mobile App',                   dim: 'iPhone 14 Pro', group: '2 · AC Distribution Network',  comp: 'Screen08_Mobile' },
+  // ── 2 · AC DISTRIBUTION NETWORK — the people running those funnels ──
+  { n: '03', name: 'AC Working Space (Desktop)',            dim: '1440 × 1800',  group: '2 · AC Distribution Network',  comp: 'Screen17_ACWorkspace', tag: 'NEW' },
+  { n: '04', name: 'AC Sales Mobile App',                   dim: 'iPhone 14 Pro', group: '2 · AC Distribution Network',  comp: 'Screen08_Mobile' },
 
-  // ── 3 · INVENTORY CORE — the central pool every AC pulls from ──
-  { n: '10', name: 'Inventory (Shared) — Nguồn hàng tổng',  dim: '1440 × 1900',  group: '3 · Inventory Core',           comp: 'Screen10_InventoryShared', tag: 'CORE' },
+  // ── 3 · CUSTOMER BUYING FLOW — discovery → delivery ──
+  { n: '05', name: 'Inventory Browse',                      dim: '1440 × 1500',  group: '3 · Customer Buying Flow',     comp: 'Screen02_Browse' },
+  { n: '06', name: 'Vehicle Detail Page',                   dim: '1440 × 2400',  group: '3 · Customer Buying Flow',     comp: 'Screen03_VDP' },
+  { n: '07', name: '200-pt Inspection Report',              dim: '1440 × 1900',  group: '3 · Customer Buying Flow',     comp: 'Screen04_Inspection' },
+  { n: '08', name: 'Pre-approval Financing',                dim: '1440 × 1500',  group: '3 · Customer Buying Flow',     comp: 'Screen07_Financing' },
+  { n: '09', name: 'Checkout / Order',                      dim: '1440 × 1500',  group: '3 · Customer Buying Flow',     comp: 'Screen05_Checkout' },
+  { n: '10', name: 'Order Tracking',                        dim: '1440 × 1300',  group: '3 · Customer Buying Flow',     comp: 'Screen09_Tracking' },
 
-  // ── 4 · SUPPLY SOURCING — how cars get into Inventory (Shared) ──
-  { n: '06', name: 'Sell My Car (AI)',                      dim: '1440 × 1500',  group: '4 · Supply Sourcing',          comp: 'Screen06_Sell' },
-  { n: '15', name: 'IS Web Console (Desktop)',              dim: '1440 × 1800',  group: '4 · Supply Sourcing',          comp: 'Screen15_ISWeb', placeholder: true, tag: 'NEW' },
-  { n: '14', name: 'IS App (Mobile)',                       dim: 'iPhone 14 Pro', group: '4 · Supply Sourcing',          comp: 'Screen14_ISApp', placeholder: true, tag: 'NEW' },
+  // ── 4 · INVENTORY CORE — the central pool every AC pulls from ──
+  { n: '11', name: 'Inventory (Shared) — Nguồn hàng tổng',  dim: '1440 × 1900',  group: '4 · Inventory Core',           comp: 'Screen10_InventoryShared', tag: 'CORE' },
 
-  // ── 5 · B2B WHOLESALE MOAT — dealer-to-dealer auction layer ──
-  { n: '13', name: 'Wholesale Auction (Desktop)',           dim: '1440 × 1400',  group: '5 · B2B Wholesale Moat',       comp: 'Screen13_WholesaleAuction', placeholder: true, tag: 'NEW' },
-  { n: '16', name: 'Wholesale Auction (Mobile)',            dim: 'iPhone 14 Pro', group: '5 · B2B Wholesale Moat',       comp: 'Screen16_WholesaleAuctionMobile', placeholder: true, tag: 'NEW' },
+  // ── 5 · SUPPLY SOURCING — how cars enter Inventory (Shared) ──
+  { n: '12', name: 'Sell My Car (AI)',                      dim: '1440 × 1500',  group: '5 · Supply Sourcing',          comp: 'Screen06_Sell' },
+  { n: '13', name: 'IS Web Console (Desktop)',              dim: '1440 × 1800',  group: '5 · Supply Sourcing',          comp: 'Screen15_ISWeb', placeholder: true, tag: 'NEW' },
+  { n: '14', name: 'IS App (Mobile)',                       dim: 'iPhone 14 Pro', group: '5 · Supply Sourcing',          comp: 'Screen14_ISApp', placeholder: true, tag: 'NEW' },
 
-  // ── 6 · DATA MOAT — AI pricing engine powering everything above ──
-  { n: '11', name: 'AI Pricing Intelligence',               dim: '1440 × 2400',  group: '6 · Data Moat',                comp: 'Screen11_AIPricing' },
+  // ── 6 · B2B WHOLESALE MOAT — dealer-to-dealer auction layer ──
+  { n: '15', name: 'Wholesale Auction (Desktop)',           dim: '1440 × 1400',  group: '6 · B2B Wholesale Moat',       comp: 'Screen13_WholesaleAuction', placeholder: true, tag: 'NEW' },
+  { n: '16', name: 'Wholesale Auction (Mobile)',            dim: 'iPhone 14 Pro', group: '6 · B2B Wholesale Moat',       comp: 'Screen16_WholesaleAuctionMobile', placeholder: true, tag: 'NEW' },
+
+  // ── 7 · DATA MOAT — AI pricing engine powering everything above ──
+  { n: '17', name: 'AI Pricing Intelligence',               dim: '1440 × 2400',  group: '7 · Data Moat',                comp: 'Screen11_AIPricing' },
 ];
 
 // Group screens for the sidebar
