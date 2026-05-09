@@ -124,8 +124,8 @@ const Screen17_ACWorkspace = () => {
         </div>
 
         {/* AI assist row */}
-        <div style={{ marginTop: 24, padding: 24, background: 'linear-gradient(135deg, rgba(232,93,44,0.08), rgba(255,184,0,0.04))', border: '1px solid rgba(232,93,44,0.25)', borderRadius: 14, display: 'grid', gridTemplateColumns: '60px 1fr auto', gap: 20, alignItems: 'center' }}>
-          <div style={{
+        <div className="ai-copilot-row" style={{ marginTop: 24, padding: 24, background: 'linear-gradient(135deg, rgba(232,93,44,0.08), rgba(255,184,0,0.04))', border: '1px solid rgba(232,93,44,0.25)', borderRadius: 14, display: 'grid', gridTemplateColumns: '60px 1fr auto', gap: 20, alignItems: 'center' }}>
+          <div className="ai-copilot-icon" style={{
             width: 56, height: 56, borderRadius: 16, background: 'linear-gradient(135deg, #E85D2C, #FFB800)',
             display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff',
             boxShadow: '0 8px 20px rgba(232,93,44,0.4), inset 0 1px 0 rgba(255,255,255,0.3)',

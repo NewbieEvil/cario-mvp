@@ -206,3 +206,79 @@ img.vehicle-image:hover {
   background: rgba(0, 0, 0, 0.8) !important;
   box-shadow: 0 4px 12px rgba(232, 93, 44, 0.4);
 }
+
+/* ── AI co-pilot fancy hover (3D lift + glass shine sweep) ── */
+.ai-copilot-row {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 0.4s ease,
+              border-color 0.4s ease;
+  cursor: pointer;
+  will-change: transform;
+}
+.ai-copilot-row::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(110deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.04) 30%,
+    rgba(255, 255, 255, 0.18) 50%,
+    rgba(255, 255, 255, 0.04) 70%,
+    transparent 100%);
+  transform: skewX(-22deg);
+  pointer-events: none;
+  opacity: 0;
+}
+.ai-copilot-row:hover {
+  transform: translateY(-3px);
+  border-color: rgba(232, 93, 44, 0.55) !important;
+  box-shadow: 0 14px 38px rgba(232, 93, 44, 0.22),
+              0 4px 12px rgba(0, 0, 0, 0.45);
+}
+.ai-copilot-row:hover::before {
+  animation: aiCopilotSweep 1.15s cubic-bezier(0.25, 0.8, 0.4, 1) forwards;
+}
+@keyframes aiCopilotSweep {
+  0%   { left: -80%; opacity: 0; }
+  18%  { opacity: 1; }
+  100% { left: 135%; opacity: 0; }
+}
+
+.ai-copilot-icon {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 0.45s ease;
+}
+.ai-copilot-icon::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -130%;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(105deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.6) 50%,
+    transparent 100%);
+  transform: skewX(-25deg);
+  pointer-events: none;
+}
+.ai-copilot-row:hover .ai-copilot-icon {
+  transform: translateY(-5px) scale(1.09) rotate(-3deg);
+  box-shadow: 0 16px 30px rgba(232, 93, 44, 0.6),
+              0 6px 14px rgba(255, 184, 0, 0.35),
+              inset 0 1px 0 rgba(255, 255, 255, 0.45) !important;
+}
+.ai-copilot-row:hover .ai-copilot-icon::after {
+  animation: aiIconShine 0.95s cubic-bezier(0.25, 0.8, 0.4, 1) 0.1s;
+}
+@keyframes aiIconShine {
+  0%   { left: -130%; }
+  100% { left: 230%; }
+}
