@@ -335,3 +335,251 @@ img.vehicle-image:hover {
 .otb-toggle:hover .otb-toggle-dot {
   transform: scale(1.06);
 }
+
+/* ── Showroom (s02) WOW animations ────────────────────────────── */
+
+/* Animated hero background blobs */
+.showroom-hero {
+  background: radial-gradient(ellipse at top left, rgba(232,93,44,0.08), transparent 50%),
+              radial-gradient(ellipse at bottom right, rgba(255,184,0,0.06), transparent 50%),
+              linear-gradient(135deg, #0F1419 0%, #1A1F26 100%);
+}
+.hero-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.35;
+  pointer-events: none;
+  animation: heroBlobFloat 12s ease-in-out infinite;
+}
+.hero-blob-1 {
+  width: 500px; height: 500px;
+  top: -150px; left: -100px;
+  background: radial-gradient(circle, #E85D2C 0%, transparent 70%);
+}
+.hero-blob-2 {
+  width: 600px; height: 600px;
+  bottom: -200px; right: -150px;
+  background: radial-gradient(circle, #FFB800 0%, transparent 70%);
+  animation-delay: -6s;
+}
+@keyframes heroBlobFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(40px, -30px) scale(1.08); }
+  66%      { transform: translate(-30px, 20px) scale(0.95); }
+}
+.hero-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 60% at center, black 30%, transparent 80%);
+  pointer-events: none;
+}
+
+/* Pulsing dot — used everywhere */
+.pulse-dot {
+  display: inline-block;
+  flex-shrink: 0;
+  position: relative;
+  animation: pulseDot 1.6s ease-out infinite;
+}
+@keyframes pulseDot {
+  0%   { box-shadow: 0 0 0 0 currentColor; opacity: 1; }
+  70%  { box-shadow: 0 0 0 8px transparent; opacity: 1; }
+  100% { box-shadow: 0 0 0 0 transparent; opacity: 0.85; }
+}
+
+/* Hero CTA buttons — gradient + lift */
+.hero-cta-zalo, .hero-cta-primary {
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease;
+  box-shadow: 0 8px 22px rgba(232,93,44,0.42);
+}
+.hero-cta-zalo:hover, .hero-cta-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(232,93,44,0.55);
+}
+.hero-cta-zalo::before, .hero-cta-primary::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(105deg, transparent, rgba(255,255,255,0.35), transparent);
+  transform: skewX(-20deg);
+  pointer-events: none;
+}
+.hero-cta-zalo:hover::before, .hero-cta-primary:hover::before {
+  animation: ctaShine 0.8s ease-out;
+}
+@keyframes ctaShine {
+  0%   { left: -100%; }
+  100% { left: 130%; }
+}
+
+/* Featured car shine on idle */
+.featured-car-card {
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+}
+.featured-car-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 40px 90px rgba(0,0,0,0.6),
+              0 0 0 1px rgba(232,93,44,0.35),
+              0 16px 40px rgba(232,93,44,0.3) !important;
+}
+.featured-shine {
+  position: absolute;
+  top: 0; left: -75%;
+  width: 50%; height: 100%;
+  background: linear-gradient(105deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%);
+  transform: skewX(-22deg);
+  pointer-events: none;
+  animation: featuredShine 5s ease-in-out infinite;
+}
+@keyframes featuredShine {
+  0%, 35%   { left: -75%; opacity: 0; }
+  45%       { opacity: 1; }
+  85%       { left: 130%; opacity: 0; }
+  100%      { left: 130%; opacity: 0; }
+}
+
+/* Live ticker scroll */
+.ticker-content {
+  animation: tickerScroll 40s linear infinite;
+}
+@keyframes tickerScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.ticker-track:hover .ticker-content {
+  animation-play-state: paused;
+}
+
+/* Showroom inventory cards */
+.showroom-car:hover {
+  transform: translateY(-6px);
+  border-color: rgba(232,93,44,0.4) !important;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 0 1px rgba(232,93,44,0.2);
+}
+.showroom-car .vehicle-image {
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.showroom-car:hover .vehicle-image {
+  transform: scale(1.05);
+}
+.wishlist-heart {
+  position: absolute;
+  top: 14px; right: 14px;
+  z-index: 2;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 0;
+  background: rgba(15,20,25,0.85);
+  backdrop-filter: blur(8px);
+  color: #A0A4AB;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+}
+.wishlist-heart:hover {
+  color: #EF4444;
+  background: rgba(15,20,25,0.95);
+  transform: scale(1.1);
+}
+
+/* AI matchmaker glow orbs */
+.ai-glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.4;
+  pointer-events: none;
+  animation: aiGlowFloat 9s ease-in-out infinite;
+}
+.ai-glow-1 {
+  width: 280px; height: 280px;
+  top: -80px; right: 30%;
+  background: #E85D2C;
+}
+.ai-glow-2 {
+  width: 200px; height: 200px;
+  bottom: -60px; left: 10%;
+  background: #FFB800;
+  animation-delay: -4s;
+}
+@keyframes aiGlowFloat {
+  0%, 100% { transform: translate(0, 0); }
+  50%      { transform: translate(30px, -20px); }
+}
+
+/* Typing indicator dots */
+.typing-dot {
+  display: inline-block;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #6B7280;
+  animation: typingBounce 1.2s ease-in-out infinite;
+}
+@keyframes typingBounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30%           { transform: translateY(-4px); opacity: 1; }
+}
+
+/* Testimonial cards */
+.testimonial-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(232,93,44,0.4) !important;
+}
+
+/* Floating Zalo widget */
+.floating-zalo {
+  position: absolute;
+  bottom: 32px; right: 32px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-direction: row-reverse;
+}
+.floating-zalo-aura {
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,93,44,0.5) 0%, transparent 70%);
+  animation: zaloAura 2s ease-out infinite;
+  pointer-events: none;
+}
+@keyframes zaloAura {
+  0%   { transform: scale(0.8); opacity: 0.7; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+.floating-zalo-btn {
+  position: relative;
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  border: 0;
+  background: linear-gradient(135deg, #E85D2C, #FFB800);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12px 30px rgba(232,93,44,0.55), inset 0 2px 0 rgba(255,255,255,0.3);
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.floating-zalo-btn:hover {
+  transform: scale(1.08) rotate(-6deg);
+}
+.floating-zalo-bubble {
+  background: rgba(15,20,25,0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 10px 14px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  white-space: nowrap;
+}

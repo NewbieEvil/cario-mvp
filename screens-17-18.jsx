@@ -609,17 +609,42 @@ const Screen17_ACWorkspace = () => {
 // Like a Shopee shop landing — only this AC's curated cars, isolated funnel
 
 const Screen18_ACShowroom = () => {
+  const featured = {
+    name: 'Honda CR-V 1.5L Turbo G 2022', km: '28,500', img: 'uploads/s02-card01-honda-crv-blue.png',
+    trust: 92, price: 920, monthly: 13.3, downpct: 30,
+    badges: ['Great Deal', 'Certified'], year: 2022, fuel: 'Xăng', trans: 'CVT', color: 'Xanh ngọc',
+    viewers: 17, savedBy: 42,
+  };
+
   const showroomCars = [
-    { name: 'Honda CR-V 1.5L Turbo 2022', km: '28,500', img: 'uploads/s02-card01-honda-crv-blue.png', trust: 92, price: 920, deal: 'great', loc: 'HCM' },
-    { name: 'Toyota Camry 2.5Q 2022', km: '34,200', img: 'uploads/s02-card02-toyota-camry-white.png', trust: 95, price: 1180, deal: 'great', loc: 'HCM' },
-    { name: 'Mazda CX-5 Premium 2023', km: '18,700', img: 'uploads/s02-card03-mazda-cx5-red.png', trust: 88, price: 850, loc: 'HN' },
-    { name: 'VinFast VF8 Plus 2023', km: '12,400', img: 'uploads/s02-card11-vinfast-vf8-blue.png', trust: 91, price: 1200, loc: 'HCM' },
-    { name: 'Kia Seltos 1.6L 2023', km: '14,200', img: 'uploads/s02-card06-kia-seltos-silver.png', trust: 85, price: 690, loc: 'HCM' },
-    { name: 'Hyundai Tucson 2.0 2022', km: '32,100', img: 'uploads/s02-card07-hyundai-tucson-gray.png', trust: 82, price: 880, loc: 'HCM' },
+    { name: 'Toyota Camry 2.5Q 2022', km: '34,200', img: 'uploads/s02-card02-toyota-camry-white.png', trust: 95, price: 1180, deal: 'great', loc: 'HCM', viewers: 8, hot: true },
+    { name: 'Mazda CX-5 Premium 2023', km: '18,700', img: 'uploads/s02-card03-mazda-cx5-red.png', trust: 88, price: 850, loc: 'HN', viewers: 4 },
+    { name: 'VinFast VF8 Plus 2023', km: '12,400', img: 'uploads/s02-card11-vinfast-vf8-blue.png', trust: 91, price: 1200, loc: 'HCM', viewers: 6, deadline: 2 },
+    { name: 'Kia Seltos 1.6L 2023', km: '14,200', img: 'uploads/s02-card06-kia-seltos-silver.png', trust: 85, price: 690, loc: 'HCM', viewers: 11, hot: true },
+    { name: 'Hyundai Tucson 2.0 2022', km: '32,100', img: 'uploads/s02-card07-hyundai-tucson-gray.png', trust: 82, price: 880, loc: 'HCM', viewers: 3 },
+    { name: 'Mitsubishi Xpander 2023', km: '21,500', img: 'uploads/s02-card05-mitsubishi-xpander.png', trust: 86, price: 620, loc: 'HCM', viewers: 5 },
+  ];
+
+  const activities = [
+    'Anh Hùng (Q.7) vừa đặt lịch xem Honda CR-V — 2 phút trước',
+    'Chị Mai (Q.1) đã chốt cọc 50M cho Toyota Camry — 8 phút trước',
+    'Đơn #OB-0142 vừa giao xong: Honda Civic 780M ₫ — 14 phút trước',
+    'Anh Quân (Q.10) vừa thêm Mazda CX-5 vào yêu thích — 22 phút trước',
+    'Anh Đức (Bình Tân) đặt test-drive VinFast VF8 — 35 phút trước',
+    'Chị Lan (Q.7) vừa xin báo giá Kia Seltos — 1 giờ trước',
+  ];
+
+  const testimonials = [
+    { initial: 'TH', name: 'Trần Văn Hùng', car: 'Honda CR-V 1.5L 2022', stars: 5, when: '2 tuần trước',
+      quote: 'Anh Tuấn tư vấn rất thật, không lái khách như sales hãng. Mình đi xem 3 xe rồi chốt CR-V — Otobank lo từ đăng ký đến giao xe trong 5 ngày. Tuyệt vời!' },
+    { initial: 'LM', name: 'Lê Thị Mai', car: 'Toyota Camry 2.5Q 2022', stars: 5, when: '1 tháng trước',
+      quote: 'Lần đầu mua xe cũ mà không lo sợ. Trust Score 95 + báo cáo 200 điểm rõ ràng từng chi tiết. Anh Tuấn còn cho mượn xe lái thử 1 ngày!' },
+    { initial: 'PD', name: 'Phạm Minh Đức', car: 'Mazda CX-5 Premium 2023', stars: 5, when: '3 tuần trước',
+      quote: 'Lãi suất VPBank pilot ưu đãi hơn ngân hàng tôi tự đến hỏi. Toàn bộ giấy tờ làm online qua Otobank, không phải đi đâu. 10/10 sẽ giới thiệu bạn bè.' },
   ];
 
   return (
-    <div className="otobank" style={{ width: 1440, minHeight: 2000, background: 'var(--bg)' }}>
+    <div className="otobank" style={{ width: 1440, minHeight: 3400, background: 'var(--bg)', position: 'relative' }}>
       {/* Browser-like URL bar to communicate "this is a public shop URL" */}
       <div style={{
         background: '#0A0E12', borderBottom: '1px solid var(--border)',
@@ -638,87 +663,141 @@ const Screen18_ACShowroom = () => {
         </div>
       </div>
 
-      {/* Hero — AC profile block */}
-      <section style={{
-        background: 'linear-gradient(135deg, #0F1419 0%, #1A1F26 100%)',
-        padding: '64px 64px 48px',
-        borderBottom: '1px solid var(--border)',
-      }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto', display: 'grid', gridTemplateColumns: 'auto 1fr auto', gap: 32, alignItems: 'center' }}>
-          {/* AC avatar */}
-          <div style={{
-            width: 140, height: 140, borderRadius: 32,
-            background: 'linear-gradient(135deg, #E85D2C 0%, #FFB800 100%)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            color: '#fff', fontFamily: '"Space Grotesk", sans-serif', fontSize: 56, fontWeight: 800,
-            boxShadow: '0 20px 50px rgba(232,93,44,0.4), inset 0 2px 0 rgba(255,255,255,0.3)',
-            position: 'relative',
-          }}>
-            <span style={{ position: 'absolute', inset: 4, borderRadius: 28, background: 'radial-gradient(circle at 30% 25%, rgba(255,255,255,0.25), transparent 60%)' }} />
-            <span style={{ position: 'relative', zIndex: 1 }}>T</span>
-            {/* Verified checkmark */}
-            <div style={{ position: 'absolute', bottom: -6, right: -6, width: 36, height: 36, borderRadius: '50%', background: '#10B981', border: '4px solid #0F1419', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}>
-              <Ico name="check" size={16} />
-            </div>
-          </div>
+      {/* HERO — Cinematic AC + Featured Car split */}
+      <section className="showroom-hero" style={{ position: 'relative', overflow: 'hidden', borderBottom: '1px solid var(--border)' }}>
+        {/* Animated background blobs */}
+        <span className="hero-blob hero-blob-1" />
+        <span className="hero-blob hero-blob-2" />
+        <span className="hero-grid-overlay" />
 
-          {/* Bio */}
+        <div style={{ maxWidth: 1320, margin: '0 auto', padding: '56px 64px 56px', display: 'grid', gridTemplateColumns: '1fr 600px', gap: 56, alignItems: 'center', position: 'relative', zIndex: 1 }}>
+          {/* Left: AC info */}
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
-              <h1 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 36, fontWeight: 800, margin: 0, color: '#F5F5F5', letterSpacing: '-0.02em' }}>Anh Nguyễn Minh Tuấn</h1>
-              <span style={{ fontSize: 12, padding: '4px 10px', borderRadius: 999, background: 'rgba(232,93,44,0.18)', border: '1px solid rgba(232,93,44,0.4)', color: '#E85D2C', fontWeight: 700, letterSpacing: '0.04em', fontFamily: '"JetBrains Mono", monospace' }}>★ AC TIER SENIOR</span>
-              <span style={{ fontSize: 12, padding: '4px 10px', borderRadius: 999, background: 'rgba(16,185,129,0.18)', border: '1px solid rgba(16,185,129,0.4)', color: '#10B981', fontWeight: 700, letterSpacing: '0.04em', fontFamily: '"JetBrains Mono", monospace' }}>✓ OTOBANK VERIFIED</span>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '7px 14px', borderRadius: 999, background: 'rgba(232,93,44,0.12)', border: '1px solid rgba(232,93,44,0.35)', marginBottom: 20 }}>
+              <span className="pulse-dot" style={{ width: 8, height: 8, borderRadius: '50%', background: '#E85D2C' }} />
+              <span style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, fontWeight: 700, color: '#E85D2C', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Shop chính chủ · anhtuan.otobank.vn</span>
             </div>
-            <p style={{ fontSize: 16, color: '#A0A4AB', margin: '0 0 16px', maxWidth: 720, lineHeight: 1.5 }}>
-              Chuyên viên tư vấn xe SUV gia đình & sedan hạng D · 3 năm kinh nghiệm · 247 khách đã hài lòng. Tôi sẽ giúp bạn chọn đúng xe phù hợp ngân sách & nhu cầu trong 30 phút.
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: 20, marginBottom: 18 }}>
+              <div style={{ width: 88, height: 88, borderRadius: 22, background: 'linear-gradient(135deg, #E85D2C 0%, #FFB800 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontFamily: '"Space Grotesk", sans-serif', fontSize: 36, fontWeight: 800, boxShadow: '0 16px 40px rgba(232,93,44,0.45), inset 0 2px 0 rgba(255,255,255,0.3)', position: 'relative', flexShrink: 0 }}>
+                <span style={{ position: 'absolute', inset: 3, borderRadius: 19, background: 'radial-gradient(circle at 30% 25%, rgba(255,255,255,0.3), transparent 60%)' }} />
+                <span style={{ position: 'relative', zIndex: 1 }}>T</span>
+                <div style={{ position: 'absolute', bottom: -4, right: -4, width: 28, height: 28, borderRadius: '50%', background: '#10B981', border: '3px solid #0F1419', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}>
+                  <Ico name="check" size={13} />
+                </div>
+              </div>
+              <div>
+                <h1 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 42, fontWeight: 800, margin: 0, color: '#F5F5F5', letterSpacing: '-0.025em', lineHeight: 1.05 }}>Anh Nguyễn Minh Tuấn</h1>
+                <div style={{ display: 'flex', gap: 8, marginTop: 8, flexWrap: 'wrap' }}>
+                  <span style={{ fontSize: 11, padding: '4px 10px', borderRadius: 999, background: 'rgba(232,93,44,0.18)', border: '1px solid rgba(232,93,44,0.4)', color: '#E85D2C', fontWeight: 700, letterSpacing: '0.04em', fontFamily: '"JetBrains Mono", monospace' }}>★ AC TIER SENIOR · 1.15x</span>
+                  <span style={{ fontSize: 11, padding: '4px 10px', borderRadius: 999, background: 'rgba(16,185,129,0.18)', border: '1px solid rgba(16,185,129,0.4)', color: '#10B981', fontWeight: 700, letterSpacing: '0.04em', fontFamily: '"JetBrains Mono", monospace' }}>✓ OTOBANK VERIFIED</span>
+                </div>
+              </div>
+            </div>
+
+            <p style={{ fontSize: 17, color: '#A0A4AB', margin: '0 0 22px', lineHeight: 1.55, maxWidth: 560 }}>
+              Chuyên SUV gia đình & sedan hạng D — 3 năm kinh nghiệm, <strong style={{ color: '#fff' }}>247 khách hài lòng</strong>. Tôi tự tay chọn 38 chiếc xe phù hợp nhất từ kho Otobank, đảm bảo Trust Score ≥75 + inspection 200 điểm.
             </p>
-            {/* Trust signals */}
-            <div style={{ display: 'flex', gap: 24, fontSize: 14, color: '#A0A4AB', flexWrap: 'wrap' }}>
-              <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>⭐ <strong style={{ color: '#FFB800', fontSize: 16 }}>4.9</strong> (247 reviews)</span>
-              <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><Ico name="zap" size={14} /> <strong style={{ color: '#fff' }}>Phản hồi ~12 phút</strong> (24/7)</span>
-              <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><Ico name="check" size={14} /> <strong style={{ color: '#fff' }}>28 deals</strong> closed (90 ngày)</span>
-              <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><Ico name="pin" size={14} /> Q.7 + Q.1 + Bình Tân (HCM)</span>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14, marginBottom: 24 }}>
+              {[
+                { l: '⭐ Rating', v: '4.9', sub: '247 reviews', c: '#FFB800' },
+                { l: 'Closed', v: '28', sub: 'deals 90d', c: '#10B981' },
+                { l: 'Phản hồi', v: '~12p', sub: '24/7', c: '#3DA9FF' },
+                { l: 'Quay lại', v: '34%', sub: 'mua xe #2-3', c: '#E85D2C' },
+              ].map(s => (
+                <div key={s.l} style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 12, padding: '12px 14px', backdropFilter: 'blur(10px)' }}>
+                  <div style={{ fontSize: 10, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600, fontFamily: '"JetBrains Mono", monospace' }}>{s.l}</div>
+                  <div className="mono" style={{ fontSize: 22, fontWeight: 800, color: s.c, marginTop: 2, letterSpacing: '-0.02em', lineHeight: 1.1 }}>{s.v}</div>
+                  <div style={{ fontSize: 10, color: '#A0A4AB' }}>{s.sub}</div>
+                </div>
+              ))}
+            </div>
+
+            <div style={{ display: 'flex', gap: 12 }}>
+              <button className="hero-cta-zalo" style={{ padding: '14px 26px', borderRadius: 12, border: 'none', background: 'linear-gradient(135deg, #E85D2C, #FFB800)', color: '#fff', fontWeight: 700, fontSize: 15, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 10, position: 'relative', overflow: 'hidden' }}>
+                <span style={{ fontSize: 18 }}>💬</span> Chat Zalo với tôi
+              </button>
+              <button style={{ padding: '14px 22px', borderRadius: 12, border: '1px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.04)', color: '#fff', fontWeight: 600, fontSize: 14, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8 }}>
+                <Ico name="play" size={14} /> Xem video giới thiệu
+              </button>
+              <button style={{ padding: '14px 18px', borderRadius: 12, border: '1px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.04)', color: '#fff', fontWeight: 600, fontSize: 14, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8 }}>
+                <Ico name="phone" size={14} /> 0901 234 567
+              </button>
             </div>
           </div>
 
-          {/* CTA */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-            <button style={{
-              padding: '14px 24px', borderRadius: 12, border: 'none',
-              background: 'linear-gradient(135deg, #E85D2C, #FFB800)', color: '#fff',
-              fontWeight: 700, fontSize: 15, cursor: 'pointer',
-              boxShadow: '0 8px 20px rgba(232,93,44,0.4)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-            }}>
-              💬 Chat Zalo trực tiếp
-            </button>
-            <button style={{
-              padding: '12px 24px', borderRadius: 12, border: '1px solid #2D343F',
-              background: 'transparent', color: '#fff',
-              fontWeight: 600, fontSize: 14, cursor: 'pointer',
-              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-            }}>
-              <Ico name="phone" size={14} /> Gọi 0901 234 567
-            </button>
-          </div>
-        </div>
-
-        {/* Featured stats strip */}
-        <div style={{ maxWidth: 1280, margin: '32px auto 0', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
-          {[
-            { l: 'Xe có sẵn', v: '38', sub: 'đã kiểm định' },
-            { l: 'Trust Score TB', v: '88', sub: '63% Certified' },
-            { l: 'Tỷ lệ closed', v: '11.4%', sub: 'top 8% AC network' },
-            { l: 'Khách quay lại', v: '34%', sub: 'mua xe thứ 2/3' },
-          ].map(s => (
-            <div key={s.l} style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 12, padding: '14px 18px' }}>
-              <div style={{ fontSize: 11, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 600, fontFamily: '"JetBrains Mono", monospace' }}>{s.l}</div>
-              <div className="mono" style={{ fontSize: 24, fontWeight: 800, color: '#F5F5F5', marginTop: 4, letterSpacing: '-0.02em' }}>{s.v}</div>
-              <div style={{ fontSize: 11, color: '#A0A4AB', marginTop: 2 }}>{s.sub}</div>
+          {/* Right: FEATURED CAR — the showpiece */}
+          <div className="featured-car-card" style={{ position: 'relative', borderRadius: 22, overflow: 'hidden', background: 'linear-gradient(165deg, #1A1F26 0%, #0F1419 100%)', border: '1px solid rgba(232,93,44,0.3)', boxShadow: '0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(232,93,44,0.15), 0 12px 30px rgba(232,93,44,0.18)' }}>
+            <div style={{ position: 'absolute', top: 16, left: 16, zIndex: 3, display: 'inline-flex', alignItems: 'center', gap: 8, padding: '7px 14px', borderRadius: 999, background: 'linear-gradient(135deg, #E85D2C, #FFB800)', color: '#fff', fontSize: 11, fontWeight: 800, letterSpacing: '0.06em', fontFamily: '"JetBrains Mono", monospace', textTransform: 'uppercase', boxShadow: '0 8px 20px rgba(232,93,44,0.5)' }}>
+              <span className="pulse-dot" style={{ width: 7, height: 7, borderRadius: '50%', background: '#fff' }} />
+              ★ Xe nổi bật tuần này
             </div>
-          ))}
+
+            <div style={{ position: 'relative', aspectRatio: '16/10', overflow: 'hidden' }}>
+              <img src={featured.img} alt={featured.name} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              <span className="featured-shine" />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(15,20,25,0.9) 0%, transparent 50%)' }} />
+              <div style={{ position: 'absolute', bottom: 14, left: 16, right: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+                <div>
+                  <div style={{ display: 'inline-flex', gap: 6, marginBottom: 8 }}>
+                    {featured.badges.map(b => (
+                      <span key={b} style={{ fontSize: 10, padding: '3px 9px', borderRadius: 4, background: b === 'Great Deal' ? '#10B981' : 'rgba(15,20,25,0.85)', color: '#fff', fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase', fontFamily: '"JetBrains Mono", monospace', border: b === 'Great Deal' ? 'none' : '1px solid rgba(16,185,129,0.5)' }}>● {b}</span>
+                    ))}
+                  </div>
+                  <div style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 22, fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1.15 }}>{featured.name}</div>
+                  <div style={{ fontSize: 12, color: '#A0A4AB', marginTop: 4 }}>{featured.km} km · {featured.year} · {featured.fuel} · {featured.trans} · màu {featured.color}</div>
+                </div>
+                <div style={{ background: 'rgba(15,20,25,0.92)', backdropFilter: 'blur(8px)', border: '1px solid rgba(16,185,129,0.5)', borderRadius: 8, padding: '6px 10px', display: 'flex', alignItems: 'center', gap: 6, flexShrink: 0 }}>
+                  <span style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 13, fontWeight: 800, background: '#10B981', color: '#fff', padding: '1px 7px', borderRadius: 4 }}>{featured.trust}</span>
+                  <span style={{ fontSize: 10, fontWeight: 700, color: '#10B981', textTransform: 'uppercase', letterSpacing: '0.04em' }}>Certified</span>
+                </div>
+              </div>
+            </div>
+
+            <div style={{ padding: '18px 20px 20px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 14 }}>
+                <div>
+                  <div className="mono" style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 34, fontWeight: 800, color: '#E85D2C', letterSpacing: '-0.02em', lineHeight: 1 }}>{featured.price}M ₫</div>
+                  <div style={{ fontSize: 12, color: '#A0A4AB', marginTop: 4 }}>Trả góp từ <strong style={{ color: '#FFB800' }}>{featured.monthly}M ₫/tháng</strong> · Trả trước {featured.downpct}%</div>
+                </div>
+                <div style={{ textAlign: 'right' }}>
+                  <div style={{ fontSize: 11, color: '#6B7280', fontFamily: '"JetBrains Mono", monospace', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Đang có</div>
+                  <div style={{ fontSize: 12, color: '#FFB800', fontWeight: 600, marginTop: 2, display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                    <Ico name="eye" size={11} /> {featured.viewers} đang xem
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 8 }}>
+                <button className="hero-cta-primary" style={{ padding: '13px', borderRadius: 10, border: 'none', background: 'linear-gradient(135deg, #E85D2C, #FFB800)', color: '#fff', fontWeight: 700, fontSize: 14, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
+                  <Ico name="calendar" size={14} /> Đặt lịch xem ngay
+                </button>
+                <button style={{ padding: '13px 16px', borderRadius: 10, border: '1px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.05)', color: '#fff', fontWeight: 600, fontSize: 13, cursor: 'pointer' }}>
+                  <Ico name="heart" size={14} /> Lưu
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
+
+      {/* LIVE ACTIVITY TICKER — pitch wow: shop is alive */}
+      <div style={{ background: 'linear-gradient(90deg, rgba(232,93,44,0.08), rgba(232,93,44,0.02) 60%)', borderBottom: '1px solid var(--border)', padding: '12px 64px', display: 'flex', alignItems: 'center', gap: 24, overflow: 'hidden' }}>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, flexShrink: 0, padding: '6px 12px', borderRadius: 8, background: 'rgba(239,68,68,0.12)', border: '1px solid rgba(239,68,68,0.4)' }}>
+          <span className="pulse-dot" style={{ width: 8, height: 8, borderRadius: '50%', background: '#EF4444', boxShadow: '0 0 8px #EF4444' }} />
+          <span style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, fontWeight: 700, color: '#EF4444', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Live · 24 khách đang ở shop</span>
+        </div>
+        <div className="ticker-track" style={{ flex: 1, overflow: 'hidden', position: 'relative', height: 22 }}>
+          <div className="ticker-content" style={{ position: 'absolute', top: 0, left: 0, display: 'flex', gap: 64, whiteSpace: 'nowrap' }}>
+            {[...activities, ...activities].map((a, i) => (
+              <span key={i} style={{ fontSize: 13, color: '#A0A4AB', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+                <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#10B981' }} />{a}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
 
       {/* Filters */}
       <section style={{ padding: '32px 64px 24px', maxWidth: 1280, margin: '0 auto', width: '100%' }}>
@@ -753,16 +832,32 @@ const Screen18_ACShowroom = () => {
         {/* Inventory grid */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
           {showroomCars.map((c, i) => (
-            <div key={i} style={{
+            <div key={i} className="showroom-car" style={{
               background: 'var(--surface)', border: '1px solid var(--border)',
               borderRadius: 16, overflow: 'hidden', cursor: 'pointer',
-              transition: 'all 0.2s ease',
+              transition: 'transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease',
+              position: 'relative',
             }}>
+              <button className="wishlist-heart" title="Lưu vào yêu thích">
+                <Ico name="heart" size={16} />
+              </button>
               <div style={{ position: 'relative', aspectRatio: '16/10' }}>
                 <img src={c.img} alt={c.name} className="vehicle-image" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-                {c.deal === 'great' && (
-                  <span style={{ position: 'absolute', top: 12, left: 12, fontSize: 11, padding: '4px 10px', borderRadius: 999, background: '#10B981', color: '#fff', fontWeight: 700 }}>● Great Deal</span>
-                )}
+
+                {/* Top-left badges */}
+                <div style={{ position: 'absolute', top: 12, left: 12, display: 'flex', flexDirection: 'column', gap: 6 }}>
+                  {c.deal === 'great' && (
+                    <span style={{ fontSize: 11, padding: '4px 10px', borderRadius: 999, background: '#10B981', color: '#fff', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: 5, width: 'fit-content' }}>● Great Deal</span>
+                  )}
+                  {c.hot && (
+                    <span style={{ fontSize: 11, padding: '4px 10px', borderRadius: 999, background: 'rgba(239,68,68,0.95)', color: '#fff', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: 5, width: 'fit-content', boxShadow: '0 4px 12px rgba(239,68,68,0.4)' }}>🔥 Hot</span>
+                  )}
+                  {c.deadline && (
+                    <span style={{ fontSize: 11, padding: '4px 10px', borderRadius: 999, background: 'linear-gradient(135deg, #E85D2C, #FFB800)', color: '#fff', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: 5, width: 'fit-content', boxShadow: '0 4px 12px rgba(232,93,44,0.4)' }}>⏰ Còn {c.deadline} ngày</span>
+                  )}
+                </div>
+
+                {/* Bottom-right Trust badge */}
                 <div style={{
                   position: 'absolute', bottom: 12, right: 12,
                   background: 'rgba(15,20,25,0.92)', backdropFilter: 'blur(8px)',
@@ -772,6 +867,13 @@ const Screen18_ACShowroom = () => {
                   <span style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 12, fontWeight: 700, background: c.trust >= 90 ? '#10B981' : '#E85D2C', color: '#fff', padding: '1px 6px', borderRadius: 4 }}>{c.trust}</span>
                   <span style={{ fontSize: 10, fontWeight: 600, color: c.trust >= 90 ? '#10B981' : '#E85D2C', textTransform: 'uppercase' }}>{c.trust >= 90 ? 'Certified' : 'Verified'}</span>
                 </div>
+
+                {/* Bottom-left viewers */}
+                {c.viewers >= 5 && (
+                  <div style={{ position: 'absolute', bottom: 12, left: 12, background: 'rgba(15,20,25,0.85)', backdropFilter: 'blur(8px)', borderRadius: 6, padding: '4px 9px', fontSize: 11, color: '#FFB800', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 5 }}>
+                    <span className="pulse-dot" style={{ width: 6, height: 6, borderRadius: '50%', background: '#FFB800' }} /> {c.viewers} đang xem
+                  </div>
+                )}
               </div>
               <div style={{ padding: 18 }}>
                 <div style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 17, fontWeight: 700, color: 'var(--text)', marginBottom: 4 }}>{c.name}</div>
@@ -781,6 +883,99 @@ const Screen18_ACShowroom = () => {
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
                   <button style={{ padding: '10px', borderRadius: 8, border: '1px solid var(--border)', background: 'transparent', color: 'var(--text)', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>Chi tiết</button>
                   <button style={{ padding: '10px', borderRadius: 8, border: 'none', background: 'var(--accent)', color: '#fff', fontSize: 13, fontWeight: 700, cursor: 'pointer', boxShadow: '0 4px 12px rgba(232,93,44,0.25)' }}>📅 Đặt lịch xem</button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* AI MATCHMAKER — pitch wow: AI-driven shopping helper */}
+      <section style={{ padding: '40px 64px', maxWidth: 1280, margin: '0 auto', width: '100%' }}>
+        <div style={{ position: 'relative', borderRadius: 22, overflow: 'hidden', background: 'linear-gradient(135deg, rgba(232,93,44,0.1) 0%, rgba(255,184,0,0.04) 50%, rgba(15,20,25,0.5) 100%)', border: '1px solid rgba(232,93,44,0.25)', padding: 40, display: 'grid', gridTemplateColumns: '1fr 540px', gap: 40, alignItems: 'center' }}>
+          <span className="ai-glow-orb ai-glow-1" />
+          <span className="ai-glow-orb ai-glow-2" />
+
+          <div style={{ position: 'relative', zIndex: 1 }}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 12px', borderRadius: 999, background: 'rgba(232,93,44,0.15)', border: '1px solid rgba(232,93,44,0.4)', marginBottom: 18 }}>
+              <Ico name="sparkles" size={14} /> <span style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, fontWeight: 700, color: '#E85D2C', letterSpacing: '0.08em' }}>AI MATCHMAKER · BETA</span>
+            </div>
+            <h2 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 34, fontWeight: 800, margin: '0 0 12px', letterSpacing: '-0.02em', lineHeight: 1.1, color: '#fff' }}>Không biết chọn xe nào?<br /><span style={{ background: 'linear-gradient(135deg, #E85D2C, #FFB800)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>AI gợi ý cho bạn trong 30 giây.</span></h2>
+            <p style={{ fontSize: 15, color: '#A0A4AB', margin: '0 0 22px', lineHeight: 1.5, maxWidth: 520 }}>
+              Tôi hỏi 5 câu (ngân sách · gia đình bao người · mục đích · ưu tiên...) → AI sàng lọc 38 xe trong shop ra <strong style={{ color: '#fff' }}>đúng 3 chiếc phù hợp nhất với bạn</strong> + giải thích lý do.
+            </p>
+            <div style={{ display: 'flex', gap: 12 }}>
+              <button className="hero-cta-zalo" style={{ padding: '14px 24px', borderRadius: 12, border: 'none', background: 'linear-gradient(135deg, #E85D2C, #FFB800)', color: '#fff', fontWeight: 700, fontSize: 14, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 10, position: 'relative', overflow: 'hidden' }}>
+                <Ico name="sparkles" size={16} /> Bắt đầu trợ lý AI
+              </button>
+              <button style={{ padding: '14px 22px', borderRadius: 12, border: '1px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.05)', color: '#fff', fontWeight: 600, fontSize: 14, cursor: 'pointer' }}>
+                Xem demo 30 giây
+              </button>
+            </div>
+          </div>
+
+          {/* Mock chat preview */}
+          <div style={{ position: 'relative', zIndex: 1, background: 'rgba(15,20,25,0.85)', backdropFilter: 'blur(14px)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 18, padding: 18, boxShadow: '0 20px 50px rgba(0,0,0,0.5)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, paddingBottom: 12, borderBottom: '1px solid rgba(255,255,255,0.08)', marginBottom: 14 }}>
+              <div style={{ width: 30, height: 30, borderRadius: 8, background: 'linear-gradient(135deg, #E85D2C, #FFB800)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}>
+                <Ico name="sparkles" size={14} />
+              </div>
+              <div>
+                <div style={{ fontSize: 13, fontWeight: 700, color: '#fff' }}>Otobank AI Assistant</div>
+                <div style={{ fontSize: 11, color: '#10B981', display: 'flex', alignItems: 'center', gap: 5 }}><span className="pulse-dot" style={{ width: 6, height: 6, borderRadius: '50%', background: '#10B981' }} /> Online · trả lời ngay</div>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10, fontSize: 13 }}>
+              <div style={{ alignSelf: 'flex-start', maxWidth: '85%', background: 'rgba(255,255,255,0.06)', padding: '10px 14px', borderRadius: '14px 14px 14px 4px', color: '#E5E7EB', lineHeight: 1.5 }}>
+                Chào bạn! 👋 Mình là AI của shop Anh Tuấn. Bạn cho mình biết: <strong style={{ color: '#FFB800' }}>ngân sách</strong> bạn dự định?
+              </div>
+              <div style={{ alignSelf: 'flex-end', maxWidth: '75%', background: 'linear-gradient(135deg, #E85D2C, #FFB800)', padding: '10px 14px', borderRadius: '14px 14px 4px 14px', color: '#fff', fontWeight: 500, lineHeight: 1.5 }}>
+                Khoảng 800-950M ạ, đi gia đình 5 người
+              </div>
+              <div style={{ alignSelf: 'flex-start', maxWidth: '90%', background: 'rgba(255,255,255,0.06)', padding: '10px 14px', borderRadius: '14px 14px 14px 4px', color: '#E5E7EB', lineHeight: 1.5 }}>
+                Tuyệt! Trong 38 xe của Anh Tuấn, mình gợi ý <strong style={{ color: '#fff' }}>3 lựa chọn match nhất</strong>:<br />
+                <span style={{ display: 'block', marginTop: 8, padding: '8px 10px', background: 'rgba(232,93,44,0.1)', border: '1px solid rgba(232,93,44,0.25)', borderRadius: 8, fontSize: 12 }}>
+                  🥇 <strong>Honda CR-V 1.5L 2022</strong> — 920M · Trust 92 · gia đình 5 thoải mái<br />
+                  🥈 Mazda CX-5 Premium 2023 — 850M · Trust 88<br />
+                  🥉 Hyundai Tucson 2.0 2022 — 880M · Trust 82
+                </span>
+              </div>
+              <div style={{ alignSelf: 'flex-start', display: 'inline-flex', gap: 4 }}>
+                <span className="typing-dot" style={{ animationDelay: '0s' }} />
+                <span className="typing-dot" style={{ animationDelay: '0.15s' }} />
+                <span className="typing-dot" style={{ animationDelay: '0.3s' }} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* TESTIMONIALS — social proof */}
+      <section style={{ padding: '24px 64px 40px', maxWidth: 1280, margin: '0 auto', width: '100%' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 24 }}>
+          <div>
+            <h2 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 30, fontWeight: 700, margin: 0, letterSpacing: '-0.02em' }}>247 khách đã hài lòng</h2>
+            <p style={{ fontSize: 14, color: 'var(--text-2)', margin: '6px 0 0' }}>Reviews thật, được xác minh bởi Otobank — không xoá được, không sửa được.</p>
+          </div>
+          <a style={{ fontSize: 13, color: 'var(--accent)', cursor: 'pointer', fontWeight: 600 }}>Xem 247 reviews →</a>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
+          {testimonials.map(t => (
+            <div key={t.name} className="testimonial-card" style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 16, padding: 22, position: 'relative', transition: 'transform 0.3s ease, border-color 0.3s ease' }}>
+              <div style={{ position: 'absolute', top: -10, right: 18, fontSize: 60, color: 'rgba(232,93,44,0.15)', lineHeight: 1, fontFamily: 'Georgia, serif' }}>"</div>
+              <div style={{ display: 'flex', gap: 4, marginBottom: 14, position: 'relative' }}>
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <span key={i} style={{ color: i < t.stars ? '#FFB800' : 'rgba(255,255,255,0.15)', fontSize: 16 }}>★</span>
+                ))}
+              </div>
+              <p style={{ fontSize: 14, color: 'var(--text)', lineHeight: 1.6, margin: '0 0 18px', position: 'relative' }}>{t.quote}</p>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12, paddingTop: 14, borderTop: '1px dashed var(--border)' }}>
+                <div style={{ width: 38, height: 38, borderRadius: '50%', background: 'linear-gradient(135deg, #E85D2C, #FFB800)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 700, fontSize: 13, flexShrink: 0 }}>{t.initial}</div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)', display: 'flex', alignItems: 'center', gap: 6 }}>{t.name} <span style={{ fontSize: 10, padding: '1px 6px', borderRadius: 4, background: 'rgba(16,185,129,0.15)', color: '#10B981', fontWeight: 700, fontFamily: '"JetBrains Mono", monospace' }}>✓ Verified</span></div>
+                  <div style={{ fontSize: 11, color: 'var(--text-3)', marginTop: 2 }}>Đã mua: {t.car} · {t.when}</div>
                 </div>
               </div>
             </div>
@@ -819,6 +1014,18 @@ const Screen18_ACShowroom = () => {
           <span>© 2026 Otobank Vietnam · Shop ID: ac_a8f3 · anhtuan.otobank.vn</span>
         </div>
       </section>
+
+      {/* FLOATING ZALO WIDGET — sticky bottom-right */}
+      <div className="floating-zalo">
+        <span className="floating-zalo-aura" />
+        <button className="floating-zalo-btn" title="Chat Zalo với Anh Tuấn">
+          <span style={{ fontSize: 24 }}>💬</span>
+        </button>
+        <div className="floating-zalo-bubble">
+          <div style={{ fontSize: 12, fontWeight: 700, color: '#fff' }}>Hỏi Anh Tuấn</div>
+          <div style={{ fontSize: 10, color: '#A0A4AB', marginTop: 1 }}>Phản hồi ~12 phút · 24/7</div>
+        </div>
+      </div>
     </div>
   );
 };
