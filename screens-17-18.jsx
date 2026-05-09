@@ -6,6 +6,8 @@
 // Screen 17 — AC Working Space
 
 const Screen17_ACWorkspace = () => {
+  const [activeTab, setActiveTab] = React.useState('inventory');
+
   const myInventory = [
     { name: 'Honda CR-V 1.5L Turbo 2022', km: '28,500', img: 'uploads/s02-card01-honda-crv-blue.png', trust: 92, retail: 920, daysInShop: 12, views: 1247, leads: 18, lastLead: '2h trước', status: 'hot' },
     { name: 'Toyota Camry 2.5Q 2022', km: '34,200', img: 'uploads/s02-card02-toyota-camry-white.png', trust: 95, retail: 1180, daysInShop: 8, views: 892, leads: 12, lastLead: '5h trước', status: 'good' },
@@ -13,6 +15,67 @@ const Screen17_ACWorkspace = () => {
     { name: 'VinFast VF8 Plus 2023', km: '12,400', img: 'uploads/s02-card11-vinfast-vf8-blue.png', trust: 91, retail: 1200, daysInShop: 24, views: 412, leads: 3, lastLead: '6 ngày', status: 'cold' },
     { name: 'Kia Seltos 1.6L 2023', km: '14,200', img: 'uploads/s02-card06-kia-seltos-silver.png', trust: 85, retail: 690, daysInShop: 3, views: 287, leads: 5, lastLead: '4h trước', status: 'good' },
   ];
+
+  const customers = [
+    { name: 'Trần Văn Hùng', initial: 'TH', phone: '0912 ••• 487', source: 'Zalo', interest: 'Honda CR-V 1.5L Turbo 2022', budget: '900M – 1.0B', lastContact: '2h trước', status: 'hot', note: 'Đã xem xe trực tiếp, đang xin vợ' },
+    { name: 'Lê Thị Mai', initial: 'LM', phone: '0938 ••• 152', source: 'Microsite', interest: 'Toyota Camry 2.5Q 2022', budget: '1.1B – 1.2B', lastContact: '5h trước', status: 'hot', note: 'Đang chốt ngày inspect' },
+    { name: 'Nguyễn Quốc Bảo', initial: 'NB', phone: '0905 ••• 233', source: 'Facebook', interest: 'Mazda CX-5 Premium 2023', budget: '800M – 900M', lastContact: '1 ngày', status: 'warm', note: 'Hỏi về tài chính VPBank' },
+    { name: 'Phạm Minh Đức', initial: 'PD', phone: '0977 ••• 901', source: 'Zalo', interest: 'VinFast VF8 Plus 2023', budget: '1.1B – 1.3B', lastContact: '2 ngày', status: 'warm', note: 'So sánh với Tesla Model Y' },
+    { name: 'Vũ Thanh Hà', initial: 'VH', phone: '0984 ••• 776', source: 'Direct', interest: 'Kia Seltos 1.6L 2023', budget: '650M – 720M', lastContact: '4h trước', status: 'hot', note: 'Vợ chốt mua, đợi chốt giá cuối' },
+    { name: 'Đỗ Hữu Tài', initial: 'DT', phone: '0913 ••• 308', source: 'Microsite', interest: 'Hyundai Tucson 2.0', budget: '850M – 920M', lastContact: '1 tuần', status: 'cold', note: 'Đang quan sát thị trường' },
+  ];
+
+  const orders = [
+    { id: 'OB-2526-0142', customer: 'Trần Văn Hùng', car: 'Honda CR-V 1.5L Turbo 2022', amount: 920, commission: 13.8, phase: 'Cọc', phaseStep: 2, updated: '2h trước', etaDelivery: '12-05-2026' },
+    { id: 'OB-2526-0138', customer: 'Lê Thị Mai', car: 'Toyota Camry 2.5Q 2022', amount: 1180, commission: 17.7, phase: 'Inspect', phaseStep: 3, updated: '5h trước', etaDelivery: '14-05-2026' },
+    { id: 'OB-2526-0131', customer: 'Vũ Thanh Hà', car: 'Kia Seltos 1.6L 2023', amount: 690, commission: 10.4, phase: 'Finance', phaseStep: 4, updated: '1h trước', etaDelivery: '16-05-2026' },
+    { id: 'OB-2526-0124', customer: 'Phạm Quang Long', car: 'Mazda CX-5 Premium 2023', amount: 850, commission: 12.7, phase: 'Hồ sơ', phaseStep: 5, updated: '6h trước', etaDelivery: '18-05-2026' },
+    { id: 'OB-2526-0119', customer: 'Bùi Thị Lan', car: 'Honda Civic RS 2022', amount: 780, commission: 11.7, phase: 'Bàn giao', phaseStep: 6, updated: '3h trước', etaDelivery: '10-05-2026' },
+    { id: 'OB-2526-0115', customer: 'Tạ Văn Sơn', car: 'Hyundai Tucson 2.0 2022', amount: 880, commission: 13.2, phase: 'Cọc', phaseStep: 2, updated: '1 ngày', etaDelivery: '20-05-2026' },
+  ];
+
+  const SourceTag = ({ s }) => {
+    const map = {
+      Zalo:      { bg: 'rgba(0,144,255,0.12)', fg: '#3DA9FF', border: 'rgba(0,144,255,0.3)' },
+      Facebook:  { bg: 'rgba(66,103,178,0.15)', fg: '#7C9BFF', border: 'rgba(66,103,178,0.4)' },
+      Microsite: { bg: 'rgba(232,93,44,0.12)', fg: '#E85D2C', border: 'rgba(232,93,44,0.3)' },
+      Direct:    { bg: 'rgba(255,255,255,0.05)', fg: 'var(--text-2)', border: 'var(--border)' },
+    };
+    const c = map[s] || map.Direct;
+    return <span style={{ fontSize: 11, padding: '3px 9px', borderRadius: 999, background: c.bg, color: c.fg, border: `1px solid ${c.border}`, fontWeight: 600, fontFamily: '"JetBrains Mono", monospace' }}>{s}</span>;
+  };
+
+  const StatusDot = ({ s }) => {
+    const map = {
+      hot:  { c: 'var(--success)', l: 'Hot' },
+      warm: { c: '#FFB800', l: 'Warm' },
+      cold: { c: 'var(--text-3)', l: 'Cold' },
+    };
+    const v = map[s];
+    return (
+      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, fontWeight: 700, color: v.c }}>
+        <span style={{ width: 8, height: 8, borderRadius: '50%', background: v.c, boxShadow: `0 0 8px ${v.c}` }} />
+        {v.l}
+      </span>
+    );
+  };
+
+  const PhaseBadge = ({ phase, step }) => {
+    const phases = ['Lead', 'Cọc', 'Inspect', 'Finance', 'Hồ sơ', 'Bàn giao'];
+    return (
+      <div>
+        <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--accent)', fontFamily: '"JetBrains Mono", monospace', letterSpacing: '0.04em' }}>{phase.toUpperCase()}</div>
+        <div style={{ display: 'flex', gap: 3, marginTop: 6 }}>
+          {phases.map((_, i) => (
+            <span key={i} style={{
+              flex: 1, height: 4, borderRadius: 2,
+              background: i < step ? 'linear-gradient(90deg, #E85D2C, #FFB800)' : 'rgba(255,255,255,0.08)',
+            }} />
+          ))}
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div className="otobank" style={{ width: 1440, minHeight: 1800, background: 'var(--bg)' }}>
@@ -68,25 +131,30 @@ const Screen17_ACWorkspace = () => {
         {/* Tabs */}
         <div style={{ display: 'flex', gap: 4, borderBottom: '1px solid var(--border)', marginBottom: 28 }}>
           {[
-            { l: 'Xe trong shop', count: 38, active: true },
-            { l: 'Khách của tôi', count: 87 },
-            { l: 'Đơn hàng', count: 12 },
-            { l: 'Microsite stats', count: null },
-            { l: 'Tools (loan/quote)', count: null },
-            { l: 'Settings', count: null },
-          ].map(t => (
-            <div key={t.l} style={{
-              padding: '14px 20px', cursor: 'pointer',
-              borderBottom: t.active ? '2px solid var(--accent)' : '2px solid transparent',
-              color: t.active ? 'var(--accent)' : 'var(--text-2)',
-              fontSize: 14, fontWeight: t.active ? 700 : 500,
-            }}>
-              {t.l} {t.count != null && <span style={{ fontSize: 11, padding: '2px 7px', borderRadius: 4, background: t.active ? 'rgba(232,93,44,0.15)' : 'var(--surface-2)', marginLeft: 6, fontWeight: 700 }}>{t.count}</span>}
-            </div>
-          ))}
+            { id: 'inventory', l: 'Xe trong shop', count: 38 },
+            { id: 'customers', l: 'Khách của tôi', count: 87 },
+            { id: 'orders', l: 'Đơn hàng', count: 12 },
+            { id: 'microsite', l: 'Microsite stats', count: null },
+            { id: 'tools', l: 'Tools (loan/quote)', count: null },
+            { id: 'settings', l: 'Settings', count: null },
+          ].map(t => {
+            const active = activeTab === t.id;
+            return (
+              <div key={t.id} onClick={() => setActiveTab(t.id)} style={{
+                padding: '14px 20px', cursor: 'pointer',
+                borderBottom: active ? '2px solid var(--accent)' : '2px solid transparent',
+                color: active ? 'var(--accent)' : 'var(--text-2)',
+                fontSize: 14, fontWeight: active ? 700 : 500,
+                transition: 'color 0.2s ease, border-color 0.2s ease',
+              }}>
+                {t.l} {t.count != null && <span style={{ fontSize: 11, padding: '2px 7px', borderRadius: 4, background: active ? 'rgba(232,93,44,0.15)' : 'var(--surface-2)', marginLeft: 6, fontWeight: 700 }}>{t.count}</span>}
+              </div>
+            );
+          })}
         </div>
 
-        {/* Inventory table */}
+        {/* TAB: Xe trong shop — Inventory table */}
+        {activeTab === 'inventory' && (
         <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '80px 2fr 90px 130px 90px 90px 110px 100px 130px', gap: 16, padding: '16px 20px', fontSize: 11, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 600, borderBottom: '1px solid var(--border)', background: 'var(--surface-2)', fontFamily: '"JetBrains Mono", monospace' }}>
             <div>Ảnh</div>
@@ -122,6 +190,378 @@ const Screen17_ACWorkspace = () => {
             </div>
           ))}
         </div>
+        )}
+
+        {/* TAB: Khách của tôi */}
+        {activeTab === 'customers' && (
+          <div>
+            {/* Filter bar */}
+            <div style={{ display: 'flex', gap: 10, marginBottom: 18, alignItems: 'center' }}>
+              <input placeholder="Tìm theo tên / SĐT / xe quan tâm..." style={{ flex: 1, padding: '12px 16px', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 10, color: 'var(--text)', fontSize: 14, fontFamily: 'inherit' }} />
+              {['Tất cả · 87', 'Hot · 24', 'Warm · 41', 'Cold · 22'].map((f, i) => (
+                <button key={f} style={{ padding: '11px 16px', fontSize: 13, borderRadius: 10, border: i === 0 ? '1px solid var(--accent)' : '1px solid var(--border)', background: i === 0 ? 'rgba(232,93,44,0.1)' : 'transparent', color: i === 0 ? 'var(--accent)' : 'var(--text-2)', cursor: 'pointer', fontWeight: 600, whiteSpace: 'nowrap' }}>{f}</button>
+              ))}
+              <button className="btn btn-primary" style={{ padding: '11px 18px', fontSize: 13, fontWeight: 700 }}>+ Thêm khách</button>
+            </div>
+
+            <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '50px 1.4fr 1.6fr 1fr 110px 110px 160px', gap: 16, padding: '16px 20px', fontSize: 11, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 600, borderBottom: '1px solid var(--border)', background: 'var(--surface-2)', fontFamily: '"JetBrains Mono", monospace' }}>
+                <div></div>
+                <div>Khách / SĐT</div>
+                <div>Xe quan tâm</div>
+                <div>Ngân sách</div>
+                <div>Nguồn</div>
+                <div>Status</div>
+                <div>Hành động</div>
+              </div>
+              {customers.map((c, i) => (
+                <div key={c.name} style={{ display: 'grid', gridTemplateColumns: '50px 1.4fr 1.6fr 1fr 110px 110px 160px', gap: 16, padding: '18px 20px', alignItems: 'center', borderBottom: i < customers.length - 1 ? '1px solid var(--border)' : 'none' }}>
+                  <div style={{ width: 40, height: 40, borderRadius: '50%', background: 'linear-gradient(135deg, #E85D2C, #FFB800)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: 13, fontWeight: 700, letterSpacing: '0.02em' }}>{c.initial}</div>
+                  <div>
+                    <div style={{ fontSize: 14, fontWeight: 600 }}>{c.name}</div>
+                    <div className="mono" style={{ fontSize: 12, color: 'var(--text-2)', marginTop: 3 }}>{c.phone}</div>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 13, fontWeight: 500 }}>{c.interest}</div>
+                    <div style={{ fontSize: 11, color: 'var(--text-3)', marginTop: 4, fontStyle: 'italic' }}>"{c.note}"</div>
+                  </div>
+                  <div className="mono" style={{ fontSize: 12, color: 'var(--text-2)' }}>{c.budget}</div>
+                  <div><SourceTag s={c.source} /></div>
+                  <div><StatusDot s={c.status} /></div>
+                  <div style={{ display: 'flex', gap: 6 }}>
+                    <button title="Chat Zalo" style={{ padding: '7px 9px', fontSize: 11, borderRadius: 6, border: '1px solid rgba(0,144,255,0.3)', background: 'rgba(0,144,255,0.08)', color: '#3DA9FF', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4, fontWeight: 600 }}><Ico name="chat" size={13} /> Chat</button>
+                    <button title="Đặt lịch xem" style={{ padding: '7px 9px', fontSize: 11, borderRadius: 6, border: '1px solid var(--border)', background: 'transparent', color: 'var(--text)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4, fontWeight: 600 }}><Ico name="calendar" size={13} /></button>
+                    <button title="Gửi báo giá" style={{ padding: '7px 9px', fontSize: 11, borderRadius: 6, border: '1px solid rgba(232,93,44,0.3)', background: 'rgba(232,93,44,0.08)', color: 'var(--accent)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4, fontWeight: 600 }}><Ico name="file" size={13} /> Quote</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div style={{ marginTop: 16, padding: '16px 20px', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 10, fontSize: 13, color: 'var(--text-2)', display: 'flex', alignItems: 'center', gap: 10 }}>
+              <Ico name="info" size={16} /> Hiển thị 6 / 87 khách. Otobank tự động sync khách từ Zalo OA + microsite về workspace của bạn.
+            </div>
+          </div>
+        )}
+
+        {/* TAB: Đơn hàng */}
+        {activeTab === 'orders' && (
+          <div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: 12, marginBottom: 24 }}>
+              {[
+                { phase: 'Lead', n: 0, c: 'var(--text-3)' },
+                { phase: 'Cọc', n: 4, c: '#FFB800' },
+                { phase: 'Inspect', n: 2, c: '#FFB800' },
+                { phase: 'Finance', n: 3, c: 'var(--accent)' },
+                { phase: 'Hồ sơ', n: 2, c: 'var(--accent)' },
+                { phase: 'Bàn giao', n: 1, c: 'var(--success)' },
+              ].map(p => (
+                <div key={p.phase} style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 12, padding: 14, textAlign: 'center' }}>
+                  <div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 10, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600 }}>{p.phase}</div>
+                  <div className="mono" style={{ fontSize: 28, fontWeight: 800, color: p.c, marginTop: 6, lineHeight: 1 }}>{p.n}</div>
+                </div>
+              ))}
+            </div>
+
+            <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '140px 1.2fr 1.6fr 110px 130px 1.4fr 110px 130px', gap: 16, padding: '16px 20px', fontSize: 11, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 600, borderBottom: '1px solid var(--border)', background: 'var(--surface-2)', fontFamily: '"JetBrains Mono", monospace' }}>
+                <div>Order ID</div>
+                <div>Khách</div>
+                <div>Xe</div>
+                <div>Giá trị</div>
+                <div>Hoa hồng</div>
+                <div>Phase</div>
+                <div>ETA giao</div>
+                <div>Hành động</div>
+              </div>
+              {orders.map((o, i) => (
+                <div key={o.id} style={{ display: 'grid', gridTemplateColumns: '140px 1.2fr 1.6fr 110px 130px 1.4fr 110px 130px', gap: 16, padding: '18px 20px', alignItems: 'center', borderBottom: i < orders.length - 1 ? '1px solid var(--border)' : 'none' }}>
+                  <div className="mono" style={{ fontSize: 11, color: 'var(--text-2)', fontWeight: 600 }}>{o.id}</div>
+                  <div style={{ fontSize: 13, fontWeight: 600 }}>{o.customer}</div>
+                  <div style={{ fontSize: 13 }}>{o.car}</div>
+                  <div className="mono" style={{ fontSize: 14, fontWeight: 700, color: 'var(--text)' }}>{o.amount}M ₫</div>
+                  <div className="mono" style={{ fontSize: 14, fontWeight: 700, color: 'var(--success)' }}>+{o.commission}M ₫</div>
+                  <div><PhaseBadge phase={o.phase} step={o.phaseStep} /></div>
+                  <div className="mono" style={{ fontSize: 12, color: 'var(--text-2)' }}>{o.etaDelivery}</div>
+                  <div style={{ display: 'flex', gap: 6 }}>
+                    <button style={{ padding: '7px 12px', fontSize: 11, borderRadius: 6, border: '1px solid var(--border)', background: 'transparent', color: 'var(--text)', cursor: 'pointer', fontWeight: 600 }}>Detail</button>
+                    <button style={{ padding: '7px 10px', fontSize: 11, borderRadius: 6, border: '1px solid rgba(232,93,44,0.3)', background: 'rgba(232,93,44,0.08)', color: 'var(--accent)', cursor: 'pointer', fontWeight: 600 }}>Push</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div style={{ marginTop: 18, padding: 18, background: 'linear-gradient(135deg, rgba(34,197,94,0.06), rgba(34,197,94,0.02))', border: '1px solid rgba(34,197,94,0.2)', borderRadius: 12, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div>
+                <div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600 }}>Hoa hồng dự kiến tháng này</div>
+                <div className="mono" style={{ fontSize: 30, fontWeight: 800, color: 'var(--success)', marginTop: 6, lineHeight: 1 }}>79.5M ₫</div>
+                <div style={{ fontSize: 12, color: 'var(--text-2)', marginTop: 6 }}>6 đơn × tier 1.15x · payout vào ngày 15-06-2026</div>
+              </div>
+              <button className="btn btn-outline" style={{ padding: '11px 18px', fontSize: 13, fontWeight: 600 }}>Export CSV</button>
+            </div>
+          </div>
+        )}
+
+        {/* TAB: Microsite stats */}
+        {activeTab === 'microsite' && (
+          <div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14, marginBottom: 24 }}>
+              {[
+                { l: 'Page views (30d)', v: '12,847', d: '+18% vs 30d trước', c: 'var(--text)' },
+                { l: 'Unique visitors', v: '8,432', d: '+24% vs 30d trước', c: 'var(--text)' },
+                { l: 'Avg time on page', v: '2m 47s', d: 'Top 15% AC toàn quốc', c: '#FFB800' },
+                { l: 'Conversion (xem→liên hệ)', v: '6.8%', d: '↑ 1.4pp vs T4', c: 'var(--success)' },
+              ].map(k => (
+                <div key={k.l} style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 12, padding: 18 }}>
+                  <div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 10, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600 }}>{k.l}</div>
+                  <div className="mono" style={{ fontSize: 26, fontWeight: 800, color: k.c, marginTop: 8, lineHeight: 1, letterSpacing: '-0.02em' }}>{k.v}</div>
+                  <div style={{ fontSize: 12, color: 'var(--success)', marginTop: 6, fontWeight: 500 }}>{k.d}</div>
+                </div>
+              ))}
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: 18 }}>
+              {/* Top performing cars */}
+              <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
+                <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--border)', background: 'var(--surface-2)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div style={{ fontSize: 14, fontWeight: 700 }}>Top xe được xem nhiều nhất</div>
+                  <span style={{ fontSize: 11, color: 'var(--text-3)', fontFamily: '"JetBrains Mono", monospace' }}>30 ngày qua</span>
+                </div>
+                {[
+                  { name: 'Honda CR-V 1.5L Turbo', img: 'uploads/s02-card01-honda-crv-blue.png', views: 1247, leads: 18, ctr: 1.44 },
+                  { name: 'Toyota Camry 2.5Q', img: 'uploads/s02-card02-toyota-camry-white.png', views: 892, leads: 12, ctr: 1.34 },
+                  { name: 'Mazda CX-5 Premium', img: 'uploads/s02-card03-mazda-cx5-red.png', views: 524, leads: 7, ctr: 1.34 },
+                  { name: 'VinFast VF8 Plus', img: 'uploads/s02-card11-vinfast-vf8-blue.png', views: 412, leads: 3, ctr: 0.73 },
+                  { name: 'Kia Seltos 1.6L', img: 'uploads/s02-card06-kia-seltos-silver.png', views: 287, leads: 5, ctr: 1.74 },
+                ].map((c, i, arr) => (
+                  <div key={c.name} style={{ display: 'grid', gridTemplateColumns: '60px 1fr 90px 80px 90px', gap: 14, padding: '14px 20px', alignItems: 'center', borderBottom: i < arr.length - 1 ? '1px solid var(--border)' : 'none' }}>
+                    <div style={{ width: 56, aspectRatio: '4/3', borderRadius: 6, overflow: 'hidden' }}>
+                      <img src={c.img} alt={c.name} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                    </div>
+                    <div style={{ fontSize: 13, fontWeight: 600 }}>{c.name}</div>
+                    <div className="mono" style={{ fontSize: 13, color: 'var(--text-2)' }}>{c.views.toLocaleString('vi-VN')} views</div>
+                    <div className="mono" style={{ fontSize: 13, fontWeight: 700, color: 'var(--success)' }}>{c.leads} leads</div>
+                    <div className="mono" style={{ fontSize: 12, color: c.ctr >= 1.4 ? 'var(--success)' : 'var(--text-2)', fontWeight: 700 }}>CTR {c.ctr}%</div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Traffic sources */}
+              <div className="card" style={{ padding: 22 }}>
+                <div style={{ fontSize: 14, fontWeight: 700, marginBottom: 4 }}>Nguồn traffic</div>
+                <div style={{ fontSize: 12, color: 'var(--text-3)', marginBottom: 20, fontFamily: '"JetBrains Mono", monospace' }}>30 ngày qua · 12,847 views</div>
+                {[
+                  { src: 'Zalo OA', n: 5421, pct: 42, c: '#3DA9FF' },
+                  { src: 'Microsite SEO', n: 3592, pct: 28, c: '#E85D2C' },
+                  { src: 'Facebook', n: 2187, pct: 17, c: '#7C9BFF' },
+                  { src: 'Direct (link AC)', n: 1180, pct: 9, c: '#FFB800' },
+                  { src: 'Google Ads', n: 467, pct: 4, c: '#22C55E' },
+                ].map(s => (
+                  <div key={s.src} style={{ marginBottom: 16 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
+                      <span style={{ fontSize: 13, fontWeight: 500 }}>{s.src}</span>
+                      <span className="mono" style={{ fontSize: 12, color: 'var(--text-2)', fontWeight: 600 }}>{s.n.toLocaleString('vi-VN')} · {s.pct}%</span>
+                    </div>
+                    <div style={{ width: '100%', height: 8, borderRadius: 4, background: 'rgba(255,255,255,0.06)', overflow: 'hidden' }}>
+                      <div style={{ width: `${s.pct}%`, height: '100%', background: s.c, borderRadius: 4, boxShadow: `0 0 12px ${s.c}50` }} />
+                    </div>
+                  </div>
+                ))}
+                <div style={{ marginTop: 24, padding: 14, background: 'rgba(232,93,44,0.06)', border: '1px solid rgba(232,93,44,0.2)', borderRadius: 10, fontSize: 12, color: 'var(--text-2)', lineHeight: 1.6 }}>
+                  <strong style={{ color: 'var(--accent)' }}>💡 Insight:</strong> Zalo OA mang về 42% traffic. Đẩy mạnh broadcast vào 19h-21h (peak window) để tăng thêm 15-20%.
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* TAB: Tools (loan/quote) */}
+        {activeTab === 'tools' && (
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
+            {/* Loan calculator */}
+            <div className="card" style={{ padding: 26 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
+                <div style={{ width: 44, height: 44, borderRadius: 12, background: 'linear-gradient(135deg, rgba(0,144,255,0.2), rgba(0,144,255,0.05))', border: '1px solid rgba(0,144,255,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#3DA9FF' }}>
+                  <Ico name="bank" size={22} />
+                </div>
+                <div>
+                  <div style={{ fontSize: 16, fontWeight: 700 }}>Loan calculator · VPBank pilot</div>
+                  <div style={{ fontSize: 12, color: 'var(--text-3)', marginTop: 2 }}>Tính nhanh khoản trả góp cho khách</div>
+                </div>
+              </div>
+
+              {[
+                { l: 'Giá xe', v: '920,000,000 ₫', sub: 'Honda CR-V 1.5L Turbo 2022' },
+                { l: 'Trả trước', v: '276,000,000 ₫ (30%)' },
+                { l: 'Khoản vay', v: '644,000,000 ₫' },
+                { l: 'Kỳ hạn', v: '60 tháng' },
+                { l: 'Lãi suất VPBank', v: '7.9%/năm (12 tháng đầu) → 10.5% thả nổi' },
+              ].map(r => (
+                <div key={r.l} style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 0', borderBottom: '1px dashed var(--border)' }}>
+                  <span style={{ fontSize: 13, color: 'var(--text-2)' }}>{r.l}</span>
+                  <span className="mono" style={{ fontSize: 13, fontWeight: 600, textAlign: 'right' }}>{r.v}{r.sub && <div style={{ fontSize: 11, color: 'var(--text-3)', fontWeight: 400, marginTop: 2 }}>{r.sub}</div>}</span>
+                </div>
+              ))}
+
+              <div style={{ marginTop: 18, padding: 18, background: 'linear-gradient(135deg, rgba(0,144,255,0.1), rgba(0,144,255,0.03))', border: '1px solid rgba(0,144,255,0.3)', borderRadius: 12 }}>
+                <div style={{ fontSize: 11, color: 'var(--text-3)', fontFamily: '"JetBrains Mono", monospace', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600 }}>Trả góp tháng đầu</div>
+                <div className="mono" style={{ fontSize: 32, fontWeight: 800, color: '#3DA9FF', marginTop: 6, letterSpacing: '-0.02em' }}>13,287,000 ₫</div>
+                <div style={{ fontSize: 12, color: 'var(--text-2)', marginTop: 8 }}>Tổng phải trả 60 tháng: <strong className="mono" style={{ color: 'var(--text)' }}>847,2M ₫</strong> · Lãi: <strong className="mono" style={{ color: '#FFB800' }}>203,2M ₫</strong></div>
+              </div>
+
+              <div style={{ display: 'flex', gap: 10, marginTop: 16 }}>
+                <button className="btn btn-outline" style={{ flex: 1, padding: '12px', fontSize: 13, fontWeight: 600 }}>Điều chỉnh</button>
+                <button className="btn btn-primary" style={{ flex: 1, padding: '12px', fontSize: 13, fontWeight: 700 }}><Ico name="chat" size={14} /> Gửi cho khách qua Zalo</button>
+              </div>
+            </div>
+
+            {/* Quote generator */}
+            <div className="card" style={{ padding: 26 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
+                <div style={{ width: 44, height: 44, borderRadius: 12, background: 'linear-gradient(135deg, rgba(232,93,44,0.2), rgba(232,93,44,0.05))', border: '1px solid rgba(232,93,44,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent)' }}>
+                  <Ico name="file" size={22} />
+                </div>
+                <div>
+                  <div style={{ fontSize: 16, fontWeight: 700 }}>Báo giá PDF</div>
+                  <div style={{ fontSize: 12, color: 'var(--text-3)', marginTop: 2 }}>Sinh báo giá có brand AC + Otobank seal</div>
+                </div>
+              </div>
+
+              {/* Mini PDF preview */}
+              <div style={{ background: '#fff', borderRadius: 10, padding: 24, color: '#0A0E12', position: 'relative', boxShadow: '0 12px 30px rgba(0,0,0,0.5)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 16, borderBottom: '2px solid #E85D2C', paddingBottom: 12 }}>
+                  <div>
+                    <div style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 18, fontWeight: 800, color: '#E85D2C', letterSpacing: '-0.02em' }}>OTOBANK</div>
+                    <div style={{ fontSize: 9, color: '#666', marginTop: 2, letterSpacing: '0.05em' }}>BÁO GIÁ XE — QUOTE #Q-20260509-008</div>
+                  </div>
+                  <div style={{ textAlign: 'right' }}>
+                    <div style={{ fontSize: 10, color: '#666' }}>AC: <strong style={{ color: '#0A0E12' }}>Anh Tuấn</strong></div>
+                    <div style={{ fontSize: 9, color: '#999' }}>09-05-2026</div>
+                  </div>
+                </div>
+
+                <div style={{ fontSize: 12, marginBottom: 8 }}><strong>Khách:</strong> Trần Văn Hùng</div>
+                <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 12 }}>Honda CR-V 1.5L Turbo 2022 · 28,500 km</div>
+
+                <div style={{ background: '#FAFAFA', padding: 12, borderRadius: 6, marginBottom: 12, fontSize: 11 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', padding: '4px 0' }}><span>Giá niêm yết</span><span>920,000,000 ₫</span></div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', padding: '4px 0', color: '#22863A' }}><span>Khuyến mãi pilot</span><span>− 8,000,000 ₫</span></div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', padding: '4px 0' }}><span>Lệ phí trước bạ (10%)</span><span>91,200,000 ₫</span></div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', padding: '4px 0' }}><span>Bảo hiểm năm 1</span><span>14,560,000 ₫</span></div>
+                  <div style={{ borderTop: '1px solid #DDD', marginTop: 6, paddingTop: 8, display: 'flex', justifyContent: 'space-between', fontWeight: 700, fontSize: 12 }}><span>TỔNG LĂN BÁNH</span><span style={{ color: '#E85D2C' }}>1,017,760,000 ₫</span></div>
+                </div>
+
+                <div style={{ fontSize: 9, color: '#999', textAlign: 'center', marginTop: 14, paddingTop: 12, borderTop: '1px dashed #DDD' }}>Báo giá có hiệu lực 7 ngày · Trust Score xe: 92/100 · Powered by Otobank</div>
+              </div>
+
+              <div style={{ display: 'flex', gap: 10, marginTop: 16 }}>
+                <button className="btn btn-outline" style={{ flex: 1, padding: '12px', fontSize: 13, fontWeight: 600 }}><Ico name="download" size={14} /> Tải PDF</button>
+                <button className="btn btn-primary" style={{ flex: 1, padding: '12px', fontSize: 13, fontWeight: 700 }}><Ico name="chat" size={14} /> Gửi Zalo</button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* TAB: Settings */}
+        {activeTab === 'settings' && (
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: 20 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+              {/* Profile */}
+              <div className="card" style={{ padding: 24 }}>
+                <div style={{ fontSize: 14, fontWeight: 700, marginBottom: 4 }}>Profile</div>
+                <div style={{ fontSize: 12, color: 'var(--text-3)', marginBottom: 18 }}>Thông tin AC hiển thị trong shop public</div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+                  {[
+                    { l: 'Họ tên', v: 'Nguyễn Minh Tuấn' },
+                    { l: 'SĐT', v: '0912 345 678', mono: true },
+                    { l: 'Khu vực hoạt động', v: 'TP.HCM' },
+                    { l: 'Năm kinh nghiệm', v: '4 năm' },
+                  ].map(f => (
+                    <div key={f.l}>
+                      <label style={{ fontSize: 11, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600, fontFamily: '"JetBrains Mono", monospace' }}>{f.l}</label>
+                      <div style={{ marginTop: 6, padding: '11px 14px', background: 'var(--surface-2)', border: '1px solid var(--border)', borderRadius: 8, fontSize: 13, fontFamily: f.mono ? '"JetBrains Mono", monospace' : 'inherit' }}>{f.v}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Shop branding */}
+              <div className="card" style={{ padding: 24 }}>
+                <div style={{ fontSize: 14, fontWeight: 700, marginBottom: 4 }}>Shop branding</div>
+                <div style={{ fontSize: 12, color: 'var(--text-3)', marginBottom: 18 }}>Tùy chỉnh hiển thị landing public của bạn</div>
+                <div style={{ marginBottom: 14 }}>
+                  <label style={{ fontSize: 11, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600, fontFamily: '"JetBrains Mono", monospace' }}>Shop URL</label>
+                  <div style={{ marginTop: 6, padding: '11px 14px', background: 'var(--surface-2)', border: '1px solid var(--border)', borderRadius: 8, fontSize: 13, fontFamily: '"JetBrains Mono", monospace', display: 'flex', justifyContent: 'space-between' }}>
+                    <span><span style={{ color: 'var(--text-3)' }}>https://</span><strong style={{ color: 'var(--accent)' }}>anhtuan</strong><span style={{ color: 'var(--text-3)' }}>.otobank.vn</span></span>
+                    <button style={{ background: 'transparent', border: 'none', color: 'var(--accent)', cursor: 'pointer', fontSize: 12, fontWeight: 600 }}>Đổi slug</button>
+                  </div>
+                </div>
+                <div style={{ marginBottom: 14 }}>
+                  <label style={{ fontSize: 11, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600, fontFamily: '"JetBrains Mono", monospace' }}>Bio (hiển thị trên landing)</label>
+                  <div style={{ marginTop: 6, padding: '11px 14px', background: 'var(--surface-2)', border: '1px solid var(--border)', borderRadius: 8, fontSize: 13, lineHeight: 1.5 }}>4 năm kinh nghiệm, chuyên SUV và sedan tầm giá 700M – 1.5B. Tận tâm tư vấn, hỗ trợ tài chính VPBank.</div>
+                </div>
+                <div>
+                  <label style={{ fontSize: 11, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600, fontFamily: '"JetBrains Mono", monospace' }}>Theme accent</label>
+                  <div style={{ marginTop: 8, display: 'flex', gap: 10 }}>
+                    {['#E85D2C', '#3DA9FF', '#22C55E', '#A855F7', '#0A0E12'].map((c, i) => (
+                      <span key={c} style={{ width: 36, height: 36, borderRadius: 10, background: c, cursor: 'pointer', border: i === 0 ? '2px solid #fff' : '2px solid transparent', boxShadow: i === 0 ? '0 0 0 2px var(--accent)' : 'none' }} />
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Notifications */}
+              <div className="card" style={{ padding: 24 }}>
+                <div style={{ fontSize: 14, fontWeight: 700, marginBottom: 18 }}>Notifications</div>
+                {[
+                  { l: 'Lead mới qua Zalo OA', sub: 'Push instant trong 30s', on: true },
+                  { l: 'Khách xem xe trên microsite', sub: 'Báo theo batch mỗi 1h', on: true },
+                  { l: 'Daily digest 8:00 sáng', sub: 'Tóm tắt hôm qua + xe gợi ý từ AI', on: true },
+                  { l: 'Email weekly report', sub: 'Gửi vào 7:00 sáng thứ 2', on: false },
+                ].map(n => (
+                  <div key={n.l} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 0', borderBottom: '1px dashed var(--border)' }}>
+                    <div>
+                      <div style={{ fontSize: 13, fontWeight: 500 }}>{n.l}</div>
+                      <div style={{ fontSize: 11, color: 'var(--text-3)', marginTop: 3 }}>{n.sub}</div>
+                    </div>
+                    <div style={{ width: 40, height: 22, borderRadius: 999, background: n.on ? 'var(--accent)' : 'rgba(255,255,255,0.1)', position: 'relative', cursor: 'pointer' }}>
+                      <span style={{ position: 'absolute', top: 2, left: n.on ? 20 : 2, width: 18, height: 18, borderRadius: '50%', background: '#fff', transition: 'left 0.2s ease' }} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Tier card sidebar */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+              <div className="card" style={{ padding: 24, background: 'linear-gradient(160deg, rgba(232,93,44,0.12), rgba(255,184,0,0.04))', border: '1px solid rgba(232,93,44,0.3)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
+                  <Ico name="award" size={18} /> <span style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, fontWeight: 700, color: 'var(--accent)', letterSpacing: '0.08em' }}>TIER PROGRESSION</span>
+                </div>
+                <div style={{ fontSize: 28, fontWeight: 800, fontFamily: '"Space Grotesk", sans-serif', letterSpacing: '-0.02em' }}>★ Senior · 1.15x</div>
+                <div style={{ fontSize: 12, color: 'var(--text-2)', marginTop: 6 }}>Hoa hồng được nhân 1.15x tier multiplier</div>
+
+                <div style={{ marginTop: 22 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, marginBottom: 8 }}>
+                    <span style={{ color: 'var(--text-2)' }}>Đến tier <strong style={{ color: '#FFB800' }}>★ Elite · 1.25x</strong></span>
+                    <span className="mono" style={{ color: 'var(--text)', fontWeight: 700 }}>52.4 / 80 M ₫</span>
+                  </div>
+                  <div style={{ width: '100%', height: 10, borderRadius: 5, background: 'rgba(255,255,255,0.06)', overflow: 'hidden' }}>
+                    <div style={{ width: '65.5%', height: '100%', background: 'linear-gradient(90deg, #E85D2C, #FFB800)', borderRadius: 5, boxShadow: '0 0 12px rgba(232,93,44,0.5)' }} />
+                  </div>
+                  <div style={{ fontSize: 11, color: 'var(--text-3)', marginTop: 8 }}>Còn 27.6M ₫ doanh thu trong 22 ngày để lên tier</div>
+                </div>
+              </div>
+
+              <div className="card" style={{ padding: 22 }}>
+                <div style={{ fontSize: 14, fontWeight: 700, marginBottom: 14 }}>Payout</div>
+                <div style={{ fontSize: 12, color: 'var(--text-3)', marginBottom: 6 }}>Tài khoản nhận hoa hồng</div>
+                <div className="mono" style={{ fontSize: 13, fontWeight: 600 }}>VCB · 0181 ••• 4729</div>
+                <div style={{ fontSize: 12, color: 'var(--text-2)', marginTop: 4 }}>Nguyễn Minh Tuấn</div>
+                <div style={{ marginTop: 16, padding: 12, background: 'var(--surface-2)', borderRadius: 8, fontSize: 11, color: 'var(--text-2)', lineHeight: 1.5 }}>Otobank chuyển hoa hồng vào ngày <strong style={{ color: 'var(--text)' }}>15 hằng tháng</strong>, sau khi đối soát đơn đã bàn giao.</div>
+              </div>
+
+              <button className="btn btn-outline" style={{ padding: '14px', fontSize: 13, fontWeight: 600, color: '#FF5F56', borderColor: 'rgba(255,95,86,0.4)' }}>Đăng xuất</button>
+            </div>
+          </div>
+        )}
 
         {/* AI assist row */}
         <div className="ai-copilot-row" style={{ marginTop: 24, padding: 24, background: 'linear-gradient(135deg, rgba(232,93,44,0.08), rgba(255,184,0,0.04))', border: '1px solid rgba(232,93,44,0.25)', borderRadius: 14, display: 'grid', gridTemplateColumns: '60px 1fr auto', gap: 20, alignItems: 'center' }}>
