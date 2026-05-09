@@ -995,7 +995,7 @@ const Screen18_ACShowroom = () => {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
             {[
               { i: 'check', t: 'Xe chính hãng có Trust Score', d: 'Tất cả xe trong shop đều được Otobank kiểm định 200 điểm + truy xuất nguồn gốc, Trust Score ≥75' },
-              { i: 'zap', t: 'Tư vấn 1-1, không lừa khách', d: 'Tôi không phải sales của 1 hãng — tôi tư vấn theo nhu cầu thật của bạn từ 38 xe đa dạng phân khúc' },
+              { i: 'zap', t: 'Cố vấn 1-1, ưu tiên bạn trước', d: 'Tôi không gắn với riêng một hãng nào — quyền lợi của tôi đến từ sự hài lòng dài hạn của khách. Từ 38 xe đa thương hiệu trong shop, tôi chỉ giới thiệu chiếc thực sự phù hợp với nhu cầu và ngân sách của bạn.' },
               { i: 'lock', t: 'Bảo vệ bởi Otobank', d: 'Hợp đồng e-sign, escrow VNPay, 7 ngày đổi trả với xe Certified — Otobank đứng tên đảm bảo giao dịch' },
             ].map(r => (
               <div key={r.t}>
