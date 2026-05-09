@@ -118,7 +118,7 @@ const Screen09_Tracking = () => (
               <div style={{ width: 48, height: 48, borderRadius: '50%', background: 'var(--accent)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700 }}>HÙ</div>
               <div>
                 <div style={{ fontSize: 14, fontWeight: 600 }}>Anh Trần Quốc Hùng</div>
-                <div style={{ fontSize: 12, color: 'var(--text-2)' }}>Tài xế Cario • 4.9 ★ • 1,247 chuyến</div>
+                <div style={{ fontSize: 12, color: 'var(--text-2)' }}>Đối tác giao xe (3rd party) • 4.9 ★ • 1,247 chuyến</div>
               </div>
             </div>
             <div style={{ display: 'flex', gap: 8 }}>

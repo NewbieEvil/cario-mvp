@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="utf-8" />
-<title>Cario — 12 màn hình</title>
+<title>Otobank — Distributed Automotive Commerce</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -25,6 +25,11 @@
   .nav-item.active { background:rgba(232,93,44,0.12); color:#E85D2C; border-left:3px solid #E85D2C; padding-left:21px; }
   .nav-num { font-family:"JetBrains Mono",monospace; font-size:11px; color:#6B7280; width:22px; }
   .nav-item.active .nav-num { color:#E85D2C; }
+  .nav-item .nav-tag { font-family:"JetBrains Mono",monospace; font-size:9px; padding:2px 6px; border-radius:4px; margin-left:auto; letter-spacing:0.05em; }
+  .nav-item.out-of-scope { opacity:0.45; }
+  .nav-item.out-of-scope:hover { opacity:0.7; }
+  .nav-item.out-of-scope .nav-tag { background:rgba(107,114,128,0.2); color:#6B7280; border:1px solid #2D343F; }
+  .nav-item.placeholder .nav-tag { background:rgba(232,93,44,0.15); color:#E85D2C; border:1px solid rgba(232,93,44,0.3); }
 
   /* Main */
   .main { display:flex; flex-direction:column; min-height:100vh; }
@@ -62,6 +67,7 @@
 <script type="text/babel" src="screens-3-4.jsx"></script>
 <script type="text/babel" src="screens-5-8.jsx"></script>
 <script type="text/babel" src="screens-9-12.jsx"></script>
+<script type="text/babel" src="screens-13-14.jsx"></script>
 
 <script type="text/babel" data-presets="env,react">
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
@@ -80,9 +86,11 @@ const SCREENS = [
   { n: '07', name: 'Pre-approval Financing', dim: '1440 × 1500', group: 'Buying Flow', comp: 'Screen07_Financing' },
   { n: '08', name: 'Mobile App Home', dim: 'iPhone 14 Pro', group: 'Sell-side & Mobile', comp: 'Screen08_Mobile' },
   { n: '09', name: 'Order Tracking', dim: '1440 × 1300', group: 'Post-purchase', comp: 'Screen09_Tracking' },
-  { n: '10', name: 'IRC Operations', dim: '1440 × 1100', group: 'Internal Tools', comp: 'Screen10_IRC' },
   { n: '11', name: 'AI Pricing Analyst', dim: '1440 × 1200', group: 'Internal Tools', comp: 'Screen11_AIPricing' },
-  { n: '12', name: 'Cario Tower (Vending)', dim: '1440 × 1500', group: 'Brand Moonshot', comp: 'Screen12_Tower' },
+  { n: '13', name: 'Wholesale Auction (Dealer)', dim: '1440 × 1400', group: '⭐ STAR Modules — sắp build', comp: 'Screen13_WholesaleAuction', placeholder: true, tag: 'NEW' },
+  { n: '14', name: 'IS App: Săn xe Owner', dim: 'iPhone 14 Pro', group: '⭐ STAR Modules — sắp build', comp: 'Screen14_ISApp', placeholder: true, tag: 'NEW' },
+  { n: '10', name: 'IRC Operations', dim: '1440 × 1100', group: '❌ Out of MVP scope', comp: 'Screen10_IRC', outOfScope: true, tag: 'DROP' },
+  { n: '12', name: 'Cario Tower (Vending)', dim: '1440 × 1500', group: '❌ Out of MVP scope', comp: 'Screen12_Tower', outOfScope: true, tag: 'DROP' },
 ];
 
 // Group screens for the sidebar
@@ -127,18 +135,25 @@ function App() {
       <div className="app">
         <nav className="sidebar">
           <div className="sidebar-header">
-            <div className="sidebar-title">Cario</div>
-            <div className="sidebar-sub">12 màn hình · v1</div>
+            <div className="sidebar-title">Otobank</div>
+            <div className="sidebar-sub">PRD MVP v3 · 14 màn hình</div>
           </div>
           {Object.entries(GROUPS).map(([group, list]) => (
             <div key={group}>
               <h4>{group}</h4>
               {list.map(s => {
                 const sIdx = SCREENS.indexOf(s);
+                const cls = [
+                  'nav-item',
+                  sIdx === idx ? 'active' : '',
+                  s.outOfScope ? 'out-of-scope' : '',
+                  s.placeholder ? 'placeholder' : '',
+                ].filter(Boolean).join(' ');
                 return (
-                  <button key={s.n} className={`nav-item ${sIdx === idx ? 'active' : ''}`} onClick={() => setIdx(sIdx)}>
+                  <button key={s.n} className={cls} onClick={() => setIdx(sIdx)}>
                     <span className="nav-num">{s.n}</span>
-                    <span>{s.name}</span>
+                    <span style={{ flex: 1 }}>{s.name}</span>
+                    {s.tag && <span className="nav-tag">{s.tag}</span>}
                   </button>
                 );
               })}

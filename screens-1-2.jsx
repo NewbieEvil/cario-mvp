@@ -1,6 +1,42 @@
 // Screen 01 — Landing Page Hero
 // Screen 02 — Browse Inventory
 
+// Trust Score badge — PRD §10.2 (Documentation 25 + Inspection 30 + History 25 + Source 20)
+const trustTier = (s) => {
+  if (s >= 90) return { label: 'Certified', color: '#10B981', bg: 'rgba(16,185,129,0.15)', border: 'rgba(16,185,129,0.4)' };
+  if (s >= 75) return { label: 'Verified', color: '#E85D2C', bg: 'rgba(232,93,44,0.15)', border: 'rgba(232,93,44,0.4)' };
+  if (s >= 60) return { label: 'Standard', color: '#A0A4AB', bg: 'rgba(160,164,171,0.15)', border: 'rgba(160,164,171,0.4)' };
+  return { label: 'Not Certified', color: '#EF4444', bg: 'rgba(239,68,68,0.15)', border: 'rgba(239,68,68,0.4)' };
+};
+
+const TrustBadge = ({ score, size = 'sm', position }) => {
+  const t = trustTier(score);
+  const compact = size === 'sm';
+  return (
+    <div style={{
+      position: position || 'absolute', bottom: 12, right: 12, zIndex: 3,
+      background: 'rgba(15,20,25,0.92)', backdropFilter: 'blur(8px)',
+      border: `1px solid ${t.border}`, borderRadius: compact ? 8 : 10,
+      padding: compact ? '5px 9px' : '8px 12px',
+      display: 'flex', alignItems: 'center', gap: compact ? 6 : 8,
+      boxShadow: '0 4px 12px rgba(0,0,0,0.4)',
+    }}>
+      <span style={{
+        fontFamily: '"JetBrains Mono", monospace',
+        fontSize: compact ? 12 : 14, fontWeight: 700,
+        background: t.color, color: '#fff',
+        padding: compact ? '1px 6px' : '2px 8px', borderRadius: 4,
+        lineHeight: 1.2,
+      }}>{score}</span>
+      <span style={{
+        fontFamily: '"Inter", sans-serif',
+        fontSize: compact ? 10 : 12, fontWeight: 600, color: t.color,
+        textTransform: 'uppercase', letterSpacing: '0.04em',
+      }}>{t.label}</span>
+    </div>
+  );
+};
+
 const CARS_FEATURED = [
   { id: 1, name: 'Honda CR-V 1.5L Turbo', year: 2022, km: 28500, price: 920000000, deal: 'great', loc: 'Q.1, HCM', variant: 'suv', tone: 'pearl', trans: 'Tự động', img: 'uploads/s02-card01-honda-crv-blue.png', alt: 'Honda CR-V 2022' },
   { id: 2, name: 'Toyota Camry 2.5Q', year: 2022, km: 34200, price: 1180000000, deal: 'great', loc: 'Q.7, HCM', variant: 'sedan', tone: 'midnight', trans: 'Tự động', img: 'uploads/s02-card02-toyota-camry-white.png', alt: 'Toyota Camry 2022' },
@@ -31,6 +67,7 @@ const CarCard = ({ car, w }) => (
               {dealBadge(car.deal)}
             </div>
           )}
+          <TrustBadge score={car.trust ?? 82} />
         </div>
       ) : (
         <CarPhoto variant={car.variant} tone={car.tone} ratio="16/10"
@@ -79,43 +116,43 @@ const Screen01_Landing = () => (
       <div>
         {/* Eyebrow */}
         <div style={{
-          fontFamily: '"Inter", sans-serif',
-          fontSize: 13,
-          fontWeight: 600,
+          fontFamily: '"JetBrains Mono", monospace',
+          fontSize: 11,
+          fontWeight: 700,
           color: '#E85D2C',
           textTransform: 'uppercase',
-          letterSpacing: '2px',
+          letterSpacing: '0.15em',
           marginBottom: 24,
         }}>
-          🚗 RA MẮT TẠI VIỆT NAM
+          ● DISTRIBUTED AUTOMOTIVE COMMERCE
         </div>
 
         {/* Main headline */}
         <h1 style={{
           fontFamily: '"Space Grotesk", sans-serif',
-          fontSize: 64,
+          fontSize: 60,
           fontWeight: 800,
           color: '#F5F5F5',
-          lineHeight: 1.1,
+          lineHeight: 1.05,
           margin: 0,
           marginBottom: 24,
           letterSpacing: '-0.02em',
         }}>
-          Mua xe ô tô<br/>
-          như mua điện thoại.
+          Một nền tảng —<br/>
+          toàn bộ thị trường ô tô.
         </h1>
 
         {/* Sub-headline */}
         <p style={{
           fontFamily: '"Inter", sans-serif',
-          fontSize: 24,
+          fontSize: 22,
           fontWeight: 500,
           color: '#A0A4AB',
           margin: 0,
           marginBottom: 16,
-          lineHeight: 1.3,
+          lineHeight: 1.35,
         }}>
-          Đơn giản. Minh bạch. Giao tận nhà.
+          Mạng lưới phân phối · Hạ tầng niềm tin · Hệ sinh thái tài chính.
         </p>
 
         {/* Description */}
@@ -125,44 +162,55 @@ const Screen01_Landing = () => (
           fontWeight: 400,
           color: '#A0A4AB',
           lineHeight: 1.6,
-          maxWidth: 480,
+          maxWidth: 520,
           margin: 0,
-          marginBottom: 40,
+          marginBottom: 36,
         }}>
-          Hơn 2,000 xe đã kiểm định 200 điểm. Pre-approval tài chính trong 5 phút. 7 ngày đổi trả không hỏi lý do.
+          Otobank kết nối hãng xe · dealer · chủ xe ký gửi · ngân hàng · bảo hiểm và mạng lưới <strong style={{ color: '#F5F5F5' }}>Automotive Consultants</strong> & <strong style={{ color: '#F5F5F5' }}>Inventory Specialists</strong> trên một nền tảng duy nhất.
         </p>
 
-        {/* 2 CTAs */}
-        <div style={{ display: 'flex', gap: 16 }}>
+        {/* 4 Personas CTAs — 2 primary + 2 secondary */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, maxWidth: 520 }}>
           <button style={{
-            background: '#E85D2C',
-            color: '#FFFFFF',
-            padding: '18px 32px',
-            borderRadius: 12,
-            fontFamily: '"Inter", sans-serif',
-            fontSize: 16,
-            fontWeight: 700,
-            border: 'none',
-            cursor: 'pointer',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 8,
+            background: '#E85D2C', color: '#FFFFFF',
+            padding: '16px 20px', borderRadius: 12,
+            fontFamily: '"Inter", sans-serif', fontSize: 15, fontWeight: 700,
+            border: 'none', cursor: 'pointer',
+            display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 2,
             boxShadow: '0 8px 24px rgba(232, 93, 44, 0.25)',
           }}>
-            Tìm xe của bạn →
+            <span style={{ fontSize: 11, fontWeight: 600, opacity: 0.85, letterSpacing: '0.04em', textTransform: 'uppercase' }}>Khách mua xe</span>
+            <span>Tìm xe của bạn →</span>
           </button>
           <button style={{
-            background: 'transparent',
-            border: '1px solid #2D343F',
-            color: '#FFFFFF',
-            padding: '18px 32px',
-            borderRadius: 12,
-            fontFamily: '"Inter", sans-serif',
-            fontSize: 16,
-            fontWeight: 600,
-            cursor: 'pointer',
+            background: '#1A1F26', color: '#FFFFFF',
+            padding: '16px 20px', borderRadius: 12,
+            fontFamily: '"Inter", sans-serif', fontSize: 15, fontWeight: 700,
+            border: '1px solid rgba(232,93,44,0.4)', cursor: 'pointer',
+            display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 2,
           }}>
-            Bán xe trong 24h
+            <span style={{ fontSize: 11, fontWeight: 600, color: '#E85D2C', letterSpacing: '0.04em', textTransform: 'uppercase' }}>Chủ xe</span>
+            <span>Ký gửi qua IS →</span>
+          </button>
+          <button style={{
+            background: 'transparent', color: '#A0A4AB',
+            padding: '14px 18px', borderRadius: 12,
+            fontFamily: '"Inter", sans-serif', fontSize: 14, fontWeight: 600,
+            border: '1px solid #2D343F', cursor: 'pointer',
+            display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 2,
+          }}>
+            <span style={{ fontSize: 10, fontWeight: 600, color: '#6B7280', letterSpacing: '0.04em', textTransform: 'uppercase' }}>Sales / Chuyên viên</span>
+            <span style={{ color: '#F5F5F5' }}>Trở thành AC / IS →</span>
+          </button>
+          <button style={{
+            background: 'transparent', color: '#A0A4AB',
+            padding: '14px 18px', borderRadius: 12,
+            fontFamily: '"Inter", sans-serif', fontSize: 14, fontWeight: 600,
+            border: '1px solid #2D343F', cursor: 'pointer',
+            display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 2,
+          }}>
+            <span style={{ fontSize: 10, fontWeight: 600, color: '#6B7280', letterSpacing: '0.04em', textTransform: 'uppercase' }}>Dealer / Salon xe</span>
+            <span style={{ color: '#F5F5F5' }}>Cổng Dealer →</span>
           </button>
         </div>
       </div>
@@ -203,28 +251,31 @@ const Screen01_Landing = () => (
         }}>
           <span style={{ fontSize: 16, lineHeight: 1 }}>✅</span>
           <span style={{ fontFamily: '"Inter", sans-serif', fontSize: 14, fontWeight: 600, color: '#F5F5F5' }}>
-            200-point inspection
+            Inspection 200 điểm
           </span>
         </div>
 
-        {/* Bottom-right badge: Giao tận nhà */}
+        {/* Bottom-right badge: Trust Score */}
         <div style={{
           position: 'absolute',
           bottom: 24,
           right: 24,
           background: 'rgba(15, 20, 25, 0.85)',
           backdropFilter: 'blur(12px)',
-          border: '1px solid #2D343F',
+          border: '1px solid rgba(232, 93, 44, 0.4)',
           padding: '12px 18px',
           borderRadius: 999,
           display: 'flex',
           alignItems: 'center',
-          gap: 8,
+          gap: 10,
           boxShadow: '0 8px 24px rgba(0,0,0,0.3)',
         }}>
-          <span style={{ fontSize: 16, lineHeight: 1 }}>🚚</span>
+          <span style={{
+            fontFamily: '"JetBrains Mono", monospace', fontSize: 13, fontWeight: 700,
+            background: '#E85D2C', color: '#fff', padding: '2px 8px', borderRadius: 6,
+          }}>92</span>
           <span style={{ fontFamily: '"Inter", sans-serif', fontSize: 14, fontWeight: 600, color: '#F5F5F5' }}>
-            Giao tận nhà
+            Trust Score
           </span>
         </div>
       </div>
@@ -317,10 +368,10 @@ const Screen01_Landing = () => (
         padding: '40px 48px 0',
       }}>
         {[
-          { name: 'Honda CR-V 1.5L Turbo', year: 2022, km: '28,500', trans: 'Tự động', price: '920,000,000', installment: '9.8M', loc: 'HCM', deal: 'great', variant: 'suv', tone: 'pearl', img: 'uploads/s02-card01-honda-crv-blue.png', alt: 'Honda CR-V' },
-          { name: 'Toyota Camry 2.5Q', year: 2022, km: '34,200', trans: 'Tự động', price: '1,180,000,000', installment: '12.5M', loc: 'HCM', deal: 'great', variant: 'sedan', tone: 'midnight', img: 'uploads/s02-card02-toyota-camry-white.png', alt: 'Toyota Camry' },
-          { name: 'Mazda CX-5 Premium', year: 2023, km: '18,700', trans: 'Tự động', price: '850,000,000', installment: '9.0M', loc: 'HN', deal: 'good', variant: 'suv', tone: 'burgundy', img: 'uploads/s02-card03-mazda-cx5-red.png', alt: 'Mazda CX-5' },
-          { name: 'VinFast VF8 Plus', year: 2023, km: '12,400', trans: 'Điện', price: '1,200,000,000', installment: '12.7M', loc: 'HCM', deal: null, variant: 'suv', tone: 'silver', img: 'uploads/s02-card11-vinfast-vf8-blue.png', alt: 'VinFast VF8' },
+          { name: 'Honda CR-V 1.5L Turbo', year: 2022, km: '28,500', trans: 'Tự động', price: '920,000,000', installment: '9.8M', loc: 'HCM', deal: 'great', variant: 'suv', tone: 'pearl', img: 'uploads/s02-card01-honda-crv-blue.png', alt: 'Honda CR-V', trust: 92 },
+          { name: 'Toyota Camry 2.5Q', year: 2022, km: '34,200', trans: 'Tự động', price: '1,180,000,000', installment: '12.5M', loc: 'HCM', deal: 'great', variant: 'sedan', tone: 'midnight', img: 'uploads/s02-card02-toyota-camry-white.png', alt: 'Toyota Camry', trust: 95 },
+          { name: 'Mazda CX-5 Premium', year: 2023, km: '18,700', trans: 'Tự động', price: '850,000,000', installment: '9.0M', loc: 'HN', deal: 'good', variant: 'suv', tone: 'burgundy', img: 'uploads/s02-card03-mazda-cx5-red.png', alt: 'Mazda CX-5', trust: 88 },
+          { name: 'VinFast VF8 Plus', year: 2023, km: '12,400', trans: 'Điện', price: '1,200,000,000', installment: '12.7M', loc: 'HCM', deal: null, variant: 'suv', tone: 'silver', img: 'uploads/s02-card11-vinfast-vf8-blue.png', alt: 'VinFast VF8', trust: 91 },
         ].map((c, i) => (
           <div key={i}
             style={{
@@ -385,6 +436,9 @@ const Screen01_Landing = () => (
               >
                 <Ico name="heart" size={14} />
               </button>
+
+              {/* Trust Score badge bottom-right */}
+              <TrustBadge score={c.trust ?? 82} />
             </div>
 
             {/* Content */}
@@ -532,18 +586,18 @@ const Screen01_Landing = () => (
 
 // Browse inventory — order locked to filename mapping (s02-card01..s02-card12)
 const CARS_GRID = [
-  { id: 1,  name: 'Honda CR-V 1.5L Turbo', year: 2021, km: 42100, price: 920000000,  deal: 'great', loc: 'Bình Tân, HCM',     variant: 'suv',    tone: 'pearl',    trans: 'Tự động', img: 'uploads/s02-card01-honda-crv-blue.png',        alt: 'Honda CR-V' },
-  { id: 2,  name: 'Toyota Camry 2.5Q',     year: 2022, km: 28500, price: 1180000000, deal: 'great', loc: 'Q.1, HCM',          variant: 'sedan',  tone: 'midnight', trans: 'Tự động', img: 'uploads/s02-card02-toyota-camry-white.png',     alt: 'Toyota Camry' },
-  { id: 3,  name: 'Mazda CX-5 Premium',    year: 2023, km: 18700, price: 850000000,  deal: 'good',  loc: 'Cầu Giấy, HN',      variant: 'suv',    tone: 'burgundy', trans: 'Tự động', img: 'uploads/s02-card03-mazda-cx5-red.png',          alt: 'Mazda CX-5' },
-  { id: 4,  name: 'Ford Ranger Wildtrak',  year: 2022, km: 38200, price: 990000000,  deal: null,    loc: 'Q.7, HCM',          variant: 'pickup', tone: 'silver',   trans: 'Tự động', img: 'uploads/s02-card04-ford-ranger-blue.png',       alt: 'Ford Ranger' },
-  { id: 5,  name: 'VinFast Lux SA2.0',     year: 2022, km: 21400, price: 1020000000, deal: 'great', loc: 'Long Biên, HN',     variant: 'suv',    tone: 'pearl',    trans: 'Tự động', img: 'uploads/s02-card05-vinfast-suv-white.png',      alt: 'VinFast SUV' },
-  { id: 6,  name: 'Kia Seltos 1.6L',       year: 2023, km: 14200, price: 690000000,  deal: 'good',  loc: 'Tân Bình, HCM',     variant: 'suv',    tone: 'silver',   trans: 'Tự động', img: 'uploads/s02-card06-kia-seltos-silver.png',      alt: 'Kia Seltos' },
-  { id: 7,  name: 'Hyundai Tucson 2.0',    year: 2022, km: 32100, price: 880000000,  deal: 'good',  loc: 'Hải Châu, ĐN',      variant: 'suv',    tone: 'midnight', trans: 'Tự động', img: 'uploads/s02-card07-hyundai-tucson-gray.png',    alt: 'Hyundai Tucson' },
-  { id: 8,  name: 'Mercedes-Benz C200',    year: 2020, km: 48700, price: 1420000000, deal: null,    loc: 'Q.1, HCM',          variant: 'sedan',  tone: 'midnight', trans: 'Tự động', img: 'uploads/s02-card08-mercedes-c-black.png',       alt: 'Mercedes C-Class' },
-  { id: 9,  name: 'Toyota Innova 2.0V',    year: 2021, km: 56300, price: 750000000,  deal: 'great', loc: 'Hai Bà Trưng, HN',  variant: 'suv',    tone: 'silver',   trans: 'Tự động', img: 'uploads/s02-card09-toyota-innova-silver.png',   alt: 'Toyota Innova' },
-  { id: 10, name: 'Mazda 3 1.5L',          year: 2022, km: 24500, price: 620000000,  deal: 'good',  loc: 'Thủ Đức, HCM',      variant: 'sedan',  tone: 'burgundy', trans: 'Tự động', img: 'uploads/s02-card10-mazda3-red.png',             alt: 'Mazda 3' },
-  { id: 11, name: 'VinFast VF8 Plus',      year: 2023, km: 12400, price: 1200000000, deal: null,    loc: 'Q.1, HCM',          variant: 'suv',    tone: 'midnight', trans: 'Điện',    img: 'uploads/s02-card11-vinfast-vf8-blue.png',       alt: 'VinFast VF8' },
-  { id: 12, name: 'Honda City RS',         year: 2022, km: 31800, price: 580000000,  deal: 'great', loc: 'Q.7, HCM',          variant: 'sedan',  tone: 'pearl',    trans: 'Tự động', img: 'uploads/s02-card12-honda-city-white.png',       alt: 'Honda City' },
+  { id: 1,  name: 'Honda CR-V 1.5L Turbo', year: 2021, km: 42100, price: 920000000,  deal: 'great', loc: 'Bình Tân, HCM',     variant: 'suv',    tone: 'pearl',    trans: 'Tự động', img: 'uploads/s02-card01-honda-crv-blue.png',        alt: 'Honda CR-V', trust: 92 },
+  { id: 2,  name: 'Toyota Camry 2.5Q',     year: 2022, km: 28500, price: 1180000000, deal: 'great', loc: 'Q.1, HCM',          variant: 'sedan',  tone: 'midnight', trans: 'Tự động', img: 'uploads/s02-card02-toyota-camry-white.png',     alt: 'Toyota Camry', trust: 95 },
+  { id: 3,  name: 'Mazda CX-5 Premium',    year: 2023, km: 18700, price: 850000000,  deal: 'good',  loc: 'Cầu Giấy, HN',      variant: 'suv',    tone: 'burgundy', trans: 'Tự động', img: 'uploads/s02-card03-mazda-cx5-red.png',          alt: 'Mazda CX-5', trust: 88 },
+  { id: 4,  name: 'Ford Ranger Wildtrak',  year: 2022, km: 38200, price: 990000000,  deal: null,    loc: 'Q.7, HCM',          variant: 'pickup', tone: 'silver',   trans: 'Tự động', img: 'uploads/s02-card04-ford-ranger-blue.png',       alt: 'Ford Ranger', trust: 78 },
+  { id: 5,  name: 'VinFast Lux SA2.0',     year: 2022, km: 21400, price: 1020000000, deal: 'great', loc: 'Long Biên, HN',     variant: 'suv',    tone: 'pearl',    trans: 'Tự động', img: 'uploads/s02-card05-vinfast-suv-white.png',      alt: 'VinFast SUV', trust: 90 },
+  { id: 6,  name: 'Kia Seltos 1.6L',       year: 2023, km: 14200, price: 690000000,  deal: 'good',  loc: 'Tân Bình, HCM',     variant: 'suv',    tone: 'silver',   trans: 'Tự động', img: 'uploads/s02-card06-kia-seltos-silver.png',      alt: 'Kia Seltos', trust: 85 },
+  { id: 7,  name: 'Hyundai Tucson 2.0',    year: 2022, km: 32100, price: 880000000,  deal: 'good',  loc: 'Hải Châu, ĐN',      variant: 'suv',    tone: 'midnight', trans: 'Tự động', img: 'uploads/s02-card07-hyundai-tucson-gray.png',    alt: 'Hyundai Tucson', trust: 82 },
+  { id: 8,  name: 'Mercedes-Benz C200',    year: 2020, km: 48700, price: 1420000000, deal: null,    loc: 'Q.1, HCM',          variant: 'sedan',  tone: 'midnight', trans: 'Tự động', img: 'uploads/s02-card08-mercedes-c-black.png',       alt: 'Mercedes C-Class', trust: 72 },
+  { id: 9,  name: 'Toyota Innova 2.0V',    year: 2021, km: 56300, price: 750000000,  deal: 'great', loc: 'Hai Bà Trưng, HN',  variant: 'suv',    tone: 'silver',   trans: 'Tự động', img: 'uploads/s02-card09-toyota-innova-silver.png',   alt: 'Toyota Innova', trust: 76 },
+  { id: 10, name: 'Mazda 3 1.5L',          year: 2022, km: 24500, price: 620000000,  deal: 'good',  loc: 'Thủ Đức, HCM',      variant: 'sedan',  tone: 'burgundy', trans: 'Tự động', img: 'uploads/s02-card10-mazda3-red.png',             alt: 'Mazda 3', trust: 84 },
+  { id: 11, name: 'VinFast VF8 Plus',      year: 2023, km: 12400, price: 1200000000, deal: null,    loc: 'Q.1, HCM',          variant: 'suv',    tone: 'midnight', trans: 'Điện',    img: 'uploads/s02-card11-vinfast-vf8-blue.png',       alt: 'VinFast VF8', trust: 91 },
+  { id: 12, name: 'Honda City RS',         year: 2022, km: 31800, price: 580000000,  deal: 'great', loc: 'Q.7, HCM',          variant: 'sedan',  tone: 'pearl',    trans: 'Tự động', img: 'uploads/s02-card12-honda-city-white.png',       alt: 'Honda City', trust: 87 },
 ];
 
 const FilterSection = ({ title, children }) => (
@@ -572,6 +626,43 @@ const Screen02_Browse = () => (
           </div>
           <span style={{ fontSize: 12, color: 'var(--accent)' }}>Đặt lại</span>
         </div>
+
+        <FilterSection title="Trust Score">
+          {[
+            { l: 'Otobank Certified', range: '≥ 90', count: 412, color: '#10B981', selected: true },
+            { l: 'Verified', range: '75–89', count: 1840, color: '#E85D2C', selected: true },
+            { l: 'Standard', range: '60–74', count: 720, color: '#A0A4AB', selected: false },
+          ].map((t, i) => (
+            <label key={t.l} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '7px 0', fontSize: 13, color: 'var(--text-2)', cursor: 'pointer' }}>
+              <span style={{ width: 16, height: 16, borderRadius: 4, border: '1.5px solid var(--border)', background: t.selected ? t.color : 'transparent', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                {t.selected && <Ico name="check" size={11} />}
+              </span>
+              <span style={{ display: 'flex', alignItems: 'center', gap: 6, flex: 1, color: t.selected ? 'var(--text)' : 'var(--text-2)' }}>
+                <span style={{ display: 'inline-block', width: 6, height: 6, borderRadius: '50%', background: t.color }} />
+                {t.l}
+                <span className="mono" style={{ fontSize: 11, color: 'var(--text-3)', marginLeft: 'auto' }}>{t.range}</span>
+              </span>
+            </label>
+          ))}
+          <div style={{ fontSize: 11, color: 'var(--text-3)', marginTop: 8, lineHeight: 1.5 }}>
+            Score = Documentation 25% + Inspection 30% + History 25% + Source 20%
+          </div>
+        </FilterSection>
+
+        <FilterSection title="Nguồn xe">
+          {[
+            { l: 'OEM / Hãng xe', count: 124 },
+            { l: 'Certified Dealer', count: 856 },
+            { l: 'Verified Owner (qua IS)', count: 320 },
+            { l: 'Bank Liquidation', count: 48 },
+          ].map(s => (
+            <label key={s.l} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '6px 0', fontSize: 13, color: 'var(--text-2)', cursor: 'pointer' }}>
+              <span style={{ width: 16, height: 16, borderRadius: 4, border: '1.5px solid var(--border)' }} />
+              <span style={{ flex: 1 }}>{s.l}</span>
+              <span className="mono" style={{ fontSize: 11, color: 'var(--text-3)' }}>{s.count}</span>
+            </label>
+          ))}
+        </FilterSection>
 
         <FilterSection title="Hãng xe">
           {['Toyota (412)', 'Honda (287)', 'Mazda (198)', 'Ford (134)', 'Hyundai (167)', 'Kia (145)', 'VinFast (98)', 'Mercedes-Benz (74)'].map((b, i) => (

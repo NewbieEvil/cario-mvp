@@ -423,8 +423,46 @@ const Screen03_VDP = () => {
             2022 • 28,500 km • Tự động • Xăng • Trắng ngọc trai
           </div>
 
-          {/* Deal banner */}
-          <div style={{ display: 'none' }}></div>
+          {/* Trust Score Hero — PRD §10.2 */}
+          <div style={{
+            background: 'linear-gradient(135deg, rgba(16,185,129,0.12), rgba(16,185,129,0.04))',
+            border: '1px solid rgba(16,185,129,0.4)',
+            borderRadius: 14, padding: 18, marginBottom: 18,
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 14 }}>
+              <div style={{
+                width: 64, height: 64, borderRadius: 12, background: '#10B981', color: '#fff',
+                display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+              }}>
+                <span style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 26, fontWeight: 800, lineHeight: 1 }}>92</span>
+                <span style={{ fontSize: 9, fontWeight: 700, opacity: 0.9, letterSpacing: '0.04em' }}>/100</span>
+              </div>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 10, color: '#10B981', fontWeight: 700, letterSpacing: '0.08em', marginBottom: 2 }}>● OTOBANK CERTIFIED</div>
+                <div style={{ fontSize: 16, fontWeight: 700, color: '#F5F5F5' }}>Trust Score 92/100</div>
+                <div style={{ fontSize: 11, color: '#A0A4AB', marginTop: 2 }}>Top 10% inventory · Bảo hành 6 tháng + 7 ngày đổi trả</div>
+              </div>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8, paddingTop: 14, borderTop: '1px solid rgba(16,185,129,0.2)' }}>
+              {[
+                { l: 'Documentation', v: 24, max: 25, sub: 'Đầy đủ giấy tờ' },
+                { l: 'Inspection', v: 28, max: 30, sub: '192/200 điểm' },
+                { l: 'History', v: 22, max: 25, sub: 'Odo verified' },
+                { l: 'Source', v: 18, max: 20, sub: 'Verified Owner' },
+              ].map(c => (
+                <div key={c.l} title={c.sub}>
+                  <div style={{ fontSize: 9, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 600 }}>{c.l}</div>
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 2, marginTop: 2 }}>
+                    <span className="mono" style={{ fontSize: 16, fontWeight: 700, color: '#F5F5F5' }}>{c.v}</span>
+                    <span className="mono" style={{ fontSize: 10, color: '#6B7280' }}>/{c.max}</span>
+                  </div>
+                  <div style={{ height: 3, background: 'rgba(16,185,129,0.15)', borderRadius: 2, marginTop: 4, overflow: 'hidden' }}>
+                    <div style={{ height: '100%', width: `${(c.v / c.max) * 100}%`, background: '#10B981' }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
 
           {/* Price */}
           <span style={{ display: 'inline-block', verticalAlign: 'middle', fontFamily: '"Space Grotesk", sans-serif', fontSize: 72, fontWeight: 800, color: '#E85D2C', lineHeight: 1, letterSpacing: '-0.03em' }}>
