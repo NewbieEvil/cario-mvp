@@ -882,7 +882,7 @@ const Screen18_ACShowroom = () => {
                 <div style={{ fontSize: 13, color: 'var(--text-2)', marginBottom: 14 }}>Trả góp từ <strong style={{ color: 'var(--accent)' }}>{Math.round(c.price * 0.7 / 60 * 10) / 10}M</strong>/tháng</div>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
                   <button style={{ padding: '10px', borderRadius: 8, border: '1px solid var(--border)', background: 'transparent', color: 'var(--text)', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>Chi tiết</button>
-                  <button style={{ padding: '10px', borderRadius: 8, border: 'none', background: 'var(--accent)', color: '#fff', fontSize: 13, fontWeight: 700, cursor: 'pointer', boxShadow: '0 4px 12px rgba(232,93,44,0.25)' }}>📅 Đặt lịch xem</button>
+                  <button style={{ padding: '10px', borderRadius: 8, border: '1px solid var(--accent)', background: 'rgba(232,93,44,0.14)', color: '#fff', fontSize: 13, fontWeight: 700, cursor: 'pointer', boxShadow: '0 0 16px rgba(232,93,44,0.45), inset 0 1px 0 rgba(255,255,255,0.06)' }}>📅 Đặt lịch xem</button>
                 </div>
               </div>
             </div>
