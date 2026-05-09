@@ -4,13 +4,68 @@
 
 const PlaceholderRibbon = ({ phase, refDoc }) => (
   <div style={{
-    position: 'absolute', top: 16, right: 16, zIndex: 50,
-    background: 'rgba(232,93,44,0.12)', border: '1px solid rgba(232,93,44,0.4)',
-    borderRadius: 8, padding: '8px 14px', display: 'flex', flexDirection: 'column', gap: 2,
+    background: 'linear-gradient(90deg, rgba(232,93,44,0.18) 0%, rgba(232,93,44,0.06) 60%, transparent 100%)',
+    borderBottom: '1px solid rgba(232,93,44,0.3)',
+    padding: '12px 32px',
+    display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap',
     fontFamily: '"JetBrains Mono", monospace',
   }}>
-    <div style={{ fontSize: 10, fontWeight: 700, color: '#E85D2C', letterSpacing: '0.1em' }}>● PLACEHOLDER · {phase}</div>
-    <div style={{ fontSize: 9, color: '#A0A4AB', letterSpacing: '0.05em' }}>{refDoc}</div>
+    <span style={{
+      display: 'inline-flex', alignItems: 'center', gap: 8,
+      fontSize: 11, fontWeight: 700, color: '#E85D2C', letterSpacing: '0.1em',
+    }}>
+      <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#E85D2C', boxShadow: '0 0 8px rgba(232,93,44,0.8)' }} />
+      PLACEHOLDER · {phase}
+    </span>
+    <span style={{ width: 1, height: 14, background: 'rgba(232,93,44,0.3)' }} />
+    <span style={{ fontSize: 11, color: '#A0A4AB', letterSpacing: '0.05em' }}>{refDoc}</span>
+  </div>
+);
+
+// Fancy 3D icon wrapper — gradient circle + shadow + glow for tab bars / nav
+const FancyIcon = ({ name, color = '#E85D2C', active = false, size = 20 }) => (
+  <div style={{
+    width: 44, height: 44, borderRadius: 14,
+    background: active
+      ? `linear-gradient(135deg, ${color} 0%, #FFB800 100%)`
+      : 'linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02))',
+    border: active ? 'none' : '1px solid rgba(255,255,255,0.08)',
+    display: 'flex', alignItems: 'center', justifyContent: 'center',
+    color: active ? '#fff' : '#6B7280',
+    boxShadow: active
+      ? `0 8px 20px ${color}55, inset 0 1px 0 rgba(255,255,255,0.3), inset 0 -1px 0 rgba(0,0,0,0.2)`
+      : 'inset 0 1px 0 rgba(255,255,255,0.04)',
+    position: 'relative',
+    transition: 'all 0.2s ease',
+  }}>
+    {active && (
+      <span style={{
+        position: 'absolute', inset: 2, borderRadius: 12,
+        background: 'radial-gradient(circle at 30% 30%, rgba(255,255,255,0.25), transparent 60%)',
+        pointerEvents: 'none',
+      }} />
+    )}
+    <Ico name={name} size={size} />
+  </div>
+);
+
+// Action button icon (smaller, for quick actions in app)
+const ActionIcon = ({ name, color = '#E85D2C', size = 22 }) => (
+  <div style={{
+    width: 48, height: 48, borderRadius: 14,
+    background: `linear-gradient(135deg, ${color}30 0%, ${color}15 100%)`,
+    border: `1px solid ${color}40`,
+    display: 'flex', alignItems: 'center', justifyContent: 'center',
+    color: color,
+    boxShadow: `0 4px 12px ${color}25, inset 0 1px 0 rgba(255,255,255,0.08)`,
+    position: 'relative',
+  }}>
+    <span style={{
+      position: 'absolute', inset: 2, borderRadius: 12,
+      background: 'radial-gradient(circle at 30% 25%, rgba(255,255,255,0.15), transparent 50%)',
+      pointerEvents: 'none',
+    }} />
+    <Ico name={name} size={size} />
   </div>
 );
 
@@ -50,7 +105,7 @@ const Screen13_WholesaleAuction = () => {
   ];
 
   return (
-    <div className="otobank" style={{ width: 1440, minHeight: 1400, background: 'var(--bg)', position: 'relative' }}>
+    <div className="otobank" style={{ width: 1440, minHeight: 1400, background: 'var(--bg)' }}>
       <PlaceholderRibbon phase="Phase 4 (Tháng 4-5)" refDoc="PRD §11 Wholesale Engine" />
 
       {/* Top bar */}
@@ -195,134 +250,167 @@ const Screen14_ISApp = () => {
   ];
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', padding: '40px 20px', background: 'transparent', position: 'relative' }}>
-      <PlaceholderRibbon phase="Phase 5 (Tháng 5-6)" refDoc="PRD §12 IS Role" />
-      <div style={{
-        width: 393, minHeight: 852, background: '#0F1419', borderRadius: 48,
-        border: '8px solid #1A1F26', boxShadow: '0 40px 80px rgba(0,0,0,0.6)',
-        overflow: 'hidden', position: 'relative',
-      }}>
-        {/* Status bar */}
-        <div style={{ height: 47, padding: '14px 28px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontFamily: '"Inter", sans-serif', fontSize: 14, fontWeight: 600, color: '#F5F5F5' }}>
-          <span>9:41</span>
-          <span style={{ display: 'flex', gap: 6, fontSize: 12 }}>📶 📡 🔋</span>
-        </div>
-
-        {/* Header */}
-        <div style={{ padding: '12px 20px 18px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 18 }}>
-            <div>
-              <div style={{ fontSize: 11, color: '#A0A4AB', fontFamily: '"JetBrains Mono", monospace', letterSpacing: '0.06em', textTransform: 'uppercase' }}>Inventory Specialist</div>
-              <div style={{ fontSize: 22, fontWeight: 700, color: '#F5F5F5', marginTop: 2 }}>Chào, Anh Hoàng</div>
-            </div>
-            <div style={{ width: 44, height: 44, borderRadius: '50%', background: 'linear-gradient(135deg, #E85D2C, #FFB800)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 16 }}>H</div>
+    <div className="otobank">
+      <PlaceholderRibbon phase="Phase 5 (Tháng 5-6)" refDoc="PRD §12 IS Role · Mobile" />
+      <div style={{ display: 'flex', justifyContent: 'center', padding: '32px 20px 48px' }}>
+        <div style={{
+          width: 393, height: 852, background: '#0F1419', borderRadius: 48,
+          border: '8px solid #1A1F26', boxShadow: '0 40px 80px rgba(0,0,0,0.6)',
+          overflow: 'hidden', position: 'relative', display: 'flex', flexDirection: 'column',
+        }}>
+          {/* Status bar */}
+          <div style={{ height: 47, padding: '14px 28px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontFamily: '"Inter", sans-serif', fontSize: 14, fontWeight: 600, color: '#F5F5F5', flexShrink: 0 }}>
+            <span>9:41</span>
+            <span style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+              <svg width="16" height="11" viewBox="0 0 16 11"><rect x="0" y="6" width="3" height="5" fill="#fff"/><rect x="4" y="4" width="3" height="7" fill="#fff"/><rect x="8" y="2" width="3" height="9" fill="#fff"/><rect x="12" y="0" width="3" height="11" fill="#fff"/></svg>
+              <span style={{ fontSize: 11 }}>5G</span>
+              <svg width="22" height="11" viewBox="0 0 22 11"><rect x="0" y="0" width="18" height="11" rx="2" fill="none" stroke="#fff" strokeWidth="1"/><rect x="2" y="2" width="14" height="7" fill="#fff"/><rect x="19" y="3.5" width="2" height="4" fill="#fff"/></svg>
+            </span>
           </div>
 
-          {/* Tier card */}
-          <div style={{ background: 'linear-gradient(135deg, rgba(232,93,44,0.18), rgba(255,184,0,0.10))', border: '1px solid rgba(232,93,44,0.3)', borderRadius: 14, padding: 14 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-              <span style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 10, color: '#FFB800', fontWeight: 700, letterSpacing: '0.08em' }}>● TIER GOLD · IS</span>
-              <span style={{ fontSize: 10, color: '#A0A4AB' }}>Cập nhật hàng ngày</span>
-            </div>
-            <div style={{ display: 'flex', gap: 16 }}>
-              <div style={{ flex: 1 }}>
-                <div style={{ fontSize: 10, color: '#A0A4AB', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Income tháng</div>
-                <div className="mono" style={{ fontSize: 18, fontWeight: 700, color: '#F5F5F5', marginTop: 2 }}>42.5M ₫</div>
-                <div style={{ fontSize: 10, color: '#A0A4AB' }}>↑ vs 38M tháng trước</div>
-              </div>
-              <div style={{ flex: 1 }}>
-                <div style={{ fontSize: 10, color: '#A0A4AB', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Owner active</div>
-                <div className="mono" style={{ fontSize: 18, fontWeight: 700, color: '#F5F5F5', marginTop: 2 }}>8</div>
-                <div style={{ fontSize: 10, color: '#A0A4AB' }}>3 wholesale · 5 retail</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* AI Valuation prompt */}
-        <div style={{ margin: '0 20px 18px', background: '#1A1F26', border: '1px solid rgba(232,93,44,0.3)', borderRadius: 14, padding: 16 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
-            <div style={{ width: 36, height: 36, borderRadius: 10, background: 'rgba(232,93,44,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18 }}>🤖</div>
-            <div style={{ flex: 1 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: '#F5F5F5' }}>AI Valuation Tool</div>
-              <div style={{ fontSize: 11, color: '#A0A4AB' }}>VIN + odo + condition → Retail/Wholesale range</div>
-            </div>
-          </div>
-          <button style={{ width: '100%', padding: '12px', borderRadius: 10, border: 'none', background: '#E85D2C', color: '#fff', fontWeight: 700, fontSize: 13, cursor: 'pointer' }}>
-            Định giá xe mới →
-          </button>
-        </div>
-
-        {/* Tab bar — Săn xe / Owner CRM / Income */}
-        <div style={{ padding: '0 20px', display: 'flex', gap: 8, marginBottom: 14 }}>
-          {[
-            { l: 'Săn xe', active: true, count: 3 },
-            { l: 'Owner CRM', active: false, count: 8 },
-            { l: 'Income', active: false, count: null },
-          ].map(t => (
-            <div key={t.l} style={{
-              flex: 1, padding: '10px 8px', borderRadius: 10, textAlign: 'center',
-              background: t.active ? 'rgba(232,93,44,0.15)' : 'transparent',
-              border: t.active ? '1px solid rgba(232,93,44,0.3)' : '1px solid #2D343F',
-            }}>
-              <div style={{ fontSize: 12, fontWeight: 600, color: t.active ? '#E85D2C' : '#A0A4AB' }}>
-                {t.l} {t.count != null && <span style={{ fontSize: 10, padding: '1px 5px', borderRadius: 4, background: t.active ? 'rgba(232,93,44,0.3)' : '#2D343F', marginLeft: 4 }}>{t.count}</span>}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Lead list */}
-        <div style={{ padding: '0 20px 20px', display: 'flex', flexDirection: 'column', gap: 10 }}>
-          <div style={{ fontSize: 12, color: '#A0A4AB', fontWeight: 600, marginBottom: 4 }}>Owner leads gần bạn</div>
-          {leads.map(l => (
-            <div key={l.name} style={{
-              background: '#1A1F26', border: '1px solid #2D343F', borderRadius: 12, padding: 14,
-              display: 'flex', flexDirection: 'column', gap: 8,
-            }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+          {/* Scrollable content */}
+          <div style={{ flex: 1, overflowY: 'auto' }}>
+            {/* Header */}
+            <div style={{ padding: '10px 20px 14px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
                 <div>
-                  <div style={{ fontSize: 14, fontWeight: 700, color: '#F5F5F5' }}>{l.name}</div>
-                  <div style={{ fontSize: 12, color: '#A0A4AB', marginTop: 2 }}>{l.vehicle}</div>
+                  <div style={{ fontSize: 11, color: '#A0A4AB', fontFamily: '"JetBrains Mono", monospace', letterSpacing: '0.06em', textTransform: 'uppercase' }}>Inventory Specialist</div>
+                  <div style={{ fontSize: 22, fontWeight: 700, color: '#F5F5F5', marginTop: 2 }}>Chào, Anh Hoàng</div>
                 </div>
-                <span style={{
-                  fontSize: 10, padding: '3px 8px', borderRadius: 12, fontWeight: 700,
-                  background: l.score === 'A' ? 'rgba(16,185,129,0.15)' : 'rgba(255,184,0,0.15)',
-                  color: l.score === 'A' ? 'var(--success)' : '#FFB800',
-                }}>Score {l.score}</span>
+                <div style={{
+                  width: 44, height: 44, borderRadius: 14,
+                  background: 'linear-gradient(135deg, #E85D2C 0%, #FFB800 100%)',
+                  color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  fontWeight: 800, fontSize: 16,
+                  boxShadow: '0 8px 20px rgba(232,93,44,0.4), inset 0 1px 0 rgba(255,255,255,0.3)',
+                  position: 'relative',
+                }}>
+                  <span style={{ position: 'absolute', inset: 2, borderRadius: 12, background: 'radial-gradient(circle at 30% 25%, rgba(255,255,255,0.3), transparent 60%)' }} />
+                  <span style={{ position: 'relative', zIndex: 1 }}>H</span>
+                </div>
               </div>
-              <div style={{ display: 'flex', gap: 12, fontSize: 11, color: '#6B7280' }}>
-                <span>📍 {l.area}</span>
-                <span>🚗 {l.dist}</span>
-                <span>{l.km} km</span>
-              </div>
-              <div style={{ display: 'flex', gap: 6, marginTop: 4 }}>
-                {l.status === 'new' && (
-                  <button style={{ flex: 1, padding: '8px', borderRadius: 8, border: 'none', background: '#E85D2C', color: '#fff', fontWeight: 700, fontSize: 12, cursor: 'pointer' }}>
-                    Nhận lead (30p first-claim)
-                  </button>
-                )}
-                {l.status === 'visited' && (
-                  <>
-                    <button style={{ flex: 1, padding: '8px', borderRadius: 8, border: '1px solid #2D343F', background: 'transparent', color: '#F5F5F5', fontWeight: 600, fontSize: 12 }}>Định giá lại</button>
-                    <button style={{ flex: 1, padding: '8px', borderRadius: 8, border: 'none', background: '#E85D2C', color: '#fff', fontWeight: 700, fontSize: 12 }}>Trình 2 channel</button>
-                  </>
-                )}
-                {l.status === 'auction' && (
-                  <div style={{ flex: 1, padding: '8px', borderRadius: 8, background: 'rgba(232,93,44,0.1)', border: '1px solid rgba(232,93,44,0.3)', textAlign: 'center', fontSize: 11, color: '#E85D2C', fontWeight: 600 }}>
-                    🔥 Auction live · 4 bids
+
+              {/* Tier card */}
+              <div style={{ background: 'linear-gradient(135deg, rgba(232,93,44,0.18), rgba(255,184,0,0.10))', border: '1px solid rgba(232,93,44,0.3)', borderRadius: 14, padding: 14 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
+                  <span style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 10, color: '#FFB800', fontWeight: 700, letterSpacing: '0.08em' }}>● TIER GOLD · IS</span>
+                  <span style={{ fontSize: 10, color: '#A0A4AB' }}>Cập nhật hàng ngày</span>
+                </div>
+                <div style={{ display: 'flex', gap: 14 }}>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontSize: 10, color: '#A0A4AB', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Income tháng</div>
+                    <div className="mono" style={{ fontSize: 20, fontWeight: 800, color: '#F5F5F5', marginTop: 2 }}>42.5M ₫</div>
+                    <div style={{ fontSize: 10, color: 'var(--success)' }}>↑ vs 38M T4</div>
                   </div>
-                )}
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontSize: 10, color: '#A0A4AB', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Owner active</div>
+                    <div className="mono" style={{ fontSize: 20, fontWeight: 800, color: '#F5F5F5', marginTop: 2 }}>8</div>
+                    <div style={{ fontSize: 10, color: '#A0A4AB' }}>3 W · 5 R</div>
+                  </div>
+                </div>
               </div>
             </div>
-          ))}
-        </div>
 
-        {/* Bottom nav placeholder */}
-        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 80, background: 'rgba(15,20,25,0.96)', borderTop: '1px solid #2D343F', display: 'flex', alignItems: 'center', padding: '12px 8px 24px' }}>
-          {['🎯', '💼', '🤖', '💰', '👤'].map((i, idx) => (
-            <div key={idx} style={{ flex: 1, textAlign: 'center', fontSize: 22, opacity: idx === 0 ? 1 : 0.4 }}>{i}</div>
-          ))}
+            {/* AI Valuation prompt with fancy icon */}
+            <div style={{ margin: '0 20px 14px', background: '#1A1F26', border: '1px solid rgba(232,93,44,0.3)', borderRadius: 14, padding: 14 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 10 }}>
+                <ActionIcon name="sparkles" color="#E85D2C" size={20} />
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontSize: 14, fontWeight: 700, color: '#F5F5F5' }}>AI Valuation Tool</div>
+                  <div style={{ fontSize: 11, color: '#A0A4AB' }}>VIN + odo → Retail/Wholesale range ±5%</div>
+                </div>
+              </div>
+              <button style={{
+                width: '100%', padding: '11px', borderRadius: 10, border: 'none',
+                background: 'linear-gradient(135deg, #E85D2C 0%, #FFB800 100%)',
+                color: '#fff', fontWeight: 700, fontSize: 13, cursor: 'pointer',
+                boxShadow: '0 6px 16px rgba(232,93,44,0.35)',
+              }}>
+                Định giá xe mới →
+              </button>
+            </div>
+
+            {/* Tab bar */}
+            <div style={{ padding: '0 20px', display: 'flex', gap: 8, marginBottom: 12 }}>
+              {[
+                { l: 'Săn xe', active: true, count: 3 },
+                { l: 'Owner CRM', active: false, count: 8 },
+                { l: 'Income', active: false, count: null },
+              ].map(t => (
+                <div key={t.l} style={{
+                  flex: 1, padding: '8px 6px', borderRadius: 10, textAlign: 'center',
+                  background: t.active ? 'rgba(232,93,44,0.15)' : 'transparent',
+                  border: t.active ? '1px solid rgba(232,93,44,0.3)' : '1px solid #2D343F',
+                }}>
+                  <div style={{ fontSize: 12, fontWeight: 600, color: t.active ? '#E85D2C' : '#A0A4AB' }}>
+                    {t.l} {t.count != null && <span style={{ fontSize: 10, padding: '1px 5px', borderRadius: 4, background: t.active ? 'rgba(232,93,44,0.3)' : '#2D343F', marginLeft: 4 }}>{t.count}</span>}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Lead list */}
+            <div style={{ padding: '0 20px 20px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <div style={{ fontSize: 12, color: '#A0A4AB', fontWeight: 600 }}>Owner leads gần bạn</div>
+              {leads.map(l => (
+                <div key={l.name} style={{
+                  background: '#1A1F26', border: '1px solid #2D343F', borderRadius: 12, padding: 12,
+                  display: 'flex', flexDirection: 'column', gap: 6,
+                }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                    <div>
+                      <div style={{ fontSize: 13, fontWeight: 700, color: '#F5F5F5' }}>{l.name}</div>
+                      <div style={{ fontSize: 11, color: '#A0A4AB', marginTop: 2 }}>{l.vehicle}</div>
+                    </div>
+                    <span style={{
+                      fontSize: 10, padding: '3px 8px', borderRadius: 12, fontWeight: 700,
+                      background: l.score === 'A' ? 'rgba(16,185,129,0.15)' : 'rgba(255,184,0,0.15)',
+                      color: l.score === 'A' ? 'var(--success)' : '#FFB800',
+                    }}>Score {l.score}</span>
+                  </div>
+                  <div style={{ display: 'flex', gap: 10, fontSize: 11, color: '#6B7280', alignItems: 'center' }}>
+                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}><Ico name="pin" size={11} /> {l.area}</span>
+                    <span>· {l.dist}</span>
+                    <span>· {l.km} km</span>
+                  </div>
+                  <div style={{ display: 'flex', gap: 6, marginTop: 2 }}>
+                    {l.status === 'new' && (
+                      <button style={{ flex: 1, padding: '8px', borderRadius: 8, border: 'none', background: '#E85D2C', color: '#fff', fontWeight: 700, fontSize: 11, cursor: 'pointer', boxShadow: '0 4px 10px rgba(232,93,44,0.3)' }}>
+                        Nhận lead · còn 28p
+                      </button>
+                    )}
+                    {l.status === 'visited' && (
+                      <>
+                        <button style={{ flex: 1, padding: '8px', borderRadius: 8, border: '1px solid #2D343F', background: 'transparent', color: '#F5F5F5', fontWeight: 600, fontSize: 11 }}>Định giá lại</button>
+                        <button style={{ flex: 1, padding: '8px', borderRadius: 8, border: 'none', background: '#E85D2C', color: '#fff', fontWeight: 700, fontSize: 11 }}>Trình 2 channel</button>
+                      </>
+                    )}
+                    {l.status === 'auction' && (
+                      <div style={{ flex: 1, padding: '6px 8px', borderRadius: 8, background: 'rgba(232,93,44,0.1)', border: '1px solid rgba(232,93,44,0.3)', textAlign: 'center', fontSize: 11, color: '#E85D2C', fontWeight: 700 }}>
+                        🔥 Auction live · 4 bids
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Bottom nav with fancy 3D icons */}
+          <div style={{ flexShrink: 0, height: 84, background: 'rgba(15,20,25,0.98)', borderTop: '1px solid #2D343F', display: 'flex', alignItems: 'center', padding: '8px 6px 24px', backdropFilter: 'blur(8px)' }}>
+            {[
+              { i: 'home', l: 'Săn xe', active: true },
+              { i: 'list', l: 'Pipeline' },
+              { i: 'sparkles', l: 'AI Tool' },
+              { i: 'dollar', l: 'Income' },
+              { i: 'user', l: 'Profile' },
+            ].map((t, idx) => (
+              <div key={idx} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+                <FancyIcon name={t.i} active={t.active} size={18} />
+                <span style={{ fontSize: 9, fontWeight: 600, color: t.active ? '#E85D2C' : '#6B7280' }}>{t.l}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -388,7 +476,7 @@ const Screen15_ISWeb = () => {
   ];
 
   return (
-    <div className="otobank" style={{ width: 1440, minHeight: 1800, background: 'var(--bg)', position: 'relative' }}>
+    <div className="otobank" style={{ width: 1440, minHeight: 1800, background: 'var(--bg)' }}>
       <PlaceholderRibbon phase="Phase 5 (Tháng 5-6)" refDoc="PRD §12 IS Role · Web View" />
 
       {/* Header bar */}
@@ -607,18 +695,26 @@ const Screen16_WholesaleAuctionMobile = () => {
   ];
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', padding: '40px 20px', background: 'transparent', position: 'relative' }}>
+    <div className="otobank">
       <PlaceholderRibbon phase="Phase 4 (Tháng 4-5)" refDoc="PRD §11 · Dealer Mobile" />
-      <div style={{
-        width: 393, minHeight: 852, background: '#0F1419', borderRadius: 48,
-        border: '8px solid #1A1F26', boxShadow: '0 40px 80px rgba(0,0,0,0.6)',
-        overflow: 'hidden', position: 'relative',
-      }}>
-        {/* Status bar */}
-        <div style={{ height: 47, padding: '14px 28px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontFamily: '"Inter", sans-serif', fontSize: 14, fontWeight: 600, color: '#F5F5F5' }}>
-          <span>9:41</span>
-          <span style={{ display: 'flex', gap: 6, fontSize: 12 }}>📶 📡 🔋</span>
-        </div>
+      <div style={{ display: 'flex', justifyContent: 'center', padding: '32px 20px 48px' }}>
+        <div style={{
+          width: 393, height: 852, background: '#0F1419', borderRadius: 48,
+          border: '8px solid #1A1F26', boxShadow: '0 40px 80px rgba(0,0,0,0.6)',
+          overflow: 'hidden', position: 'relative', display: 'flex', flexDirection: 'column',
+        }}>
+          {/* Status bar */}
+          <div style={{ height: 47, padding: '14px 28px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontFamily: '"Inter", sans-serif', fontSize: 14, fontWeight: 600, color: '#F5F5F5', flexShrink: 0 }}>
+            <span>9:41</span>
+            <span style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+              <svg width="16" height="11" viewBox="0 0 16 11"><rect x="0" y="6" width="3" height="5" fill="#fff"/><rect x="4" y="4" width="3" height="7" fill="#fff"/><rect x="8" y="2" width="3" height="9" fill="#fff"/><rect x="12" y="0" width="3" height="11" fill="#fff"/></svg>
+              <span style={{ fontSize: 11 }}>5G</span>
+              <svg width="22" height="11" viewBox="0 0 22 11"><rect x="0" y="0" width="18" height="11" rx="2" fill="none" stroke="#fff" strokeWidth="1"/><rect x="2" y="2" width="14" height="7" fill="#fff"/><rect x="19" y="3.5" width="2" height="4" fill="#fff"/></svg>
+            </span>
+          </div>
+
+          {/* Scrollable content */}
+          <div style={{ flex: 1, overflowY: 'auto' }}>
 
         {/* Header */}
         <div style={{ padding: '12px 20px 16px' }}>
@@ -758,23 +854,25 @@ const Screen16_WholesaleAuctionMobile = () => {
           ))}
         </div>
 
-        {/* Bottom nav */}
-        <div style={{ position: 'sticky', bottom: 0, height: 80, background: 'rgba(15,20,25,0.96)', borderTop: '1px solid #2D343F', display: 'flex', alignItems: 'center', padding: '12px 8px 24px', backdropFilter: 'blur(8px)' }}>
-          {[
-            { i: '🏷', l: 'Auctions', a: true },
-            { i: '💰', l: 'My bids', count: 6 },
-            { i: '🚗', l: 'Inventory', count: 142 },
-            { i: '📊', l: 'Stats' },
-            { i: '👤', l: 'Profile' },
-          ].map((t, idx) => (
-            <div key={idx} style={{ flex: 1, textAlign: 'center', position: 'relative' }}>
-              <div style={{ fontSize: 22, opacity: t.a ? 1 : 0.4 }}>{t.i}</div>
-              <div style={{ fontSize: 9, fontWeight: 600, color: t.a ? '#E85D2C' : '#6B7280', marginTop: 2 }}>{t.l}</div>
-              {t.count != null && (
-                <span style={{ position: 'absolute', top: 0, right: '24%', minWidth: 14, height: 14, padding: '0 3px', borderRadius: 7, background: '#E85D2C', color: '#fff', fontSize: 8, fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{t.count}</span>
-              )}
-            </div>
-          ))}
+          </div>
+          {/* Bottom nav with fancy 3D icons */}
+          <div style={{ flexShrink: 0, height: 84, background: 'rgba(15,20,25,0.98)', borderTop: '1px solid #2D343F', display: 'flex', alignItems: 'center', padding: '8px 6px 24px', backdropFilter: 'blur(8px)' }}>
+            {[
+              { i: 'list', l: 'Auctions', active: true },
+              { i: 'dollar', l: 'My bids', count: 6 },
+              { i: 'car', l: 'Inventory', count: 142 },
+              { i: 'trending', l: 'Stats' },
+              { i: 'user', l: 'Profile' },
+            ].map((t, idx) => (
+              <div key={idx} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, position: 'relative' }}>
+                <FancyIcon name={t.i} active={t.active} size={18} />
+                <span style={{ fontSize: 9, fontWeight: 600, color: t.active ? '#E85D2C' : '#6B7280' }}>{t.l}</span>
+                {t.count != null && (
+                  <span style={{ position: 'absolute', top: -2, right: '20%', minWidth: 16, height: 16, padding: '0 4px', borderRadius: 8, background: '#E85D2C', color: '#fff', fontSize: 9, fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 6px rgba(232,93,44,0.5)' }}>{t.count}</span>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
