@@ -87,7 +87,8 @@ const SCREENS = [
   { n: '08', name: 'AC Sales Mobile App', dim: 'iPhone 14 Pro', group: 'Sales Network', comp: 'Screen08_Mobile' },
   { n: '09', name: 'Order Tracking', dim: '1440 × 1300', group: 'Post-purchase', comp: 'Screen09_Tracking' },
   { n: '11', name: 'AI Pricing Intelligence', dim: '1440 × 2400', group: 'Internal Tools', comp: 'Screen11_AIPricing' },
-  { n: '13', name: 'Wholesale Auction (Dealer)', dim: '1440 × 1400', group: '⭐ STAR Modules — sắp build', comp: 'Screen13_WholesaleAuction', placeholder: true, tag: 'NEW' },
+  { n: '13', name: 'Wholesale Auction (Desktop)', dim: '1440 × 1400', group: '⭐ STAR Modules — sắp build', comp: 'Screen13_WholesaleAuction', placeholder: true, tag: 'NEW' },
+  { n: '16', name: 'Wholesale Auction (Mobile)', dim: 'iPhone 14 Pro', group: '⭐ STAR Modules — sắp build', comp: 'Screen16_WholesaleAuctionMobile', placeholder: true, tag: 'NEW' },
   { n: '14', name: 'IS App (Mobile)', dim: 'iPhone 14 Pro', group: '⭐ STAR Modules — sắp build', comp: 'Screen14_ISApp', placeholder: true, tag: 'NEW' },
   { n: '15', name: 'IS Web Console (Desktop)', dim: '1440 × 1800', group: '⭐ STAR Modules — sắp build', comp: 'Screen15_ISWeb', placeholder: true, tag: 'NEW' },
   { n: '10', name: 'IRC Operations', dim: '1440 × 1100', group: '❌ Out of MVP scope', comp: 'Screen10_IRC', outOfScope: true, tag: 'DROP' },
@@ -136,7 +137,7 @@ function App() {
         <nav className="sidebar">
           <div className="sidebar-header">
             <div className="sidebar-title">Otobank</div>
-            <div className="sidebar-sub">PRD MVP v3 · 14 màn hình</div>
+            <div className="sidebar-sub">PRD MVP v3 · 15 màn hình</div>
           </div>
           {Object.entries(GROUPS).map(([group, list]) => (
             <div key={group}>

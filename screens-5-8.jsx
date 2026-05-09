@@ -41,16 +41,16 @@ const Screen05_Checkout = () => (
       {/* Left — Order details */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
         {/* Vehicle */}
-        <div className="card" style={{ padding: 24 }}>
-          <div style={{ fontSize: 12, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 12 }}>Đơn hàng của bạn</div>
-          <div style={{ display: 'grid', gridTemplateColumns: '180px 1fr auto', gap: 18, alignItems: 'center' }}>
-            <div style={{ width: 180, aspectRatio: '4/3', borderRadius: 10, overflow: 'hidden' }}>
+        <div className="card" style={{ padding: 32 }}>
+          <div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700, marginBottom: 16 }}>● ĐƠN HÀNG CỦA BẠN</div>
+          <div style={{ display: 'grid', gridTemplateColumns: '200px 1fr auto', gap: 24, alignItems: 'center' }}>
+            <div style={{ width: 200, aspectRatio: '4/3', borderRadius: 12, overflow: 'hidden' }}>
               <img src="uploads/s02-card01-honda-crv-blue.png" alt="Honda CR-V 2022" className="vehicle-image" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             </div>
             <div>
-              <div style={{ fontSize: 18, fontWeight: 600 }}>Honda CR-V 1.5L Turbo</div>
-              <div style={{ fontSize: 13, color: 'var(--text-2)', marginTop: 4 }}>2022 • 28,500 km • Tự động • Xăng • Trắng ngọc trai</div>
-              <div className="mono" style={{ fontSize: 22, fontWeight: 700, marginTop: 10 }}>920,000,000 ₫</div>
+              <div style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 22, fontWeight: 700, letterSpacing: '-0.01em' }}>Honda CR-V 1.5L Turbo</div>
+              <div style={{ fontSize: 14, color: 'var(--text-2)', marginTop: 6 }}>2022 · 28,500 km · Tự động · Xăng · Trắng ngọc trai</div>
+              <div className="mono" style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 28, fontWeight: 800, marginTop: 14, color: 'var(--accent)', letterSpacing: '-0.02em' }}>920,000,000 ₫</div>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 6, fontSize: 13 }}>
               <a style={{ color: 'var(--accent)' }}>Thay đổi</a>
@@ -64,7 +64,7 @@ const Screen05_Checkout = () => (
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <Ico name="truck" size={18} />
-              <div style={{ fontSize: 16, fontWeight: 600 }}>Thông tin giao xe</div>
+              <div style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 22, fontWeight: 700, letterSpacing: '-0.01em' }}>Thông tin giao xe</div>
             </div>
             <a style={{ fontSize: 13, color: 'var(--accent)' }}>Chỉnh sửa</a>
           </div>
@@ -88,7 +88,7 @@ const Screen05_Checkout = () => (
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <Ico name="bank" size={18} />
-              <div style={{ fontSize: 16, fontWeight: 600 }}>Tài chính</div>
+              <div style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 22, fontWeight: 700, letterSpacing: '-0.01em' }}>Tài chính</div>
             </div>
             <a style={{ fontSize: 13, color: 'var(--accent)' }}>So sánh các gói</a>
           </div>
@@ -350,84 +350,120 @@ const Screen06_Sell = () => (
 
 const Screen07_Financing = () => {
   const banks = [
-    { n: 'VPBank', best: true, rate: '8.3%', monthly: 13200000, total: 789000000, perks: ['Lãi cố định 24 tháng đầu', 'Miễn phí trả nợ trước hạn từ tháng 13', 'Pre-approval không ảnh hưởng credit score'] },
-    { n: 'Techcombank', rate: '8.5%', monthly: 13300000, total: 798000000, perks: ['Giải ngân trong 4 giờ', 'Tích điểm Loyalty 2x', 'Cashback 0.5% nếu thanh toán đúng hạn'] },
-    { n: 'VIB', rate: '8.7%', monthly: 13400000, total: 806000000, perks: ['Down payment chỉ từ 20%', 'Tặng 1 năm bảo hiểm vật chất', 'eKYC 100% online'] },
+    { n: 'VPBank', best: true, rate: '8.3%', monthly: 13200000, total: 789000000, perks: ['Lãi cố định 24 tháng đầu', 'Miễn phí trả nợ trước hạn từ tháng 13', 'Pre-approval không ảnh hưởng credit score', 'Giải ngân trong 4 giờ làm việc'], live: true },
+    { n: 'Techcombank', rate: '8.5%', monthly: 13300000, total: 798000000, perks: ['Phase 2 — Q3 2026'], live: false },
+    { n: 'VIB', rate: '8.7%', monthly: 13400000, total: 806000000, perks: ['Phase 2 — Q4 2026'], live: false },
   ];
   return (
     <div className="otobank" style={{ width: 1440, minHeight: 1500, background: 'var(--bg)' }}>
       <OtobankNav active="finance" />
 
-      <div style={{ padding: '32px 80px 16px', maxWidth: 1280, margin: '0 auto' }}>
+      <div style={{ padding: '32px 96px 16px', maxWidth: 1320, margin: '0 auto' }}>
         <Stepper steps={['Thông tin', 'Thu nhập', 'Xác thực eKYC', 'Kết quả']} current={3} />
       </div>
 
-      <div style={{ padding: '24px 80px 60px', maxWidth: 1280, margin: '0 auto' }}>
+      <div style={{ padding: '40px 96px 80px', maxWidth: 1320, margin: '0 auto' }}>
         {/* Hero */}
-        <div style={{ textAlign: 'center', marginBottom: 32 }}>
-          <div className="badge badge-deal" style={{ marginBottom: 14 }}>
-            <Ico name="check" size={12} /> Pre-approval thành công trong 4 phút 18 giây
+        <div style={{ textAlign: 'center', marginBottom: 56 }}>
+          <div style={{
+            display: 'inline-flex', alignItems: 'center', gap: 8,
+            background: 'rgba(16,185,129,0.12)', border: '1px solid rgba(16,185,129,0.3)',
+            padding: '8px 14px', borderRadius: 999, marginBottom: 24,
+          }}>
+            <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--success)' }} />
+            <span style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 12, fontWeight: 700, color: 'var(--success)', letterSpacing: '0.08em' }}>
+              ✓ PRE-APPROVAL THÀNH CÔNG · 4 phút 18 giây
+            </span>
           </div>
-          <h1 style={{ fontSize: 36, margin: 0 }}>3 ngân hàng đã pre-approve khoản vay của bạn</h1>
-          <p style={{ fontSize: 15, color: 'var(--text-2)', marginTop: 12, maxWidth: 640, margin: '12px auto 0' }}>
-            Khoản vay <strong style={{ color: 'var(--text)' }}>644,000,000 ₫</strong> (70% giá xe Honda CR-V 920M ₫) — 60 tháng. Chọn ngân hàng phù hợp với bạn.
+          <h1 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 48, fontWeight: 800, margin: 0, letterSpacing: '-0.02em', lineHeight: 1.05 }}>VPBank đã duyệt khoản vay của bạn</h1>
+          <p style={{ fontSize: 18, color: 'var(--text-2)', marginTop: 16, maxWidth: 720, margin: '16px auto 0', lineHeight: 1.5 }}>
+            Khoản vay <strong style={{ color: 'var(--text)' }}>644,000,000 ₫</strong> (70% giá xe Honda CR-V 920M) · 60 tháng · Lãi suất 8.3%/năm cố định 24 tháng đầu.
           </p>
         </div>
 
         {/* Offer cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18, marginBottom: 28 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24, marginBottom: 40 }}>
           {banks.map(b => (
             <div key={b.n} className="card" style={{
-              padding: 28, position: 'relative',
-              border: b.best ? '2px solid var(--accent-2)' : '1px solid var(--border)',
-              background: b.best ? 'linear-gradient(180deg, rgba(255,184,0,0.06), var(--surface))' : 'var(--surface)',
+              padding: 32, position: 'relative',
+              border: b.best ? '2px solid var(--accent)' : '1px solid var(--border)',
+              background: b.best ? 'linear-gradient(180deg, rgba(232,93,44,0.05), var(--surface))' : 'var(--surface)',
+              opacity: b.live === false ? 0.5 : 1,
             }}>
               {b.best && (
-                <span className="badge badge-premium" style={{ position: 'absolute', top: -12, left: 24, padding: '6px 12px' }}>
-                  <Ico name="award" size={12} /> Đề xuất tốt nhất
+                <span style={{
+                  position: 'absolute', top: -14, left: 24,
+                  padding: '6px 14px', borderRadius: 999, background: 'var(--accent)',
+                  color: '#fff', fontSize: 12, fontWeight: 700, letterSpacing: '0.04em',
+                  display: 'inline-flex', alignItems: 'center', gap: 6,
+                  fontFamily: '"JetBrains Mono", monospace',
+                }}>
+                  ★ PILOT BANK · MVP LIVE
                 </span>
               )}
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 18 }}>
+              {b.live === false && (
+                <span style={{
+                  position: 'absolute', top: -14, left: 24,
+                  padding: '6px 14px', borderRadius: 999, background: 'var(--surface-2)',
+                  color: 'var(--text-3)', fontSize: 11, fontWeight: 700, letterSpacing: '0.04em',
+                  fontFamily: '"JetBrains Mono", monospace', border: '1px solid var(--border)',
+                }}>
+                  PHASE 2 — chưa active
+                </span>
+              )}
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24 }}>
                 <BankLogo name={b.n} w={120} />
-                <span className="badge badge-deal"><Ico name="check" size={11} /> Approved</span>
+                {b.live ? (
+                  <span style={{ fontSize: 11, padding: '5px 10px', borderRadius: 999, background: 'rgba(16,185,129,0.15)', color: 'var(--success)', fontWeight: 700, letterSpacing: '0.04em' }}>● APPROVED</span>
+                ) : (
+                  <span style={{ fontSize: 11, padding: '5px 10px', borderRadius: 999, background: 'var(--surface-2)', color: 'var(--text-3)', fontWeight: 700 }}>○ Q3-Q4 2026</span>
+                )}
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, marginBottom: 4 }}>
-                <span className="mono" style={{ fontSize: 38, fontWeight: 800, color: 'var(--text)' }}>{b.rate}</span>
-                <span style={{ fontSize: 14, color: 'var(--text-2)' }}>/năm</span>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 6 }}>
+                <span className="mono" style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 56, fontWeight: 800, color: b.best ? 'var(--accent)' : 'var(--text)', letterSpacing: '-0.03em', lineHeight: 1 }}>{b.rate}</span>
+                <span style={{ fontSize: 16, color: 'var(--text-2)' }}>/năm</span>
               </div>
-              <div style={{ fontSize: 13, color: 'var(--text-2)', marginBottom: 18 }}>Cố định 24 tháng đầu • 60 tháng tổng</div>
+              <div style={{ fontSize: 14, color: 'var(--text-2)', marginBottom: 24 }}>Cố định 24 tháng đầu · 60 tháng tổng</div>
 
-              <div style={{ padding: '14px 16px', background: 'var(--surface-2)', borderRadius: 10, marginBottom: 16 }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, marginBottom: 8 }}>
+              <div style={{ padding: '18px 20px', background: 'var(--surface-2)', borderRadius: 12, marginBottom: 20 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 14, marginBottom: 12 }}>
                   <span style={{ color: 'var(--text-2)' }}>Trả hàng tháng</span>
-                  <span className="mono" style={{ fontWeight: 700 }}>{fmt(b.monthly)} ₫</span>
+                  <span className="mono" style={{ fontWeight: 800, fontSize: 18 }}>{fmt(b.monthly)} ₫</span>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 14 }}>
                   <span style={{ color: 'var(--text-2)' }}>Tổng phải trả</span>
-                  <span className="mono" style={{ fontWeight: 600 }}>{fmt(b.total)} ₫</span>
+                  <span className="mono" style={{ fontWeight: 600, fontSize: 14 }}>{fmt(b.total)} ₫</span>
                 </div>
               </div>
 
-              <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 18px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+              <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px', display: 'flex', flexDirection: 'column', gap: 12 }}>
                 {b.perks.map(p => (
-                  <li key={p} style={{ fontSize: 12, color: 'var(--text-2)', display: 'flex', gap: 8, alignItems: 'flex-start' }}>
-                    <span style={{ color: 'var(--success)', marginTop: 2 }}><Ico name="check" size={11} /></span>{p}
+                  <li key={p} style={{ fontSize: 13, color: 'var(--text-2)', display: 'flex', gap: 10, alignItems: 'flex-start', lineHeight: 1.5 }}>
+                    <span style={{ color: b.live ? 'var(--success)' : 'var(--text-3)', marginTop: 2, flex: '0 0 auto' }}>{b.live ? <Ico name="check" size={13} /> : '○'}</span>{p}
                   </li>
                 ))}
               </ul>
 
-              <button className={b.best ? 'btn btn-primary' : 'btn btn-outline'} style={{ width: '100%' }}>
-                Chọn {b.n} <Ico name="arrow" size={14} />
+              <button className={b.best ? 'btn btn-primary' : 'btn btn-outline'} disabled={!b.live} style={{ width: '100%', padding: '14px', fontSize: 14, fontWeight: 700, opacity: b.live ? 1 : 0.4, cursor: b.live ? 'pointer' : 'not-allowed' }}>
+                {b.live ? <>Chọn VPBank <Ico name="arrow" size={14} /></> : 'Phase 2 — chờ ra mắt'}
               </button>
             </div>
           ))}
         </div>
 
+        {/* Note about MVP scope */}
+        <div style={{
+          padding: '14px 20px', background: 'rgba(232,93,44,0.06)', border: '1px solid rgba(232,93,44,0.2)',
+          borderRadius: 10, fontSize: 13, color: 'var(--text-2)', marginBottom: 32, lineHeight: 1.5,
+        }}>
+          <strong style={{ color: 'var(--accent)' }}>📌 MVP scope (PRD §1.3):</strong> Chỉ <strong style={{ color: 'var(--text)' }}>1 ngân hàng pilot</strong> (VPBank — chọn vì API tốt nhất) trong 6 tháng đầu. Techcombank + VIB sẽ tích hợp ở Phase 2 sau khi pilot validate được flow.
+        </div>
+
         {/* Customize */}
-        <div className="card" style={{ padding: 28, marginBottom: 24 }}>
-          <h3 style={{ fontSize: 18, margin: '0 0 6px' }}>Tuỳ chỉnh khoản vay</h3>
-          <p style={{ fontSize: 13, color: 'var(--text-2)', margin: '0 0 22px' }}>Thay đổi down payment hoặc thời hạn để xem trả hàng tháng cập nhật real-time.</p>
+        <div className="card" style={{ padding: 36, marginBottom: 32 }}>
+          <h3 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 24, fontWeight: 700, margin: '0 0 8px', letterSpacing: '-0.01em' }}>Tuỳ chỉnh khoản vay</h3>
+          <p style={{ fontSize: 15, color: 'var(--text-2)', margin: '0 0 28px', lineHeight: 1.5 }}>Thay đổi down payment hoặc thời hạn để xem trả hàng tháng cập nhật real-time.</p>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32 }}>
             {[

@@ -80,6 +80,30 @@
   letter-spacing: -0.02em;
 }
 
+/* International standard typography scale — applies when no inline override */
+.otobank h1 { font-size: 40px; line-height: 1.1; }
+.otobank h2 { font-size: 28px; line-height: 1.2; }
+.otobank h3 { font-size: 22px; line-height: 1.3; }
+.otobank h4 { font-size: 18px; line-height: 1.4; }
+.otobank p { line-height: 1.6; }
+
+/* Eyebrow utility — JetBrains Mono uppercase with letter spacing */
+.otobank .eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--text-3);
+}
+.otobank .eyebrow.accent { color: var(--accent); }
+.otobank .eyebrow.success { color: var(--success); }
+
+/* KPI big number — for stat cards across screens */
+.otobank .kpi-num {
+  font-family: var(--font-display);
+  font-size: 36px; font-weight: 800;
+  letter-spacing: -0.02em; line-height: 1;
+}
+
 .otobank .mono { font-family: var(--font-mono); }
 
 .otobank .btn {

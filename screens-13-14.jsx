@@ -343,12 +343,48 @@ const Screen15_ISWeb = () => {
   ];
 
   const kanbanCols = [
-    { stage: 'Lead (mới)', count: 3, color: '#6B7280' },
-    { stage: 'Visited', count: 4, color: '#3B82F6' },
-    { stage: 'Negotiating', count: 2, color: '#FFB800' },
-    { stage: 'Auctioning', count: 1, color: '#E85D2C' },
-    { stage: 'Retail listed', count: 3, color: '#10B981' },
-    { stage: 'Sold (90d)', count: 12, color: 'var(--success)' },
+    {
+      stage: 'Lead (mới)', count: 3, color: '#6B7280',
+      cards: [
+        { name: 'A. Trần Hữu', veh: 'Honda CR-V 2021', meta: '32k km · Q.2', age: '2h trước', tag: 'Inbound' },
+        { name: 'C. Phạm Lan', veh: 'Toyota Vios 2020', meta: '64k km · Tân Bình', age: '4h trước', tag: 'Inbound' },
+        { name: 'A. Bùi Long', veh: 'VinFast Lux 2022', meta: '18k km · Thủ Đức', age: '8h trước', tag: 'Outbound' },
+      ],
+    },
+    {
+      stage: 'Visited', count: 4, color: '#3B82F6',
+      cards: [
+        { name: 'A. Phạm Quốc', veh: 'Mercedes C200 2020', meta: '52k km · 900-960M', age: 'Visit T2', tag: 'Wholesale' },
+        { name: 'C. Trần Mai', veh: 'Mazda CX-5 2022', meta: '28k km · 800-840M', age: 'Visit T3', tag: 'Hesitant' },
+      ],
+    },
+    {
+      stage: 'Negotiating', count: 2, color: '#FFB800',
+      cards: [
+        { name: 'C. Nguyễn Hà', veh: 'Toyota Innova 2021', meta: '78k km · 680-720M', age: 'Day 5', tag: 'Wholesale' },
+        { name: 'A. Đặng Tuấn', veh: 'Ford Ranger 2022', meta: '38k km · 880-940M', age: 'Day 3', tag: '?', urgent: true },
+      ],
+    },
+    {
+      stage: 'Auctioning', count: 1, color: '#E85D2C',
+      cards: [
+        { name: 'A. Lê Tâm', veh: 'Hyundai Tucson 2021', meta: '41k km · Floor 720M', age: '⏱ Còn 14h', tag: '4 bids', live: true },
+      ],
+    },
+    {
+      stage: 'Retail listed', count: 3, color: '#10B981',
+      cards: [
+        { name: 'C. Trần My', veh: 'Mazda 3 2022', meta: '24k km · 620M list', age: 'Day 12', tag: '32 views' },
+        { name: 'A. Hồ Quang', veh: 'Kia Seltos 2023', meta: '14k km · 690M list', age: 'Day 4', tag: '8 leads' },
+      ],
+    },
+    {
+      stage: 'Sold (90d)', count: 12, color: 'var(--success)',
+      cards: [
+        { name: 'A. Vũ Hùng', veh: 'Ford Ranger 2022', meta: '905M (W)', age: 'Day −8', tag: '+13.6M' },
+        { name: '+ 11 deals khác', veh: 'Tổng commission', meta: '146M ₫', age: '90 ngày', tag: '', summary: true },
+      ],
+    },
   ];
 
   return (
@@ -399,16 +435,59 @@ const Screen15_ISWeb = () => {
         </div>
 
         {/* Pipeline Kanban */}
-        <h2 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 24, fontWeight: 700, margin: '0 0 16px', letterSpacing: '-0.01em' }}>Pipeline kanban</h2>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+          <h2 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 28, fontWeight: 700, margin: 0, letterSpacing: '-0.02em' }}>Pipeline kanban</h2>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, fontSize: 13, color: 'var(--text-2)' }}>
+            <span>Drag để chuyển stage</span>
+            <span style={{ width: 1, height: 14, background: 'var(--border)' }} />
+            <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--success)' }} /> Auto-saved
+            </span>
+          </div>
+        </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: 14, marginBottom: 40 }}>
           {kanbanCols.map(col => (
-            <div key={col.stage} style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 12, padding: 14 }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12, paddingBottom: 10, borderBottom: `2px solid ${col.color}` }}>
-                <span style={{ fontSize: 12, fontWeight: 700, color: col.color, textTransform: 'uppercase', letterSpacing: '0.04em' }}>{col.stage}</span>
-                <span className="mono" style={{ fontSize: 14, fontWeight: 800, color: 'var(--text)' }}>{col.count}</span>
+            <div key={col.stage} style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 14, padding: 14 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14, paddingBottom: 10, borderBottom: `2px solid ${col.color}` }}>
+                <span style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, fontWeight: 700, color: col.color, textTransform: 'uppercase', letterSpacing: '0.06em' }}>{col.stage}</span>
+                <span className="mono" style={{ fontSize: 16, fontWeight: 800, color: 'var(--text)' }}>{col.count}</span>
               </div>
-              <div style={{ height: 120, background: 'var(--surface-2)', borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, color: 'var(--text-3)' }}>
-                {col.count > 0 ? `${col.count} card${col.count > 1 ? 's' : ''}` : 'Empty'}
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                {col.cards.map((c, i) => (
+                  <div key={i} style={{
+                    background: c.summary ? 'transparent' : 'var(--surface-2)',
+                    border: c.summary ? '1px dashed var(--border)' : (c.urgent ? '1px solid rgba(239,68,68,0.4)' : c.live ? `1px solid ${col.color}` : '1px solid var(--border)'),
+                    borderLeft: c.summary ? '1px dashed var(--border)' : `3px solid ${col.color}`,
+                    borderRadius: 8, padding: 10, fontSize: 12, cursor: 'grab',
+                    position: 'relative', overflow: 'hidden',
+                  }}>
+                    {c.live && (
+                      <span style={{ position: 'absolute', top: 6, right: 6, fontSize: 8, padding: '2px 6px', borderRadius: 4, background: col.color, color: '#fff', fontWeight: 700, letterSpacing: '0.06em' }}>● LIVE</span>
+                    )}
+                    {c.urgent && !c.live && (
+                      <span style={{ position: 'absolute', top: 6, right: 6, fontSize: 12, lineHeight: 1 }}>🔥</span>
+                    )}
+                    <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)', marginBottom: 3, lineHeight: 1.3 }}>{c.name}</div>
+                    <div style={{ fontSize: 11, color: 'var(--text-2)', marginBottom: 6, lineHeight: 1.3 }}>{c.veh}</div>
+                    <div style={{ fontSize: 10, color: 'var(--text-3)', marginBottom: 6, fontFamily: '"JetBrains Mono", monospace' }}>{c.meta}</div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 6, borderTop: c.summary ? 'none' : '1px solid rgba(255,255,255,0.04)' }}>
+                      <span style={{ fontSize: 10, color: c.urgent ? 'var(--danger)' : 'var(--text-3)', fontWeight: 600 }}>{c.age}</span>
+                      {c.tag && (
+                        <span style={{
+                          fontSize: 9, padding: '2px 6px', borderRadius: 3,
+                          background: `${col.color}25`, color: col.color, fontWeight: 700, letterSpacing: '0.04em',
+                        }}>{c.tag}</span>
+                      )}
+                    </div>
+                  </div>
+                ))}
+
+                {col.count > col.cards.length && (
+                  <div style={{ fontSize: 11, color: 'var(--text-3)', textAlign: 'center', padding: '6px 0', fontStyle: 'italic' }}>
+                    + {col.count - col.cards.length} owner khác
+                  </div>
+                )}
               </div>
             </div>
           ))}
@@ -501,4 +580,205 @@ const Screen15_ISWeb = () => {
   );
 };
 
-Object.assign(window, { Screen13_WholesaleAuction, Screen14_ISApp, Screen15_ISWeb });
+// ─────────────────────────────────────────────────────────
+// Screen 16 — Wholesale Auction (Dealer Mobile) — PLACEHOLDER
+// PRD §11 — companion mobile của Screen 13 desktop
+
+const Screen16_WholesaleAuctionMobile = () => {
+  const auctions = [
+    {
+      id: 'AUC-2026-0142', veh: 'Honda CR-V 1.5L Turbo', year: 2022, km: '28,500',
+      img: 'uploads/s02-card01-honda-crv-blue.png', source: 'Owner', trust: 92,
+      floor: 720, suggested: 760, retail: 920, currentBid: 745, bids: 4,
+      hours: 14, status: 'live', urgent: true,
+    },
+    {
+      id: 'AUC-2026-0141', veh: 'Mazda CX-5 Premium', year: 2023, km: '18,700',
+      img: 'uploads/s02-card03-mazda-cx5-red.png', source: 'Trade-in', trust: 88,
+      floor: 680, suggested: 720, retail: 850, currentBid: 705, bids: 7,
+      hours: 8, status: 'live', urgent: true,
+    },
+    {
+      id: 'AUC-2026-0140', veh: 'Toyota Camry 2.5Q', year: 2022, km: '34,200',
+      img: 'uploads/s02-card02-toyota-camry-white.png', source: 'Owner', trust: 95,
+      floor: 950, suggested: 1010, retail: 1180, currentBid: null, bids: 0,
+      hours: 47, status: 'invited', urgent: false,
+    },
+  ];
+
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center', padding: '40px 20px', background: 'transparent', position: 'relative' }}>
+      <PlaceholderRibbon phase="Phase 4 (Tháng 4-5)" refDoc="PRD §11 · Dealer Mobile" />
+      <div style={{
+        width: 393, minHeight: 852, background: '#0F1419', borderRadius: 48,
+        border: '8px solid #1A1F26', boxShadow: '0 40px 80px rgba(0,0,0,0.6)',
+        overflow: 'hidden', position: 'relative',
+      }}>
+        {/* Status bar */}
+        <div style={{ height: 47, padding: '14px 28px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontFamily: '"Inter", sans-serif', fontSize: 14, fontWeight: 600, color: '#F5F5F5' }}>
+          <span>9:41</span>
+          <span style={{ display: 'flex', gap: 6, fontSize: 12 }}>📶 📡 🔋</span>
+        </div>
+
+        {/* Header */}
+        <div style={{ padding: '12px 20px 16px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
+            <div>
+              <div style={{ fontSize: 11, color: '#A0A4AB', fontFamily: '"JetBrains Mono", monospace', letterSpacing: '0.06em', textTransform: 'uppercase' }}>Dealer · Wholesale Buyer</div>
+              <div style={{ fontSize: 20, fontWeight: 700, color: '#F5F5F5', marginTop: 2 }}>Auto Sài Gòn 168</div>
+            </div>
+            <div style={{ width: 44, height: 44, borderRadius: 12, background: 'rgba(255,184,0,0.18)', border: '1px solid rgba(255,184,0,0.4)', color: '#FFB800', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 12 }}>GOLD</div>
+          </div>
+
+          {/* KPI strip */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8, marginBottom: 16 }}>
+            {[
+              { l: 'Live auctions', v: '23', sub: 'eligible' },
+              { l: 'Win rate 90d', v: '38%', sub: '32/84 bids' },
+              { l: 'Spend T5', v: '12.4', sub: 'tỷ ₫' },
+            ].map(k => (
+              <div key={k.l} style={{ background: '#1A1F26', border: '1px solid #2D343F', borderRadius: 12, padding: '10px 12px' }}>
+                <div style={{ fontSize: 9, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 600 }}>{k.l}</div>
+                <div className="mono" style={{ fontSize: 18, fontWeight: 800, color: '#F5F5F5', marginTop: 2, lineHeight: 1 }}>{k.v}</div>
+                <div style={{ fontSize: 9, color: '#A0A4AB', marginTop: 2 }}>{k.sub}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Tier ladder */}
+        <div style={{ margin: '0 20px 18px', padding: 14, borderRadius: 12, background: 'linear-gradient(135deg, rgba(255,184,0,0.12), rgba(232,93,44,0.06))', border: '1px solid rgba(255,184,0,0.3)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+            <span style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 10, color: '#FFB800', fontWeight: 700, letterSpacing: '0.08em' }}>● TIER GOLD</span>
+            <span style={{ fontSize: 10, color: '#A0A4AB' }}>Notif T+4h sau platinum</span>
+          </div>
+          <div style={{ display: 'flex', gap: 4, alignItems: 'center', fontSize: 9, fontFamily: '"JetBrains Mono", monospace' }}>
+            {['BRONZE', 'SILVER', 'GOLD', 'PLAT'].map((t, i) => (
+              <div key={t} style={{
+                flex: 1, padding: '6px 4px', borderRadius: 4, textAlign: 'center',
+                background: t === 'GOLD' ? '#FFB800' : 'rgba(255,255,255,0.04)',
+                color: t === 'GOLD' ? '#0F1419' : '#6B7280',
+                fontWeight: t === 'GOLD' ? 800 : 600,
+              }}>{t}</div>
+            ))}
+          </div>
+        </div>
+
+        {/* Tab bar — Auction filter */}
+        <div style={{ padding: '0 20px', display: 'flex', gap: 6, marginBottom: 14, overflow: 'auto' }}>
+          {[
+            { l: 'Tất cả', count: 23, active: true },
+            { l: 'SUV', count: 12, active: false },
+            { l: 'Sedan', count: 8, active: false },
+            { l: 'Pickup', count: 3, active: false },
+          ].map(t => (
+            <div key={t.l} style={{
+              padding: '7px 12px', borderRadius: 999, whiteSpace: 'nowrap',
+              background: t.active ? 'rgba(232,93,44,0.15)' : 'transparent',
+              border: t.active ? '1px solid rgba(232,93,44,0.4)' : '1px solid #2D343F',
+              fontSize: 11, fontWeight: 600,
+              color: t.active ? '#E85D2C' : '#A0A4AB',
+            }}>
+              {t.l} <span style={{ opacity: 0.7 }}>· {t.count}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* Live auction list */}
+        <div style={{ padding: '0 20px 16px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ fontSize: 14, fontWeight: 700, color: '#F5F5F5' }}>Auctions đang mời bạn</div>
+            <span style={{ fontSize: 10, color: '#A0A4AB' }}>Sắp xếp: Sắp đóng</span>
+          </div>
+
+          {auctions.map(a => (
+            <div key={a.id} style={{
+              background: '#1A1F26',
+              border: a.status === 'live' ? '1px solid rgba(232,93,44,0.4)' : '1px solid #2D343F',
+              borderRadius: 14, overflow: 'hidden',
+            }}>
+              {/* Image header */}
+              <div style={{ position: 'relative', aspectRatio: '16/8' }}>
+                <img src={a.img} alt={a.veh} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                <div style={{ position: 'absolute', top: 8, left: 8, display: 'flex', gap: 6 }}>
+                  <span style={{ fontSize: 9, padding: '3px 8px', borderRadius: 4, background: a.source === 'Owner' ? 'rgba(232,93,44,0.85)' : 'rgba(16,185,129,0.85)', color: '#fff', fontWeight: 700, letterSpacing: '0.04em' }}>{a.source.toUpperCase()}</span>
+                  <span style={{ fontSize: 9, padding: '3px 8px', borderRadius: 4, background: 'rgba(15,20,25,0.8)', backdropFilter: 'blur(8px)', color: '#10B981', fontWeight: 700, border: '1px solid rgba(16,185,129,0.3)' }}>● {a.trust}</span>
+                </div>
+                <div style={{ position: 'absolute', top: 8, right: 8, padding: '4px 10px', borderRadius: 999, background: a.urgent ? 'rgba(232,93,44,0.95)' : 'rgba(15,20,25,0.85)', backdropFilter: 'blur(8px)', color: '#fff', fontFamily: '"JetBrains Mono", monospace', fontSize: 11, fontWeight: 700 }}>
+                  ⏱ {a.hours}h
+                </div>
+              </div>
+
+              {/* Body */}
+              <div style={{ padding: 14 }}>
+                <div style={{ fontSize: 14, fontWeight: 700, color: '#F5F5F5', marginBottom: 2 }}>{a.veh}</div>
+                <div style={{ fontSize: 11, color: '#A0A4AB', marginBottom: 12 }}>{a.year} · {a.km} km · ID {a.id}</div>
+
+                {/* Price row */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8, marginBottom: 12 }}>
+                  <div>
+                    <div style={{ fontSize: 9, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 600 }}>Floor (kín)</div>
+                    <div className="mono" style={{ fontSize: 14, fontWeight: 700, color: '#A0A4AB', marginTop: 2 }}>{a.floor}M</div>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 9, color: '#FFB800', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 700 }}>Suggested</div>
+                    <div className="mono" style={{ fontSize: 16, fontWeight: 800, color: '#FFB800', marginTop: 2 }}>{a.suggested}M</div>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 9, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 600 }}>Retail</div>
+                    <div className="mono" style={{ fontSize: 14, fontWeight: 700, color: '#6B7280', marginTop: 2, textDecoration: 'line-through' }}>{a.retail}M</div>
+                  </div>
+                </div>
+
+                {/* Status row */}
+                {a.bids > 0 ? (
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 10px', borderRadius: 8, background: 'rgba(232,93,44,0.08)', border: '1px solid rgba(232,93,44,0.2)', marginBottom: 10 }}>
+                    <span style={{ fontSize: 11, color: '#A0A4AB' }}>● {a.bids} sealed bids</span>
+                    <span className="mono" style={{ fontSize: 12, fontWeight: 700, color: '#E85D2C' }}>Bid mới ngẫu nhiên 5p trước</span>
+                  </div>
+                ) : (
+                  <div style={{ padding: '8px 10px', borderRadius: 8, background: 'rgba(255,184,0,0.06)', border: '1px solid rgba(255,184,0,0.2)', marginBottom: 10, fontSize: 11, color: '#FFB800', fontWeight: 600 }}>
+                    🆕 Auction mới · Chưa có bid · First-mover advantage
+                  </div>
+                )}
+
+                {/* CTA */}
+                <button style={{
+                  width: '100%', padding: '11px', borderRadius: 10, border: 'none',
+                  background: a.status === 'live' ? '#E85D2C' : 'transparent',
+                  border: a.status === 'live' ? 'none' : '1px solid #E85D2C',
+                  color: a.status === 'live' ? '#fff' : '#E85D2C',
+                  fontWeight: 700, fontSize: 13, cursor: 'pointer',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+                }}>
+                  {a.status === 'live' ? '💰 Đặt bid kín →' : '👁 Xem chi tiết'}
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom nav */}
+        <div style={{ position: 'sticky', bottom: 0, height: 80, background: 'rgba(15,20,25,0.96)', borderTop: '1px solid #2D343F', display: 'flex', alignItems: 'center', padding: '12px 8px 24px', backdropFilter: 'blur(8px)' }}>
+          {[
+            { i: '🏷', l: 'Auctions', a: true },
+            { i: '💰', l: 'My bids', count: 6 },
+            { i: '🚗', l: 'Inventory', count: 142 },
+            { i: '📊', l: 'Stats' },
+            { i: '👤', l: 'Profile' },
+          ].map((t, idx) => (
+            <div key={idx} style={{ flex: 1, textAlign: 'center', position: 'relative' }}>
+              <div style={{ fontSize: 22, opacity: t.a ? 1 : 0.4 }}>{t.i}</div>
+              <div style={{ fontSize: 9, fontWeight: 600, color: t.a ? '#E85D2C' : '#6B7280', marginTop: 2 }}>{t.l}</div>
+              {t.count != null && (
+                <span style={{ position: 'absolute', top: 0, right: '24%', minWidth: 14, height: 14, padding: '0 3px', borderRadius: 7, background: '#E85D2C', color: '#fff', fontSize: 8, fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{t.count}</span>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+Object.assign(window, { Screen13_WholesaleAuction, Screen14_ISApp, Screen15_ISWeb, Screen16_WholesaleAuctionMobile });
