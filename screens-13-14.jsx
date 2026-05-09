@@ -252,24 +252,11 @@ const Screen14_ISApp = () => {
   return (
     <div className="otobank">
       <PlaceholderRibbon phase="Phase 5 (Tháng 5-6)" refDoc="PRD §12 IS Role · Mobile" />
-      <div style={{ display: 'flex', justifyContent: 'center', padding: '32px 20px 48px' }}>
-        <div style={{
-          width: 393, height: 852, background: '#0F1419', borderRadius: 48,
-          border: '8px solid #1A1F26', boxShadow: '0 40px 80px rgba(0,0,0,0.6)',
-          overflow: 'hidden', position: 'relative', display: 'flex', flexDirection: 'column',
-        }}>
-          {/* Status bar */}
-          <div style={{ height: 47, padding: '14px 28px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontFamily: '"Inter", sans-serif', fontSize: 14, fontWeight: 600, color: '#F5F5F5', flexShrink: 0 }}>
-            <span>9:41</span>
-            <span style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
-              <svg width="16" height="11" viewBox="0 0 16 11"><rect x="0" y="6" width="3" height="5" fill="#fff"/><rect x="4" y="4" width="3" height="7" fill="#fff"/><rect x="8" y="2" width="3" height="9" fill="#fff"/><rect x="12" y="0" width="3" height="11" fill="#fff"/></svg>
-              <span style={{ fontSize: 11 }}>5G</span>
-              <svg width="22" height="11" viewBox="0 0 22 11"><rect x="0" y="0" width="18" height="11" rx="2" fill="none" stroke="#fff" strokeWidth="1"/><rect x="2" y="2" width="14" height="7" fill="#fff"/><rect x="19" y="3.5" width="2" height="4" fill="#fff"/></svg>
-            </span>
-          </div>
-
-          {/* Scrollable content */}
-          <div style={{ flex: 1, overflowY: 'auto' }}>
+      <div style={{ background: 'radial-gradient(ellipse at 50% 30%, #1A1F26 0%, #000 70%)', padding: '40px 60px', display: 'flex', justifyContent: 'center' }}>
+        <PhoneFrame>
+          <div style={{ height: 'calc(100% - 48px)', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+            {/* Scrollable content */}
+            <div style={{ flex: 1, overflowY: 'auto' }}>
             {/* Header */}
             <div style={{ padding: '10px 20px 14px' }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
@@ -411,7 +398,8 @@ const Screen14_ISApp = () => {
               </div>
             ))}
           </div>
-        </div>
+          </div>
+        </PhoneFrame>
       </div>
     </div>
   );
@@ -697,24 +685,11 @@ const Screen16_WholesaleAuctionMobile = () => {
   return (
     <div className="otobank">
       <PlaceholderRibbon phase="Phase 4 (Tháng 4-5)" refDoc="PRD §11 · Dealer Mobile" />
-      <div style={{ display: 'flex', justifyContent: 'center', padding: '32px 20px 48px' }}>
-        <div style={{
-          width: 393, height: 852, background: '#0F1419', borderRadius: 48,
-          border: '8px solid #1A1F26', boxShadow: '0 40px 80px rgba(0,0,0,0.6)',
-          overflow: 'hidden', position: 'relative', display: 'flex', flexDirection: 'column',
-        }}>
-          {/* Status bar */}
-          <div style={{ height: 47, padding: '14px 28px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontFamily: '"Inter", sans-serif', fontSize: 14, fontWeight: 600, color: '#F5F5F5', flexShrink: 0 }}>
-            <span>9:41</span>
-            <span style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
-              <svg width="16" height="11" viewBox="0 0 16 11"><rect x="0" y="6" width="3" height="5" fill="#fff"/><rect x="4" y="4" width="3" height="7" fill="#fff"/><rect x="8" y="2" width="3" height="9" fill="#fff"/><rect x="12" y="0" width="3" height="11" fill="#fff"/></svg>
-              <span style={{ fontSize: 11 }}>5G</span>
-              <svg width="22" height="11" viewBox="0 0 22 11"><rect x="0" y="0" width="18" height="11" rx="2" fill="none" stroke="#fff" strokeWidth="1"/><rect x="2" y="2" width="14" height="7" fill="#fff"/><rect x="19" y="3.5" width="2" height="4" fill="#fff"/></svg>
-            </span>
-          </div>
-
-          {/* Scrollable content */}
-          <div style={{ flex: 1, overflowY: 'auto' }}>
+      <div style={{ background: 'radial-gradient(ellipse at 50% 30%, #1A1F26 0%, #000 70%)', padding: '40px 60px', display: 'flex', justifyContent: 'center' }}>
+        <PhoneFrame>
+          <div style={{ height: 'calc(100% - 48px)', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+            {/* Scrollable content */}
+            <div style={{ flex: 1, overflowY: 'auto' }}>
 
         {/* Header */}
         <div style={{ padding: '12px 20px 16px' }}>
@@ -873,7 +848,8 @@ const Screen16_WholesaleAuctionMobile = () => {
               </div>
             ))}
           </div>
-        </div>
+          </div>
+        </PhoneFrame>
       </div>
     </div>
   );

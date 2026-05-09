@@ -68,6 +68,7 @@
 <script type="text/babel" src="screens-5-8.jsx"></script>
 <script type="text/babel" src="screens-9-12.jsx"></script>
 <script type="text/babel" src="screens-13-14.jsx"></script>
+<script type="text/babel" src="screens-17-18.jsx"></script>
 
 <script type="text/babel" data-presets="env,react">
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
@@ -85,13 +86,15 @@ const SCREENS = [
   { n: '06', name: 'Sell My Car (AI)', dim: '1440 × 1500', group: 'Sell-side & Mobile', comp: 'Screen06_Sell' },
   { n: '07', name: 'Pre-approval Financing', dim: '1440 × 1500', group: 'Buying Flow', comp: 'Screen07_Financing' },
   { n: '08', name: 'AC Sales Mobile App', dim: 'iPhone 14 Pro', group: 'Sales Network', comp: 'Screen08_Mobile' },
+  { n: '17', name: 'AC Working Space (Desktop)', dim: '1440 × 1800', group: 'Sales Network', comp: 'Screen17_ACWorkspace', tag: 'NEW' },
+  { n: '18', name: 'AC Showroom (Public)', dim: '1440 × 2000', group: 'Sales Network', comp: 'Screen18_ACShowroom', tag: 'NEW' },
   { n: '09', name: 'Order Tracking', dim: '1440 × 1300', group: 'Post-purchase', comp: 'Screen09_Tracking' },
   { n: '11', name: 'AI Pricing Intelligence', dim: '1440 × 2400', group: 'Internal Tools', comp: 'Screen11_AIPricing' },
   { n: '13', name: 'Wholesale Auction (Desktop)', dim: '1440 × 1400', group: '⭐ STAR Modules — sắp build', comp: 'Screen13_WholesaleAuction', placeholder: true, tag: 'NEW' },
   { n: '16', name: 'Wholesale Auction (Mobile)', dim: 'iPhone 14 Pro', group: '⭐ STAR Modules — sắp build', comp: 'Screen16_WholesaleAuctionMobile', placeholder: true, tag: 'NEW' },
   { n: '14', name: 'IS App (Mobile)', dim: 'iPhone 14 Pro', group: '⭐ STAR Modules — sắp build', comp: 'Screen14_ISApp', placeholder: true, tag: 'NEW' },
   { n: '15', name: 'IS Web Console (Desktop)', dim: '1440 × 1800', group: '⭐ STAR Modules — sắp build', comp: 'Screen15_ISWeb', placeholder: true, tag: 'NEW' },
-  { n: '10', name: 'IRC Operations', dim: '1440 × 1100', group: '❌ Out of MVP scope', comp: 'Screen10_IRC', outOfScope: true, tag: 'DROP' },
+  { n: '10', name: 'Inventory (Shared) — Nguồn hàng tổng', dim: '1440 × 1900', group: '⭐ STAR Modules — sắp build', comp: 'Screen10_InventoryShared', placeholder: false, tag: 'CORE' },
 ];
 
 // Group screens for the sidebar
@@ -137,7 +140,7 @@ function App() {
         <nav className="sidebar">
           <div className="sidebar-header">
             <div className="sidebar-title">Otobank</div>
-            <div className="sidebar-sub">PRD MVP v3 · 15 màn hình</div>
+            <div className="sidebar-sub">PRD MVP v3 · 17 màn hình</div>
           </div>
           {Object.entries(GROUPS).map(([group, list]) => (
             <div key={group}>

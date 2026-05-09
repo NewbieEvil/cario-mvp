@@ -196,6 +196,409 @@ const BRAND_TO_IMG = {
   'Mercedes C200 2020': 'uploads/s02-card08-mercedes-c-black.png',
 };
 
+// ─────────────────────────────────────────────────────────
+// Screen 10 — Inventory (Shared) — central pool that ACs curate from
+// Sourced primarily from IS (Inventory Specialists) + Dealer uploads + OEM partners
+// AC adds cars from this pool to their personal showroom landing page
+
+const Screen10_InventoryShared = () => {
+  const cars = [
+    { name: 'Honda CR-V 1.5L Turbo 2022', km: '28,500', source: 'IS', sourceLabel: 'IS — A. Hoàng', img: 'uploads/s02-card01-honda-crv-blue.png', trust: 92, floor: 720, retail: 920, acsAdded: 18, daysInPool: 4, hot: true, inMyShop: true },
+    { name: 'Toyota Camry 2.5Q 2022', km: '34,200', source: 'IS', sourceLabel: 'IS — A. Tâm', img: 'uploads/s02-card02-toyota-camry-white.png', trust: 95, floor: 950, retail: 1180, acsAdded: 31, daysInPool: 7, hot: true },
+    { name: 'Mazda CX-5 Premium 2023', km: '18,700', source: 'OEM', sourceLabel: 'OEM — Mazda VN', img: 'uploads/s02-card03-mazda-cx5-red.png', trust: 88, floor: 700, retail: 850, acsAdded: 12, daysInPool: 2, inMyShop: true },
+    { name: 'Ford Ranger Wildtrak 2022', km: '38,200', source: 'Dealer', sourceLabel: 'Dealer — Auto SG 168', img: 'uploads/s02-card04-ford-ranger-blue.png', trust: 78, floor: 820, retail: 990, acsAdded: 7, daysInPool: 11 },
+    { name: 'VinFast Lux SA2.0 2022', km: '21,400', source: 'OEM', sourceLabel: 'OEM — VinFast', img: 'uploads/s02-card05-vinfast-suv-white.png', trust: 90, floor: 820, retail: 1020, acsAdded: 24, daysInPool: 5 },
+    { name: 'Kia Seltos 1.6L 2023', km: '14,200', source: 'IS', sourceLabel: 'IS — C. Mai', img: 'uploads/s02-card06-kia-seltos-silver.png', trust: 85, floor: 580, retail: 690, acsAdded: 15, daysInPool: 3 },
+    { name: 'Hyundai Tucson 2.0 2022', km: '32,100', source: 'Dealer', sourceLabel: 'Dealer — Hùng Anh', img: 'uploads/s02-card07-hyundai-tucson-gray.png', trust: 82, floor: 740, retail: 880, acsAdded: 9, daysInPool: 8 },
+    { name: 'Mercedes C200 2020', km: '52,000', source: 'IS', sourceLabel: 'IS — A. Hoàng', img: 'uploads/s02-card08-mercedes-c-black.png', trust: 72, floor: 1200, retail: 1420, acsAdded: 4, daysInPool: 1, isNew: true },
+    { name: 'Toyota Innova 2.0V 2021', km: '56,300', source: 'IS', sourceLabel: 'IS — A. Đức', img: 'uploads/s02-card09-toyota-innova-silver.png', trust: 76, floor: 620, retail: 750, acsAdded: 11, daysInPool: 6 },
+  ];
+
+  const SourceBadge = ({ source, label }) => {
+    const cfg = source === 'IS' ? { c: '#FFB800', bg: 'rgba(255,184,0,0.15)', icon: '👤' }
+              : source === 'OEM' ? { c: '#10B981', bg: 'rgba(16,185,129,0.15)', icon: '🏭' }
+              : source === 'Dealer' ? { c: '#3B82F6', bg: 'rgba(59,130,246,0.15)', icon: '🏪' }
+              : { c: '#A0A4AB', bg: 'rgba(160,164,171,0.15)', icon: '🏦' };
+    return (
+      <span style={{
+        display: 'inline-flex', alignItems: 'center', gap: 6,
+        fontSize: 11, padding: '4px 10px', borderRadius: 999,
+        background: cfg.bg, color: cfg.c, fontWeight: 700, border: `1px solid ${cfg.c}40`,
+      }}>{label}</span>
+    );
+  };
+
+  return (
+    <div className="otobank" style={{ width: 1440, minHeight: 1900, background: 'var(--bg)' }}>
+      <OtobankNav active="inventory" />
+
+      <div style={{ padding: '40px 64px', maxWidth: 1320, margin: '0 auto' }}>
+        {/* Header */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 32 }}>
+          <div>
+            <div style={{
+              display: 'inline-flex', alignItems: 'center', gap: 8,
+              background: 'rgba(232,93,44,0.12)', border: '1px solid rgba(232,93,44,0.3)',
+              padding: '6px 12px', borderRadius: 999, marginBottom: 16,
+            }}>
+              <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#E85D2C', boxShadow: '0 0 8px rgba(232,93,44,0.6)' }} />
+              <span style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, fontWeight: 700, color: '#E85D2C', letterSpacing: '0.08em' }}>INVENTORY (SHARED) · NGUỒN HÀNG TỔNG</span>
+            </div>
+            <h1 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 40, fontWeight: 800, margin: 0, letterSpacing: '-0.02em', lineHeight: 1.05 }}>
+              Catalog xe Otobank trung tâm
+            </h1>
+            <p style={{ fontSize: 16, color: 'var(--text-2)', marginTop: 12, margin: '12px 0 0', lineHeight: 1.5, maxWidth: 720 }}>
+              Toàn bộ xe được IS (Inventory Specialist) + Dealer + OEM cung cấp về một pool duy nhất. Bạn (AC) chọn xe phù hợp với khách của mình → thêm vào shop cá nhân để hiển thị trên trang bán hàng.
+            </p>
+          </div>
+          <div style={{ display: 'flex', gap: 12 }}>
+            <button className="btn btn-outline" style={{ padding: '14px 18px', fontSize: 14, fontWeight: 600 }}>
+              <Ico name="grid" size={16} /> Bulk add (CSV)
+            </button>
+            <button className="btn btn-primary" style={{ padding: '14px 22px', fontSize: 14, fontWeight: 700 }}>
+              <Ico name="sparkles" size={16} /> AI gợi ý cho khách của tôi
+            </button>
+          </div>
+        </div>
+
+        {/* KPI strip */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 18, marginBottom: 32 }}>
+          {[
+            { eyebrow: 'Total xe trong pool', value: '4,283', delta: '+87 tuần này', color: 'var(--text)' },
+            { eyebrow: 'Từ IS (tuần này)', value: '142', delta: '↑ 23% vs T4', color: '#FFB800' },
+            { eyebrow: 'Avg Trust Score', value: '84.2', delta: '63% Certified ≥85', color: 'var(--success)' },
+            { eyebrow: 'Đang có trong shop của tôi', value: '38', delta: '12 đang có lead', color: 'var(--accent)' },
+          ].map(k => (
+            <div key={k.eyebrow} style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 14, padding: 22 }}>
+              <div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600 }}>{k.eyebrow}</div>
+              <div className="mono" style={{ fontSize: 32, fontWeight: 800, color: k.color, marginTop: 8, lineHeight: 1, letterSpacing: '-0.02em' }}>{k.value}</div>
+              <div style={{ fontSize: 13, color: 'var(--text-2)', marginTop: 6, fontWeight: 500 }}>{k.delta}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Filter row */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 24, flexWrap: 'wrap' }}>
+          <span style={{ fontSize: 13, color: 'var(--text-2)', fontWeight: 600 }}>Lọc nhanh:</span>
+          {[
+            { l: 'Tất cả', count: 4283, active: true },
+            { l: 'Mới từ IS (7 ngày)', count: 142 },
+            { l: 'Trust ≥ 90 (Certified)', count: 1247 },
+            { l: 'Hot (>20 AC đã thêm)', count: 56 },
+            { l: 'Chưa có AC nào', count: 38, urgent: true },
+          ].map(f => (
+            <span key={f.l} style={{
+              padding: '8px 14px', borderRadius: 999, fontSize: 13, fontWeight: 600, cursor: 'pointer',
+              background: f.active ? 'rgba(232,93,44,0.15)' : f.urgent ? 'rgba(239,68,68,0.08)' : 'var(--surface-2)',
+              border: f.active ? '1px solid rgba(232,93,44,0.4)' : f.urgent ? '1px solid rgba(239,68,68,0.3)' : '1px solid var(--border)',
+              color: f.active ? '#E85D2C' : f.urgent ? '#EF4444' : 'var(--text-2)',
+            }}>
+              {f.l} · <span className="mono" style={{ opacity: 0.8 }}>{f.count.toLocaleString('vi-VN')}</span>
+            </span>
+          ))}
+          <span style={{ marginLeft: 'auto', fontSize: 13, color: 'var(--text-2)' }}>Sắp xếp: <strong style={{ color: 'var(--text)' }}>Mới nhất ↓</strong></span>
+        </div>
+
+        {/* Inventory grid */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
+          {cars.map((c, i) => (
+            <div key={i} style={{
+              background: 'var(--surface)', border: c.inMyShop ? '2px solid var(--accent)' : '1px solid var(--border)',
+              borderRadius: 16, overflow: 'hidden', position: 'relative',
+              transition: 'all 0.2s ease',
+            }}>
+              {/* Image */}
+              <div style={{ position: 'relative', aspectRatio: '16/10' }}>
+                <img src={c.img} alt={c.name} className="vehicle-image" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+
+                {/* Top-left badges */}
+                <div style={{ position: 'absolute', top: 12, left: 12, display: 'flex', flexDirection: 'column', gap: 6 }}>
+                  <SourceBadge source={c.source} label={c.sourceLabel} />
+                  {c.isNew && (
+                    <span style={{ fontSize: 10, padding: '3px 10px', borderRadius: 999, background: 'rgba(239,68,68,0.95)', color: '#fff', fontWeight: 700, letterSpacing: '0.06em', display: 'inline-block', width: 'fit-content', boxShadow: '0 4px 10px rgba(239,68,68,0.4)' }}>● NEW · {c.daysInPool}d</span>
+                  )}
+                  {c.hot && (
+                    <span style={{ fontSize: 10, padding: '3px 10px', borderRadius: 999, background: 'rgba(232,93,44,0.95)', color: '#fff', fontWeight: 700, letterSpacing: '0.06em', display: 'inline-block', width: 'fit-content', boxShadow: '0 4px 10px rgba(232,93,44,0.4)' }}>🔥 HOT · {c.acsAdded} AC</span>
+                  )}
+                </div>
+
+                {/* Top-right: Trust Score */}
+                <div style={{ position: 'absolute', top: 12, right: 12 }}>
+                  <div style={{
+                    background: 'rgba(15,20,25,0.92)', backdropFilter: 'blur(8px)',
+                    border: c.trust >= 90 ? '1px solid rgba(16,185,129,0.4)' : c.trust >= 75 ? '1px solid rgba(232,93,44,0.4)' : '1px solid rgba(160,164,171,0.4)',
+                    borderRadius: 8, padding: '5px 9px', display: 'flex', alignItems: 'center', gap: 6,
+                  }}>
+                    <span style={{
+                      fontFamily: '"JetBrains Mono", monospace', fontSize: 12, fontWeight: 700,
+                      background: c.trust >= 90 ? '#10B981' : c.trust >= 75 ? '#E85D2C' : '#A0A4AB',
+                      color: '#fff', padding: '1px 6px', borderRadius: 4,
+                    }}>{c.trust}</span>
+                    <span style={{ fontSize: 10, fontWeight: 600, color: c.trust >= 90 ? '#10B981' : c.trust >= 75 ? '#E85D2C' : '#A0A4AB', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                      {c.trust >= 90 ? 'Certified' : c.trust >= 75 ? 'Verified' : 'Standard'}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Bottom-right: AC count */}
+                <div style={{
+                  position: 'absolute', bottom: 12, right: 12,
+                  background: 'rgba(15,20,25,0.85)', backdropFilter: 'blur(6px)',
+                  borderRadius: 8, padding: '4px 10px', fontSize: 11, color: '#A0A4AB', fontWeight: 600,
+                  border: '1px solid rgba(255,255,255,0.08)',
+                }}>
+                  <span className="mono" style={{ color: '#fff', fontWeight: 700, marginRight: 4 }}>{c.acsAdded}</span> AC đã thêm
+                </div>
+              </div>
+
+              {/* Content */}
+              <div style={{ padding: 20 }}>
+                <div style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 18, fontWeight: 700, color: 'var(--text)', marginBottom: 4, letterSpacing: '-0.01em' }}>{c.name}</div>
+                <div style={{ fontSize: 13, color: 'var(--text-2)', marginBottom: 16 }}>{c.km} km</div>
+
+                {/* Price grid */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, padding: 14, background: 'var(--surface-2)', borderRadius: 10, marginBottom: 16 }}>
+                  <div>
+                    <div style={{ fontSize: 10, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 600 }}>Floor (kín)</div>
+                    <div className="mono" style={{ fontSize: 16, fontWeight: 700, color: 'var(--text-2)', marginTop: 2 }}>{c.floor}M ₫</div>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 10, color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 700 }}>Suggested retail</div>
+                    <div className="mono" style={{ fontSize: 18, fontWeight: 800, color: 'var(--accent)', marginTop: 2 }}>{c.retail}M ₫</div>
+                  </div>
+                </div>
+
+                {/* CTA */}
+                {c.inMyShop ? (
+                  <button style={{
+                    width: '100%', padding: '12px', borderRadius: 10, border: '1px solid rgba(16,185,129,0.4)',
+                    background: 'rgba(16,185,129,0.1)', color: 'var(--success)',
+                    fontWeight: 700, fontSize: 13, cursor: 'pointer',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                  }}>
+                    <Ico name="check" size={16} /> Đã trong shop của tôi · Quản lý
+                  </button>
+                ) : (
+                  <button style={{
+                    width: '100%', padding: '12px', borderRadius: 10, border: 'none',
+                    background: 'linear-gradient(135deg, #E85D2C, #FFB800)',
+                    color: '#fff', fontWeight: 700, fontSize: 13, cursor: 'pointer',
+                    boxShadow: '0 6px 16px rgba(232,93,44,0.3)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                  }}>
+                    <Ico name="plus" size={16} /> Thêm vào shop của tôi
+                  </button>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Footnote */}
+        <div style={{ marginTop: 32, padding: 20, background: 'rgba(232,93,44,0.04)', border: '1px solid rgba(232,93,44,0.15)', borderRadius: 12, fontSize: 13, color: 'var(--text-2)', lineHeight: 1.6 }}>
+          <strong style={{ color: 'var(--accent)' }}>📌 Cách hoạt động (Otobank flywheel):</strong> IS chuyên săn xe từ Owner → đổ về Inventory (Shared) chung → AC trên cả nước chọn xe phù hợp khách của mình → thêm vào shop cá nhân (landing page riêng). AC gửi link shop cho khách (như Shopee shop) → khách chỉ xem được xe trong shop đó. Cùng 1 xe có thể có ở nhiều shop AC; AC nào đóng deal trước hưởng commission.
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Screen 11 — AI Pricing Analyst
+// Screen 12 — Otobank Tower (Vending Concept)
+
+const Screen09_Tracking = () => (
+  <div className="otobank" style={{ width: 1440, minHeight: 1300, background: 'var(--bg)' }}>
+    <OtobankNav active="home" />
+
+    <div style={{ padding: '20px 80px 12px', maxWidth: 1280, margin: '0 auto', display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: 'var(--text-2)' }}>
+      <span>Tài khoản</span> <Ico name="chevron" size={11} />
+      <span>Đơn hàng</span> <Ico name="chevron" size={11} />
+      <span style={{ color: 'var(--text)' }} className="mono">#ORD-2026-0142</span>
+    </div>
+
+    <div style={{ padding: '20px 80px 60px', maxWidth: 1280, margin: '0 auto' }}>
+      {/* Header card */}
+      <div className="card" style={{ padding: 32, marginBottom: 20 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 28 }}>
+          <div>
+            <h1 style={{ fontSize: 28, margin: 0 }}>Xe của bạn đang trên đường đến</h1>
+            <p style={{ fontSize: 14, color: 'var(--text-2)', marginTop: 6, marginBottom: 0 }}>
+              Honda CR-V 1.5L Turbo 2022 • Đặt hàng 12/05/2026 • Giao 16/05/2026
+            </p>
+          </div>
+          <div style={{ textAlign: 'right' }}>
+            <div className="mono" style={{ fontSize: 32, fontWeight: 700, color: 'var(--accent)' }}>2h 15m</div>
+            <div style={{ fontSize: 12, color: 'var(--text-2)', marginTop: 4 }}>ETA dự kiến đến nhà bạn</div>
+          </div>
+        </div>
+
+        {/* Timeline */}
+        <div style={{ position: 'relative' }}>
+          <div style={{ position: 'absolute', top: 16, left: 16, right: 16, height: 2, background: 'var(--border)' }} />
+          <div style={{ position: 'absolute', top: 16, left: 16, width: 'calc(60% - 16px)', height: 2, background: 'var(--success)' }} />
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', position: 'relative' }}>
+            {[
+              { t: 'Đặt cọc', d: '12/05 14:32', done: true },
+              { t: 'Tài chính approved', d: '12/05 15:08', done: true },
+              { t: 'Sang tên hoàn tất', d: '14/05 11:20', done: true },
+              { t: 'Đang giao', d: 'Hôm nay 09:00', active: true },
+              { t: 'Hoàn tất', d: 'Dự kiến 11:30' },
+            ].map((s, i) => (
+              <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
+                <div style={{
+                  width: 32, height: 32, borderRadius: '50%',
+                  background: s.done ? 'var(--success)' : s.active ? 'var(--accent)' : 'var(--surface-2)',
+                  border: s.active ? '4px solid rgba(232,93,44,0.3)' : 'none',
+                  color: s.done ? '#0F1419' : s.active ? '#fff' : 'var(--text-3)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700,
+                  boxShadow: s.active ? '0 0 0 8px rgba(232,93,44,0.15)' : 'none',
+                  zIndex: 1,
+                }}>
+                  {s.done ? <Ico name="check" size={14} /> : s.active ? <span style={{ width: 10, height: 10, background: '#fff', borderRadius: '50%', animation: 'pulse 1.6s infinite' }} /> : i + 1}
+                </div>
+                <div style={{ textAlign: 'center' }}>
+                  <div style={{ fontSize: 13, fontWeight: 600, color: s.done || s.active ? 'var(--text)' : 'var(--text-2)' }}>{s.t}</div>
+                  <div style={{ fontSize: 11, color: 'var(--text-3)', marginTop: 2 }}>{s.d}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: 20 }}>
+        {/* Map / Live tracking */}
+        <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
+          <div style={{
+            height: 380, position: 'relative',
+            background: 'linear-gradient(135deg, #1a2332 0%, #0F1419 100%)',
+          }}>
+            {/* Mock map grid */}
+            <svg width="100%" height="100%" viewBox="0 0 600 380" style={{ position: 'absolute', inset: 0 }}>
+              <defs>
+                <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.04)" strokeWidth="1"/>
+                </pattern>
+              </defs>
+              <rect width="600" height="380" fill="url(#grid)" />
+              {/* Roads */}
+              <path d="M 0 200 Q 200 180 300 200 T 600 220" stroke="rgba(160,164,171,0.2)" strokeWidth="14" fill="none" />
+              <path d="M 0 200 Q 200 180 300 200 T 600 220" stroke="rgba(160,164,171,0.4)" strokeWidth="2" fill="none" strokeDasharray="4 8" />
+              <path d="M 200 0 L 220 380" stroke="rgba(160,164,171,0.15)" strokeWidth="10" fill="none" />
+              <path d="M 450 0 L 460 380" stroke="rgba(160,164,171,0.15)" strokeWidth="10" fill="none" />
+              {/* Driver path traveled */}
+              <path d="M 80 240 L 200 220 Q 250 200 320 210" stroke="var(--success)" strokeWidth="3" fill="none" strokeLinecap="round" />
+              {/* Path remaining */}
+              <path d="M 320 210 Q 400 220 480 200" stroke="var(--accent)" strokeWidth="3" fill="none" strokeLinecap="round" strokeDasharray="6 4" />
+              {/* Origin */}
+              <circle cx="80" cy="240" r="8" fill="var(--success)" />
+              <circle cx="80" cy="240" r="14" fill="rgba(16,185,129,0.2)" />
+              {/* Driver position */}
+              <g transform="translate(320, 210)">
+                <circle r="22" fill="rgba(232,93,44,0.2)" />
+                <circle r="14" fill="var(--accent)" />
+                <text x="0" y="4" textAnchor="middle" fontSize="14">🚗</text>
+              </g>
+              {/* Destination */}
+              <g transform="translate(480, 200)">
+                <circle r="10" fill="var(--text)" />
+                <circle r="6" fill="var(--bg)" />
+              </g>
+              <text x="80" y="265" fill="var(--text-2)" fontSize="11" fontFamily="var(--font-mono)">SHOWROOM HCM</text>
+              <text x="465" y="225" fill="var(--text)" fontSize="11" fontFamily="var(--font-mono)">NHÀ BẠN</text>
+            </svg>
+
+            {/* Floating chip */}
+            <div className="card" style={{ position: 'absolute', top: 16, left: 16, padding: '10px 14px', display: 'flex', alignItems: 'center', gap: 10, backdropFilter: 'blur(10px)', background: 'rgba(15,20,25,0.85)' }}>
+              <span style={{ width: 8, height: 8, background: 'var(--success)', borderRadius: '50%', animation: 'pulse 1.5s infinite' }} />
+              <span style={{ fontSize: 12, fontWeight: 600 }}>LIVE • Cập nhật mỗi 15 giây</span>
+            </div>
+          </div>
+
+          <div style={{ padding: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+              <div style={{ width: 48, height: 48, borderRadius: '50%', background: 'var(--accent)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700 }}>HÙ</div>
+              <div>
+                <div style={{ fontSize: 14, fontWeight: 600 }}>Anh Trần Quốc Hùng</div>
+                <div style={{ fontSize: 12, color: 'var(--text-2)' }}>Đối tác giao xe (3rd party) • 4.9 ★ • 1,247 chuyến</div>
+              </div>
+            </div>
+            <div style={{ display: 'flex', gap: 8 }}>
+              <button className="btn btn-outline" style={{ padding: '10px 14px', fontSize: 13 }}><Ico name="phone" size={14} /> Gọi</button>
+              <button className="btn btn-outline" style={{ padding: '10px 14px', fontSize: 13 }}><Ico name="chat" size={14} /> Chat</button>
+            </div>
+          </div>
+        </div>
+
+        {/* Order details */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <div className="card" style={{ padding: 20 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '90px 1fr', gap: 14, alignItems: 'center', marginBottom: 16 }}>
+              <div style={{ width: 90, aspectRatio: '4/3', borderRadius: 6, overflow: 'hidden' }}>
+                <img src="uploads/s02-card01-honda-crv-blue.png" alt="Honda CR-V 2022" className="vehicle-image" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              </div>
+              <div>
+                <div style={{ fontSize: 14, fontWeight: 600 }}>Honda CR-V 1.5L Turbo</div>
+                <div style={{ fontSize: 12, color: 'var(--text-2)' }}>2022 • 28,500 km</div>
+                <div className="mono" style={{ fontSize: 16, fontWeight: 700, marginTop: 4 }}>953,000,000 ₫</div>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 12 }}>
+              {[
+                ['Mã đơn hàng', '#ORD-2026-0142'],
+                ['Đã thanh toán', '286,000,000 ₫'],
+                ['Còn lại khi nhận xe', '667,000,000 ₫'],
+                ['Hợp đồng VPBank', '#VPB-LN-892341'],
+              ].map(([k, v]) => (
+                <div key={k} style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: 'var(--text-2)' }}>{k}</span>
+                  <span className="mono" style={{ color: 'var(--text)', fontWeight: 500 }}>{v}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div style={{ background: 'rgba(16,185,129,0.08)', border: '1px solid rgba(16,185,129,0.25)', borderRadius: 12, padding: 18 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+              <span style={{ color: 'var(--success)' }}><Ico name="refresh" size={18} /></span>
+              <div style={{ fontSize: 14, fontWeight: 600 }}>7 ngày đổi trả của bạn</div>
+            </div>
+            <div className="mono" style={{ fontSize: 22, fontWeight: 700, color: 'var(--success)', marginBottom: 4 }}>7 ngày 0 giờ</div>
+            <div style={{ fontSize: 12, color: 'var(--text-2)' }}>Bắt đầu khi bạn nhận xe — tối đa 1,000 km</div>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+            <button className="btn btn-outline" style={{ padding: '12px', fontSize: 13 }}><Ico name="file" size={14} /> Xem hợp đồng</button>
+            <button className="btn btn-outline" style={{ padding: '12px', fontSize: 13 }}><Ico name="info" size={14} /> Hỗ trợ</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <style>{`@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.4);opacity:0.5}}`}</style>
+  </div>
+);
+
+// ─────────────────────────────────────────────────────────
+// Screen 10 — IRC Operations Dashboard
+
+const BRAND_TO_IMG = {
+  'Toyota Vios 2021': 'uploads/s02-card12-honda-city-white.png',
+  'Mazda CX-5 2023': 'uploads/s02-card03-mazda-cx5-red.png',
+  'Ford Ranger 2022': 'uploads/s02-card04-ford-ranger-blue.png',
+  'Honda CR-V 2022': 'uploads/s02-card01-honda-crv-blue.png',
+  'Hyundai Tucson 2021': 'uploads/s02-card07-hyundai-tucson-gray.png',
+  'Kia Seltos 2023': 'uploads/s02-card06-kia-seltos-silver.png',
+  'Toyota Camry 2022': 'uploads/s02-card02-toyota-camry-white.png',
+  'VinFast Lux A 2021': 'uploads/s02-card05-vinfast-suv-white.png',
+  'Mazda 3 2022': 'uploads/s02-card10-mazda3-red.png',
+  'Honda City 2022': 'uploads/s02-card12-honda-city-white.png',
+  'Kia Carnival 2023': 'uploads/s02-card09-toyota-innova-silver.png',
+  'Toyota Innova 2021': 'uploads/s02-card09-toyota-innova-silver.png',
+  'Mercedes C200 2020': 'uploads/s02-card08-mercedes-c-black.png',
+};
+
 const KanbanCard = ({ name, day, tone, variant, badge, sub }) => (
   <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 8, padding: 8, cursor: 'pointer' }}>
     <div style={{ borderRadius: 5, overflow: 'hidden', marginBottom: 8, aspectRatio: '16/9' }}>
@@ -747,4 +1150,4 @@ const Screen11_AIPricing = () => (
 );
 
 
-Object.assign(window, { Screen09_Tracking, Screen10_IRC, Screen11_AIPricing });
+Object.assign(window, { Screen09_Tracking, Screen10_InventoryShared, Screen11_AIPricing });

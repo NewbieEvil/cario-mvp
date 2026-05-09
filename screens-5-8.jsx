@@ -673,4 +673,4 @@ const Screen08_Mobile = () => (
   </div>
 );
 
-Object.assign(window, { Screen05_Checkout, Screen06_Sell, Screen07_Financing, Screen08_Mobile });
+Object.assign(window, { Screen05_Checkout, Screen06_Sell, Screen07_Financing, Screen08_Mobile, PhoneFrame });
