@@ -3,6 +3,44 @@
 // Per Otobank distribution model: AC pulls from Inventory (Shared) → curates personal showroom → sends link to customer (Shopee-shop-style isolated funnel)
 
 // ─────────────────────────────────────────────────────────
+// Notifications card (used inside Screen 17 Settings tab)
+
+const NotificationsCard = () => {
+  const [items, setItems] = React.useState([
+    { l: 'Lead mới qua Zalo OA', sub: 'Push instant trong 30s', on: true },
+    { l: 'Khách xem xe trên microsite', sub: 'Báo theo batch mỗi 1h', on: true },
+    { l: 'Daily digest 8:00 sáng', sub: 'Tóm tắt hôm qua + xe gợi ý từ AI', on: true },
+    { l: 'Email weekly report', sub: 'Gửi vào 7:00 sáng thứ 2', on: false },
+  ]);
+  const toggle = (i) => setItems(items.map((it, idx) => idx === i ? { ...it, on: !it.on } : it));
+
+  return (
+    <div className="card" style={{ padding: 24 }}>
+      <div style={{ fontSize: 14, fontWeight: 700, marginBottom: 4 }}>Notifications</div>
+      <div style={{ fontSize: 12, color: 'var(--text-3)', marginBottom: 14 }}>Bấm để bật/tắt từng kênh thông báo</div>
+      {items.map((n, i) => (
+        <div key={n.l} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 14, padding: '14px 0', borderBottom: i < items.length - 1 ? '1px dashed var(--border)' : 'none' }}>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>{n.l}</div>
+            <div style={{ fontSize: 11, color: 'var(--text-3)', marginTop: 4, lineHeight: 1.5 }}>{n.sub}</div>
+          </div>
+          <button
+            type="button"
+            role="switch"
+            aria-checked={n.on}
+            onClick={() => toggle(i)}
+            className={`otb-toggle${n.on ? ' on' : ''}`}
+          >
+            <span className="otb-toggle-track" />
+            <span className="otb-toggle-dot" />
+          </button>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+// ─────────────────────────────────────────────────────────
 // Screen 17 — AC Working Space
 
 const Screen17_ACWorkspace = () => {
@@ -508,25 +546,8 @@ const Screen17_ACWorkspace = () => {
               </div>
 
               {/* Notifications */}
-              <div className="card" style={{ padding: 24 }}>
-                <div style={{ fontSize: 14, fontWeight: 700, marginBottom: 18 }}>Notifications</div>
-                {[
-                  { l: 'Lead mới qua Zalo OA', sub: 'Push instant trong 30s', on: true },
-                  { l: 'Khách xem xe trên microsite', sub: 'Báo theo batch mỗi 1h', on: true },
-                  { l: 'Daily digest 8:00 sáng', sub: 'Tóm tắt hôm qua + xe gợi ý từ AI', on: true },
-                  { l: 'Email weekly report', sub: 'Gửi vào 7:00 sáng thứ 2', on: false },
-                ].map(n => (
-                  <div key={n.l} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 0', borderBottom: '1px dashed var(--border)' }}>
-                    <div>
-                      <div style={{ fontSize: 13, fontWeight: 500 }}>{n.l}</div>
-                      <div style={{ fontSize: 11, color: 'var(--text-3)', marginTop: 3 }}>{n.sub}</div>
-                    </div>
-                    <div style={{ width: 40, height: 22, borderRadius: 999, background: n.on ? 'var(--accent)' : 'rgba(255,255,255,0.1)', position: 'relative', cursor: 'pointer' }}>
-                      <span style={{ position: 'absolute', top: 2, left: n.on ? 20 : 2, width: 18, height: 18, borderRadius: '50%', background: '#fff', transition: 'left 0.2s ease' }} />
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <NotificationsCard />
+
             </div>
 
             {/* Tier card sidebar */}

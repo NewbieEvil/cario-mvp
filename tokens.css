@@ -282,3 +282,56 @@ img.vehicle-image:hover {
   0%   { left: -130%; }
   100% { left: 230%; }
 }
+
+/* ── Otobank toggle switch (used in Settings notifications) ── */
+.otb-toggle {
+  position: relative;
+  flex-shrink: 0;
+  width: 46px;
+  height: 26px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  outline: none;
+}
+.otb-toggle:focus-visible {
+  box-shadow: 0 0 0 3px rgba(232, 93, 44, 0.35);
+  border-radius: 999px;
+}
+.otb-toggle-track {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: #1A1F26;
+  border: 1px solid #2D343F;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
+  transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.otb-toggle.on .otb-toggle-track {
+  background: linear-gradient(135deg, #E85D2C 0%, #FFB800 100%);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 14px rgba(232, 93, 44, 0.55),
+              inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+.otb-toggle-dot {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5),
+              inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transition: left 0.25s cubic-bezier(0.4, 1.6, 0.5, 1),
+              transform 0.25s ease;
+}
+.otb-toggle.on .otb-toggle-dot {
+  left: 23px;
+}
+.otb-toggle:hover .otb-toggle-dot {
+  transform: scale(1.06);
+}
